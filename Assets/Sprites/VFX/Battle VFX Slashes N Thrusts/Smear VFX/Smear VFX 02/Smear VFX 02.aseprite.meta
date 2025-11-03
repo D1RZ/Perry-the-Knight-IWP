@@ -1,0 +1,531 @@
+fileFormatVersion: 2
+guid: bccc0c7c72d73e4428c5de6bb28ccf86
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Smear VFX 02_Frame_0
+    originalName: 
+    pivot: {x: 0.28125, y: -2.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 233
+      width: 32
+      height: 15
+    spriteID: 59fcfcd15d8a44d4c82184e0829f409c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 233}
+  - name: Smear VFX 02_Frame_1
+    originalName: 
+    pivot: {x: 0.14814816, y: -0.54838705}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 158
+      width: 27
+      height: 31
+    spriteID: 3a80a17dd2875734bbbfe4d1ee871663
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 158}
+  - name: Smear VFX 02_Frame_2
+    originalName: 
+    pivot: {x: 0.4390244, y: -0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 44
+      width: 41
+      height: 32
+    spriteID: 69cf9688afb35744db8f02c98800c415
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 44}
+  - name: Smear VFX 02_Frame_3
+    originalName: 
+    pivot: {x: 0.45238099, y: -0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 42
+      height: 32
+    spriteID: 78e2200b6a0f556418e4f3a3a8bd67a3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Smear VFX 02_Frame_4
+    originalName: 
+    pivot: {x: -2.2857141, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 39
+      y: 158
+      width: 7
+      height: 8
+    spriteID: c4df67bc95edb6f4fab4ec0eabe593f4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 39, y: 158}
+  - name: Smear VFX 02_Frame_5
+    originalName: 
+    pivot: {x: -2.2857141, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 39
+      y: 174
+      width: 7
+      height: 8
+    spriteID: 1172304f03ffb0c478c06b42171723ed
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 39, y: 174}
+  - name: Smear VFX 02_Frame_6
+    originalName: 
+    pivot: {x: 0.25806448, y: -1.0869565}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 4
+      width: 31
+      height: 23
+    spriteID: 1abfd44fb90a67a459269a0650cbc9ea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 4}
+  - name: Smear VFX 02_Frame_7
+    originalName: 
+    pivot: {x: 0.20689656, y: -0.71428573}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 197
+      width: 29
+      height: 28
+    spriteID: 19785a11cd4ecc646b2173d10cb72db2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 197}
+  - name: Smear VFX 02_Frame_8
+    originalName: 
+    pivot: {x: 0.3235294, y: -0.65517247}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 121
+      width: 34
+      height: 29
+    spriteID: 67a27fe39955f944b80886a36990aff2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 121}
+  - name: Smear VFX 02_Frame_9
+    originalName: 
+    pivot: {x: 0.34285715, y: -0.65517247}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 84
+      width: 35
+      height: 29
+    spriteID: ed36277a2b458d045917ee5e2eea73e5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 84}
+  - name: Smear VFX 02_Frame_10
+    originalName: 
+    pivot: {x: -2.2857141, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 35
+      width: 7
+      height: 8
+    spriteID: 0dc73bc633ab2784bad3207fe3e1205c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 35}
+  - name: Smear VFX 02_Frame_11
+    originalName: 
+    pivot: {x: -2.2857141, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 51
+      width: 7
+      height: 8
+    spriteID: 5fa33fcfca281b94d9d0e0b53fd5a4da
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 51}
+  - name: Smear VFX 02_Frame_12
+    originalName: 
+    pivot: {x: -2.2857141, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 67
+      width: 7
+      height: 8
+    spriteID: 79ba79ea66ba26e40aeafea277e67870
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 67}
+  - name: Smear VFX 02_Frame_13
+    originalName: 
+    pivot: {x: -2.2857141, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 83
+      width: 7
+      height: 8
+    spriteID: 3182f6f473ec2344eae1205299d09e0d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 83}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -364433904
+    name: Smear VFX 02
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Smear VFX 02_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 15
+        y: 33
+        width: 32
+        height: 15
+      spriteId: 59fcfcd15d8a44d4c82184e0829f409c
+    - name: Smear VFX 02_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 20
+        y: 17
+        width: 27
+        height: 31
+      spriteId: 3a80a17dd2875734bbbfe4d1ee871663
+    - name: Smear VFX 02_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 6
+        y: 16
+        width: 41
+        height: 32
+      spriteId: 69cf9688afb35744db8f02c98800c415
+    - name: Smear VFX 02_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 5
+        y: 16
+        width: 42
+        height: 32
+      spriteId: 78e2200b6a0f556418e4f3a3a8bd67a3
+    - name: Smear VFX 02_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 40
+        y: 40
+        width: 7
+        height: 8
+      spriteId: c4df67bc95edb6f4fab4ec0eabe593f4
+    - name: Smear VFX 02_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 40
+        y: 40
+        width: 7
+        height: 8
+      spriteId: 1172304f03ffb0c478c06b42171723ed
+    - name: Smear VFX 02_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 16
+        y: 25
+        width: 31
+        height: 23
+      spriteId: 1abfd44fb90a67a459269a0650cbc9ea
+    - name: Smear VFX 02_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 18
+        y: 20
+        width: 29
+        height: 28
+      spriteId: 19785a11cd4ecc646b2173d10cb72db2
+    - name: Smear VFX 02_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 13
+        y: 19
+        width: 34
+        height: 29
+      spriteId: 67a27fe39955f944b80886a36990aff2
+    - name: Smear VFX 02_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 12
+        y: 19
+        width: 35
+        height: 29
+      spriteId: ed36277a2b458d045917ee5e2eea73e5
+    - name: Smear VFX 02_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 40
+        y: 40
+        width: 7
+        height: 8
+      spriteId: 0dc73bc633ab2784bad3207fe3e1205c
+    - name: Smear VFX 02_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 40
+        y: 40
+        width: 7
+        height: 8
+      spriteId: 5fa33fcfca281b94d9d0e0b53fd5a4da
+    - name: Smear VFX 02_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 40
+        y: 40
+        width: 7
+        height: 8
+      spriteId: 79ba79ea66ba26e40aeafea277e67870
+    - name: Smear VFX 02_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 40
+        y: 40
+        width: 7
+        height: 8
+      spriteId: 3182f6f473ec2344eae1205299d09e0d
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 48, y: 48}

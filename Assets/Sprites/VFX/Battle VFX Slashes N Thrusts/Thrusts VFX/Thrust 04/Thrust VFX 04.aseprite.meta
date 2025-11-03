@@ -1,0 +1,727 @@
+fileFormatVersion: 2
+guid: 695cc01e50bb26b4f9b095a8a6054e21
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Thrust VFX 04_Frame_0
+    originalName: 
+    pivot: {x: 0.84, y: -0.28125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 25
+      height: 32
+    spriteID: 335961a640e0cef4c8b7f1eaeab1e2ea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Thrust VFX 04_Frame_1
+    originalName: 
+    pivot: {x: 0.5833334, y: -1.3846154}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 4
+      width: 36
+      height: 13
+    spriteID: 4c3ef6b11849af1428a881867f739e93
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 4}
+  - name: Thrust VFX 04_Frame_2
+    originalName: 
+    pivot: {x: 0.48888892, y: -2.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 191
+      y: 25
+      width: 45
+      height: 8
+    spriteID: 3528e0319e285104ca4510b94cfdd84a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 191, y: 25}
+  - name: Thrust VFX 04_Frame_3
+    originalName: 
+    pivot: {x: 0.47826087, y: -4.4}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 44
+      width: 46
+      height: 5
+    spriteID: 735ed9ada7de43144b4795ba2c56cf49
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 44}
+  - name: Thrust VFX 04_Frame_4
+    originalName: 
+    pivot: {x: 0.52380955, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 58
+      y: 60
+      width: 42
+      height: 1
+    spriteID: 6113872498bd6854ea206587352a6a54
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 58, y: 60}
+  - name: Thrust VFX 04_Frame_5
+    originalName: 
+    pivot: {x: 0.5641026, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 208
+      y: 60
+      width: 39
+      height: 1
+    spriteID: a984716b5be77a44dbdb64b9dd2d1c43
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 208, y: 60}
+  - name: Thrust VFX 04_Frame_6
+    originalName: 
+    pivot: {x: 0.6666667, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 218
+      y: 44
+      width: 33
+      height: 1
+    spriteID: e09a03ab9df88bb4ab63ecf65591b6e2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 218, y: 44}
+  - name: Thrust VFX 04_Frame_9
+    originalName: 
+    pivot: {x: 0.84, y: -0.28125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 4
+      width: 25
+      height: 32
+    spriteID: 447594ca51bcb3440abb7fbe8b28a57d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 4}
+  - name: Thrust VFX 04_Frame_10
+    originalName: 
+    pivot: {x: 0.5833334, y: -1.3846154}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 147
+      y: 4
+      width: 36
+      height: 13
+    spriteID: 4bddf2120d247a34d876c348e0e5323d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 147, y: 4}
+  - name: Thrust VFX 04_Frame_11
+    originalName: 
+    pivot: {x: 0.48888892, y: -2.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 44
+      width: 45
+      height: 8
+    spriteID: 58a7a7595cd9a2e419731018bd60e5e4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 44}
+  - name: Thrust VFX 04_Frame_12
+    originalName: 
+    pivot: {x: 0.47826087, y: -4.4}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 164
+      y: 44
+      width: 46
+      height: 5
+    spriteID: 2b32092ad58c5b5489c02de3388a27bb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 164, y: 44}
+  - name: Thrust VFX 04_Frame_13
+    originalName: 
+    pivot: {x: 0.52380955, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 60
+      width: 42
+      height: 1
+    spriteID: b6b48fcab2a436647a34768a016ce898
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 60}
+  - name: Thrust VFX 04_Frame_14
+    originalName: 
+    pivot: {x: 0.5641026, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 73
+      width: 39
+      height: 1
+    spriteID: 6e39fa142599c2348ad4197de4fd3cd6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 73}
+  - name: Thrust VFX 04_Frame_15
+    originalName: 
+    pivot: {x: 0.6666667, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 25
+      width: 33
+      height: 1
+    spriteID: 44be9520c139090418c3eaac7a8b77d0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 25}
+  - name: Thrust VFX 04_Frame_18
+    originalName: 
+    pivot: {x: 0.84, y: -0.28125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 4
+      width: 25
+      height: 32
+    spriteID: 5e897b0b104493e428c439f9eb230c4c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 4}
+  - name: Thrust VFX 04_Frame_19
+    originalName: 
+    pivot: {x: 0.5833334, y: -1.3846154}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 191
+      y: 4
+      width: 36
+      height: 13
+    spriteID: bc380256fcce3304099c2d3fa1663619
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 191, y: 4}
+  - name: Thrust VFX 04_Frame_20
+    originalName: 
+    pivot: {x: 0.48888892, y: -2.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 57
+      y: 44
+      width: 45
+      height: 8
+    spriteID: 04d081cca4f1da645a8a6d015a84da45
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 57, y: 44}
+  - name: Thrust VFX 04_Frame_21
+    originalName: 
+    pivot: {x: 0.47826087, y: -4.4}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 60
+      width: 46
+      height: 5
+    spriteID: 962500187576c5244a2ffd347e1acc2e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 60}
+  - name: Thrust VFX 04_Frame_22
+    originalName: 
+    pivot: {x: 0.52380955, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 158
+      y: 60
+      width: 42
+      height: 1
+    spriteID: 9b82d3971581dea4e94d2acf6c3dd16e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 158, y: 60}
+  - name: Thrust VFX 04_Frame_23
+    originalName: 
+    pivot: {x: 0.5641026, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 73
+      width: 39
+      height: 1
+    spriteID: 18a3e9f31ebb0f54ab52288ae2141d28
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 73}
+  - name: Thrust VFX 04_Frame_24
+    originalName: 
+    pivot: {x: 0.6666667, y: -24}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 34
+      width: 33
+      height: 1
+    spriteID: c26523e3aaf110645a178f766493e583
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 34}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 498207852
+    name: Thrust VFX 04
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Thrust VFX 04_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 3
+        y: 9
+        width: 25
+        height: 32
+      spriteId: 335961a640e0cef4c8b7f1eaeab1e2ea
+    - name: Thrust VFX 04_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 3
+        y: 18
+        width: 36
+        height: 13
+      spriteId: 4c3ef6b11849af1428a881867f739e93
+    - name: Thrust VFX 04_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 2
+        y: 20
+        width: 45
+        height: 8
+      spriteId: 3528e0319e285104ca4510b94cfdd84a
+    - name: Thrust VFX 04_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 2
+        y: 22
+        width: 46
+        height: 5
+      spriteId: 735ed9ada7de43144b4795ba2c56cf49
+    - name: Thrust VFX 04_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 2
+        y: 24
+        width: 42
+        height: 1
+      spriteId: 6113872498bd6854ea206587352a6a54
+    - name: Thrust VFX 04_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 2
+        y: 24
+        width: 39
+        height: 1
+      spriteId: a984716b5be77a44dbdb64b9dd2d1c43
+    - name: Thrust VFX 04_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 2
+        y: 24
+        width: 33
+        height: 1
+      spriteId: e09a03ab9df88bb4ab63ecf65591b6e2
+    - name: Thrust VFX 04_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 3
+        y: 9
+        width: 25
+        height: 32
+      spriteId: 447594ca51bcb3440abb7fbe8b28a57d
+    - name: Thrust VFX 04_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 3
+        y: 18
+        width: 36
+        height: 13
+      spriteId: 4bddf2120d247a34d876c348e0e5323d
+    - name: Thrust VFX 04_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 2
+        y: 20
+        width: 45
+        height: 8
+      spriteId: 58a7a7595cd9a2e419731018bd60e5e4
+    - name: Thrust VFX 04_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 2
+        y: 22
+        width: 46
+        height: 5
+      spriteId: 2b32092ad58c5b5489c02de3388a27bb
+    - name: Thrust VFX 04_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 2
+        y: 24
+        width: 42
+        height: 1
+      spriteId: b6b48fcab2a436647a34768a016ce898
+    - name: Thrust VFX 04_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 2
+        y: 24
+        width: 39
+        height: 1
+      spriteId: 6e39fa142599c2348ad4197de4fd3cd6
+    - name: Thrust VFX 04_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 2
+        y: 24
+        width: 33
+        height: 1
+      spriteId: 44be9520c139090418c3eaac7a8b77d0
+    - name: Thrust VFX 04_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 3
+        y: 9
+        width: 25
+        height: 32
+      spriteId: 5e897b0b104493e428c439f9eb230c4c
+    - name: Thrust VFX 04_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 3
+        y: 18
+        width: 36
+        height: 13
+      spriteId: bc380256fcce3304099c2d3fa1663619
+    - name: Thrust VFX 04_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 2
+        y: 20
+        width: 45
+        height: 8
+      spriteId: 04d081cca4f1da645a8a6d015a84da45
+    - name: Thrust VFX 04_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 2
+        y: 22
+        width: 46
+        height: 5
+      spriteId: 962500187576c5244a2ffd347e1acc2e
+    - name: Thrust VFX 04_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 2
+        y: 24
+        width: 42
+        height: 1
+      spriteId: 9b82d3971581dea4e94d2acf6c3dd16e
+    - name: Thrust VFX 04_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 2
+        y: 24
+        width: 39
+        height: 1
+      spriteId: 18a3e9f31ebb0f54ab52288ae2141d28
+    - name: Thrust VFX 04_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 2
+        y: 24
+        width: 33
+        height: 1
+      spriteId: c26523e3aaf110645a178f766493e583
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 48, y: 48}
