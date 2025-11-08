@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class Entity : MonoBehaviour
 {
@@ -63,6 +64,13 @@ public class Entity : MonoBehaviour
             spriteRenderer.material.shader = NormalSpriteShader;
             spriteRenderer.color = Color.white;
         }
+    }
+
+    public bool CheckGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.55f, LayerMask.GetMask("Platforms", "Ledges"));
+        if (hit.collider == null) return false;
+        else return true;
     }
 
     public virtual void SetVelocity(float velocity) // changes velocity of enemy according to their facing direction

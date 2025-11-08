@@ -30,8 +30,8 @@ public class UIManager : MonoBehaviour
         // get references
         var enemyRedBar = enemy.HealthBar.transform.GetChild(2).GetComponent<Image>();
         var enemyGreyBar = enemy.HealthBar.transform.GetChild(1).GetComponent<Image>();
-
-        float targetRedWidth = 0.77f * (enemy.health / enemy.entityData.MaxHealth) * 100;
+        
+        float targetRedWidth = enemy.healthBar1PercentWidth * (enemy.health / enemy.entityData.MaxHealth) * 100;
 
         // instantly set red bar
         var redSize = enemyRedBar.rectTransform.sizeDelta;

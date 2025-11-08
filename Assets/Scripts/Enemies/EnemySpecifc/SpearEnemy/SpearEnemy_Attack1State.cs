@@ -54,7 +54,7 @@ public class SpearEnemy_Attack1State : MoveState
             {
                 entity.Anim.speed = 1f; // reset after animation ends
 
-                if (!entity.CheckAttackTarget("Player"))
+                if (!entity.CheckAttackTarget("Player") && Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) < 1)
                 {
                     entity.CheckFacingDirectionBasedOnTargetPos();
                     entity.stateMachine.SetNextState("CHASE", entity);

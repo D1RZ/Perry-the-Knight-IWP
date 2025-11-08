@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SpearEnemy_IdleState : IdleState
 {
-    private SpearEnemy_IdleState_Data spearIdleData;
+    private IdleState_Data spearIdleData;
 
-    public SpearEnemy_IdleState(SpearEnemy_IdleState_Data stateData)
+    public SpearEnemy_IdleState(IdleState_Data stateData)
     {
         this.spearIdleData = stateData;
     }

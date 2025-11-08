@@ -5,7 +5,7 @@ public class SpearEnemy : Enemy,IDamageable
 {
     public SpearEnemy_PatrolState_Data PatrolStateData;
 
-    public SpearEnemy_IdleState_Data IdleStateData;
+    public IdleState_Data IdleStateData;
 
     public SpearEnemy_ChaseState_Data ChaseStateData;
 
@@ -70,7 +70,7 @@ public class SpearEnemy : Enemy,IDamageable
         if (facingDirection < 0) vfx.transform.localScale = new Vector3(vfx.transform.localScale.x * -1, vfx.transform.localScale.y, vfx.transform.localScale.z);
         StartCoroutine(DestroyVFX(0.52f,vfx));
     }
-
+    
     private IEnumerator DestroyVFX(float delay,GameObject vfx)
     {
         yield return new WaitForSeconds(delay);

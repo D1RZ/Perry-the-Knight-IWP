@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SpearEnemy_PatrolState : MoveState
 {
     private SpearEnemy_PatrolState_Data spearPatrolData;
@@ -17,7 +19,7 @@ public class SpearEnemy_PatrolState : MoveState
     {
         if (PlayerController.Instance._PlayerData.HealthData > 0)
         {
-            if (entity.CheckAttackTarget("Player"))
+            if (entity.CheckAttackTarget("Player") && Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) < 1)
             {
                 entity.stateMachine.SetNextState("ATTACK1", entity);
                 return;

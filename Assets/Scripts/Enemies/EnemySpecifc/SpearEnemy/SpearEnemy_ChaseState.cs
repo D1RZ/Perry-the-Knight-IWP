@@ -27,13 +27,14 @@ public class SpearEnemy_ChaseState : State
 
         entity.CheckFacingDirection();
 
-        if (entity.CheckAttackTarget("Player"))
+        if (entity.CheckAttackTarget("Player") && Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) < 1)
         {
             entity.stateMachine.SetNextState("ATTACK1",entity);
             return;
         }    
 
-        if(Vector2.Distance(entity.GetTarget().gameObject.transform.position, entity.gameObject.transform.position) > spearChaseData.MaxChaseDistance)
+        if(Vector2.Distance(entity.GetTarget().gameObject.transform.position, entity.gameObject.transform.position) > spearChaseData.MaxChaseDistance 
+            || Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) > 1)
         {
             entity.stateMachine.SetNextState("PATROL", entity);
             return;

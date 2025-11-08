@@ -184,6 +184,8 @@ public class PlayerController : Entity
 
     private float startBlockTime = 0;
 
+    public bool blockSuccess = false;
+
     public static PlayerController Instance
     { 
         get
@@ -360,7 +362,7 @@ public class PlayerController : Entity
             StartBlock();
         }
 
-        if (Input.GetMouseButtonUp(1) && isBlocking)
+        if (!Input.GetMouseButton(1) && isBlocking && !blockSuccess)
         {
             EndBlock();
         }
@@ -413,18 +415,12 @@ public class PlayerController : Entity
         animationController.animator.ResetTrigger("roll");
         // Only freeze X if player is grounded
         if (!InAir)
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         else
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        walk = Mathf.Abs(dirH) > 0.01f;
+        walk = Mathf.Abs(dirH) > 0.01f && defaultwalkspeed > 0 && canMove;
         run = false;
-
-        // blend back to idle or walk depending on input
-        if (Mathf.Abs(dirH) > 0.01f)
-            animationController.SetAnimation("walk");
-        else
-            animationController.SetAnimation("idle");
     }
 
     private void StartBlock()
@@ -452,12 +448,8 @@ public class PlayerController : Entity
         isBlocking = false;
         canMove = true;
         rb.velocity = Vector2.zero;
-        walk = Mathf.Abs(dirH) > 0.01f;
+        walk = Mathf.Abs(dirH) > 0.01f && defaultwalkspeed > 0 && canMove;
         run = false;
-        if (walk)
-            animationController.SetAnimation("walk");
-        else
-            animationController.SetAnimation("idle");
     }
 
     public void OnHit()
@@ -639,6 +631,7 @@ public class PlayerController : Entity
     {
         parryAnimator.ResetTrigger("Block");
         animator.SetBool("Block", false);
+        blockSuccess = false;
     }
 
 }

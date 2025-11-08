@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.66, y: -1.51}
+  m_AnchoredPosition: {x: 2.5, y: -1.52}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2703835516572195011
@@ -95,7 +95,7 @@ Transform:
   m_GameObject: {fileID: 2941035770968134957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 1.89, z: 0}
+  m_LocalPosition: {x: 0.09, y: 1.9, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,7 +354,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -279.7, y: 296.25}
-  m_SizeDelta: {x: 85, y: 25}
+  m_SizeDelta: {x: 127, y: 25}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2616754756496274612
 CanvasRenderer:
@@ -562,6 +562,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8338737497797447325}
   isChasing: 0
   HealthBar: {fileID: 1136381452385500031}
+  healthBar1PercentWidth: 1.2
   PatrolStateData: {fileID: 11400000, guid: f594568519f7e684fa12bcbc0dcc15b9, type: 2}
   IdleStateData: {fileID: 11400000, guid: 97a5e21690ea3874c81f6763a82604e9, type: 2}
   ChaseStateData: {fileID: 11400000, guid: 446fedb1b4ec6e44d89b24b91335dc7d, type: 2}
@@ -614,7 +615,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -275.6, y: 296.5}
-  m_SizeDelta: {x: 77, y: 17}
+  m_SizeDelta: {x: 120, y: 17}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1135614834669423132
 CanvasRenderer:
@@ -689,7 +690,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -275.6, y: 296.5}
-  m_SizeDelta: {x: 77, y: 17}
+  m_SizeDelta: {x: 120, y: 17}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &5601286169266696381
 CanvasRenderer:

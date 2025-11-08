@@ -6,6 +6,7 @@ public class Enemy : Entity
     public float health { get; private set; }
     public GameObject HealthBar;
     public static Action<Enemy> OnEnemyHit; // static event shared by all enemies
+    public float healthBar1PercentWidth; // for ui manager
 
     // Start is called before the first frame update
     public override void Start()
