@@ -325,12 +325,16 @@ MonoBehaviour:
   playerCheck: {fileID: 8894484790347643809}
   spriteRenderer: {fileID: 2557747449789267821}
   isChasing: 0
+  groundRaycastDistance: 1.7
   HealthBar: {fileID: 6952016830909419701}
   healthBar1PercentWidth: 0.9
+  knockedUp: 0
+  knockedUpGraceTimer: 0
+  hitAnim: Archer Goblin - Hit
   IdleStateData: {fileID: 11400000, guid: 9303a87c07f0bd5428b5fee68fb5f0c3, type: 2}
   PatrolStateData: {fileID: 11400000, guid: 753cb96bfdcdfe941baf1f55131f08db, type: 2}
-  AttackState_Data: {fileID: 11400000, guid: 9c932849b13206f47a6f1337ae090f6c, type: 2}
-  jumpForce: {x: 0.4, y: 0.55}
+  AttackStateData: {fileID: 11400000, guid: 9c932849b13206f47a6f1337ae090f6c, type: 2}
+  RetreatStateData: {fileID: 11400000, guid: 61b4d9aa15582ca41b7cbf5d6e9f5925, type: 2}
 --- !u!50 &1203254552736853758
 Rigidbody2D:
   serializedVersion: 4
@@ -343,7 +347,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -609,7 +613,7 @@ MonoBehaviour:
   ExclamationMark: {fileID: 5657646142359943740}
   projectileName: Arrow
   spawnPos: {fileID: 5467097202651645414}
-  projectileSpeed: 2.5
+  projectileSpeed: 6
 --- !u!1 &6606137144983397648
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy : Entity
 {
@@ -7,6 +9,9 @@ public class Enemy : Entity
     public GameObject HealthBar;
     public static Action<Enemy> OnEnemyHit; // static event shared by all enemies
     public float healthBar1PercentWidth; // for ui manager
+    public bool knockedUp = false;
+    public float knockedUpGraceTimer = 0f;
+    public string hitAnim;
 
     // Start is called before the first frame update
     public override void Start()
@@ -23,9 +28,32 @@ public class Enemy : Entity
 
         if (health < 0) return;
 
+        if (knockedUp)
+        {
+            // Count down the grace period
+            if (knockedUpGraceTimer > 0)
+            {
+                knockedUpGraceTimer -= Time.deltaTime;
+                return; // don't check grounded yet
+            }
+
+            // Only check grounded AFTER the grace timer expires
+            if (CheckGrounded())
+            {
+                knockedUp = false;
+                rb.velocity = Vector3.zero; // prevent any form of sliding
+                Animator anim = spriteRenderer.GetComponent<Animator>();
+                if (anim != null) anim.speed = 1;
+                CurrentState.Enter(this);
+                rb.gravityScale = 1;
+                Debug.Log("Enemy Landed");
+            }
+            return;
+        }
+
         stateMachine.OnUpdate(Time.deltaTime, this); // updates enemy state machine
     }
-
+    
     public virtual void AttackVFX(int VFXAttackNo)
     {
 
@@ -43,6 +71,5 @@ public class Enemy : Entity
         HealthBar.SetActive(true);
         OnEnemyHit.Invoke(this);
     }
-    
 
 }

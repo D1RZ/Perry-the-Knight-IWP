@@ -15219,14 +15219,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1203254552736853758, guid: 88b7a0d7968e4d34788d06f0570ca489, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2298086073192419003, guid: 88b7a0d7968e4d34788d06f0570ca489, type: 3}
-      propertyPath: projectileSpeed
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2589233027049497297, guid: 88b7a0d7968e4d34788d06f0570ca489, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.814445
@@ -15271,14 +15263,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcherEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 8654180535027450829, guid: 88b7a0d7968e4d34788d06f0570ca489, type: 3}
-      propertyPath: AttackStateData
-      value: 
-      objectReference: {fileID: 11400000, guid: 9c932849b13206f47a6f1337ae090f6c, type: 2}
-    - target: {fileID: 8654180535027450829, guid: 88b7a0d7968e4d34788d06f0570ca489, type: 3}
-      propertyPath: RetreatStateData
-      value: 
-      objectReference: {fileID: 11400000, guid: 61b4d9aa15582ca41b7cbf5d6e9f5925, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17483,7 +17467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 730781128351590541, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 730781128351590541, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17522,9 +17506,25 @@ PrefabInstance:
       value: MainCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 7356582306673281185, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
+      propertyPath: jumpSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356582306673281185, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
+      propertyPath: AttackInputDelay
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356582306673281185, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
       propertyPath: audioSettingsManager
       value: 
       objectReference: {fileID: 346793324287811813}
+    - target: {fileID: 7356582306673281185, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
+      propertyPath: groundRaycastDistance
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7545084305328509879, guid: 6afd50ee5f27ff348ba387dc998b7302, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 730792733742d18489de211f04ebc99d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

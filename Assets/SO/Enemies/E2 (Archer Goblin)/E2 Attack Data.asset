@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f39ec423608ad4fa4248aa981cde3f, type: 3}
   m_Name: E2 Attack Data
   m_EditorClassIdentifier: 
-  minAttackCooldown: 0.8
-  maxAttackCooldown: 1
+  minAttackCooldown: 0.55
+  maxAttackCooldown: 0.9

@@ -1,6 +1,16 @@
 using System;
 using UnityEngine;
 
+public enum AttackType
+{
+    None,
+    Normal,
+    Lift,
+    Air,
+    GroundSlam,
+    Dash
+}
+
 public class PlayerController : Entity
 {
     // Static event that passes a float
@@ -118,6 +128,8 @@ public class PlayerController : Entity
 
     [SerializeField] private Animator parryAnimator;
 
+    private bool isAttacking;   // true when any attack is active
+
     public bool _IsFacingRight
     {
         get
@@ -127,8 +139,8 @@ public class PlayerController : Entity
         set
         {
             if (_isfacingright != value)
-            { 
-                transform.localScale *= new Vector2(-1,1);
+            {
+                transform.localScale *= new Vector2(-1, 1);
             }
             _isfacingright = value;
         }
@@ -168,9 +180,13 @@ public class PlayerController : Entity
 
     private bool canFlip;
 
-    private static PlayerController _instance;
+    private bool normalAttack = false; // for normal attack
 
-    private bool normalAttack = false; // just for normal attack
+    private bool liftAttack = false; // for lift attack
+
+    private bool airAttack = false;
+
+    private int airAttackCount = 0;
 
     private bool canAttack = true; // for all attacks shared
 
@@ -186,8 +202,16 @@ public class PlayerController : Entity
 
     public bool blockSuccess = false;
 
+    private float airAttackHangTimer = 0f;
+
+    public float maxAirHangTime = 0.45f; // tweak this
+
+    private float originalGravityScale;
+    
+    private static PlayerController _instance;
+
     public static PlayerController Instance
-    { 
+    {
         get
         {
             if (_instance == null) Debug.Log("GameManager is null");
@@ -220,7 +244,7 @@ public class PlayerController : Entity
     // Update is called once per frame
     void Update()
     {
-        if(Player.HealthData <= 0)
+        if (Player.HealthData <= 0)
         {
             gameObject.SetActive(false);
             return;
@@ -244,46 +268,7 @@ public class PlayerController : Entity
         {
             if (!isRolling && !isBlocking)
             {
-                if (walk && !run)
-                {
-                    Debug.Log("Activated! Walking");
-                    rb.constraints = RigidbodyConstraints2D.None; // reset constraints of rigidbody 2d
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    walkSpeed = defaultwalkspeed;
-                    animationController.SetAnimation("walk");
-                    if (!sfxAudioSource.isPlaying)
-                    {
-                        sfxAudioSource.clip = WalkAudioClip;
-                        sfxAudioSource.Play();
-                    }
-                }
-                else if (!walk && !run)
-                {
-                    rb.constraints = RigidbodyConstraints2D.FreezePositionX; // freezing of x position to prevent character from sliding due to 2d physics material
-                    animationController.SetAnimation("idle");
-                }
-                else // if running
-                {
-                    rb.constraints = RigidbodyConstraints2D.None; // reset constraints of rigidbody 2d
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    if (walkSpeed < maxSpeed)
-                    {
-                        walkSpeed = walkSpeed * 1.2f;
-                    }
-                    else
-                    {
-                        walkSpeed = maxSpeed;
-                    }
-                    animationController.SetAnimation("run");
-                }
-            }
-
-            if (normalAttack)
-            {
-                canMove = false;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                OnPlayerAttack.Invoke("Normal Attack");
-                normalAttack = false;
+                HandleWalkIdle();
             }
         }
         else
@@ -292,11 +277,104 @@ public class PlayerController : Entity
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             walkSpeed = defaultwalkspeed;
         }
+
+        HandleAttackState();
+    }
+
+    private void HandleWalkIdle()
+    {
+        if (walk && !run)
+        {
+            Debug.Log("Activated! Walking");
+            rb.constraints = RigidbodyConstraints2D.None; // reset constraints of rigidbody 2d
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            walkSpeed = defaultwalkspeed;
+            animationController.SetAnimation("walk");
+            if (!sfxAudioSource.isPlaying)
+            {
+                sfxAudioSource.clip = WalkAudioClip;
+                sfxAudioSource.Play();
+            }
+        }
+        else if (!walk && !run)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX; // freezing of x position to prevent character from sliding due to 2d physics material
+            animationController.SetAnimation("idle");
+        }
+    }
+
+    private void HandleAttackState()
+    {
+        if (normalAttack)
+        {
+            ExecuteAttack(AttackType.Normal);
+            return;
+        }
+
+        if (liftAttack)
+        {
+            ExecuteAttack(AttackType.Lift);
+            return;
+        }
+        
+        if(airAttack)
+        {
+            Debug.Log("Call execute!");
+            ExecuteAttack(AttackType.Air);
+        }
+
+        // Future attacks
+        // if (dashAttack) ExecuteAttack(AttackType.Dash);
+        // if (slamAttack) ExecuteAttack(AttackType.GroundSlam);
+    }
+
+    private void ExecuteAttack(AttackType type)
+    {
+        isAttacking = true;
+        canMove = false;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+
+        switch (type)
+        {
+            case AttackType.Normal:
+                OnPlayerAttack?.Invoke("Normal Attack");
+                normalAttack = false;
+                break;
+
+            case AttackType.Lift:
+                OnPlayerAttack?.Invoke("Lift Attack");
+                liftAttack = false;
+                break;
+
+            case AttackType.Air:
+                Debug.Log("Invoked Event!");
+                OnPlayerAttack?.Invoke("Air Attack");
+                airAttack = false;
+                break;
+
+            // Add more here later
+            case AttackType.GroundSlam:
+                OnPlayerAttack?.Invoke("Ground Slam");
+                break;
+
+            case AttackType.Dash:
+                OnPlayerAttack?.Invoke("Dash Attack");
+                break;
+        }
     }
 
     private void HandleGravity()
     {
-         // Fallback check: if roll got cancelled by falling
+        if(!InAir)
+        {
+            if(airAttackCount > 0) airAttackCount = 0;
+            if(rb.gravityScale > 1) rb.gravityScale = 1;
+        }
+
+        if (airAttack)
+            return; // ignore gravity during air attack
+
+        // Fallback check: if roll got cancelled by falling
         if (isRolling && InAir && rb.velocity.y < 0)
         {
             EndRoll();
@@ -336,28 +414,28 @@ public class PlayerController : Entity
             SetFacingDirection();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !jump && !normalAttack && !isRolling && AmtOfJumpsLeft > 0 && canMove)
+        if (Input.GetKeyDown(KeyCode.Space) && !jump && !isAttacking && !isRolling && AmtOfJumpsLeft > 0 && canMove)
         {
             jump = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && canMove && !normalAttack && !isRolling)
+        if (Input.GetKeyUp(KeyCode.Space) && canMove && !isAttacking && !isRolling)
         {
             variablejump = true;
         }
 
-        if (Input.GetMouseButtonDown(0) && !InAir && !isRolling && currentAttackInputTimer <= 0 && !isHit)
+        AttackType attack = ResolveAttack();
+        if (attack != AttackType.None)
         {
-            currentAttackInputTimer = AttackInputDelay; // resets attack input timer
-            normalAttack = true;
+            PerformAttack(attack);
         }
 
-        if (Input.GetKeyDown(KeyCode.V) && !jump && !normalAttack && !isRolling && canMove && !InAir && !isHit)
+        if (Input.GetKeyDown(KeyCode.V) && !jump && !isAttacking && !isRolling && canMove && !InAir && !isHit)
         {
             StartRoll();
         }
 
-        if (Input.GetMouseButtonDown(1) && !jump && !normalAttack && !isRolling && !InAir && !isHit && !isBlocking)
+        if (Input.GetMouseButtonDown(1) && !jump && !isAttacking && !isRolling && !InAir && !isHit && !isBlocking)
         {
             StartBlock();
         }
@@ -368,6 +446,77 @@ public class PlayerController : Entity
         }
     }
 
+    private AttackType ResolveAttack()
+    {
+        if (isRolling || isHit || isBlocking)
+            return AttackType.None;
+
+        if (currentAttackInputTimer > 0)
+            return AttackType.None;
+
+        if (InAir)
+        {
+            Debug.Log("IN AIR!");
+
+            if (Input.GetMouseButtonDown(0) && airAttackCount <= 3)
+            {
+                airAttackCount++;
+                currentAttackInputTimer = 0.4f;
+                Debug.Log("Air Attack!");
+                return AttackType.Air;
+            }
+
+            return AttackType.None;
+        }
+
+        if (Input.GetKey(KeyCode.W) && Input.GetMouseButtonDown(0))
+        {
+            currentAttackInputTimer = 0.5f;
+            return AttackType.Lift;
+        }
+
+        // Normal attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            currentAttackInputTimer = AttackInputDelay;
+            return AttackType.Normal;
+        }
+
+        return AttackType.None;
+    }
+
+    private void PerformAttack(AttackType attack)
+    {
+        switch (attack)
+        {
+            case AttackType.Normal:
+                liftAttack = false;
+                airAttack = false;
+                normalAttack = true;
+                break;
+
+            case AttackType.Lift:
+                normalAttack = false;
+                airAttack = false;
+                liftAttack = true;
+                rb.gravityScale = 1.25f;
+                break;
+
+            case AttackType.Air:
+                Debug.Log("Air Resolved!");
+                normalAttack = false;
+                liftAttack = false;
+                airAttack = true;
+                rb.velocity = Vector2.zero;  // stop drifting
+                originalGravityScale = rb.gravityScale;
+                rb.gravityScale = 0f;
+                airAttackHangTimer = maxAirHangTime;
+                break;
+        }
+
+        isAttacking = true;
+    }
+    
     private void StartAttack()
     {
         currentAttackInputTimer = AttackInputDelay;
@@ -397,13 +546,24 @@ public class PlayerController : Entity
         float direction = _IsFacingRight ? 1f : -1f;
         rb.AddForce(new Vector2(rollForce * direction, 0f), ForceMode2D.Impulse);
 
-        animationController.SetAnimation("roll"); 
+        animationController.SetAnimation("roll");
     }
 
     private void UpdateTimers()
     {
         if (currentAttackInputTimer > 0)
             currentAttackInputTimer -= Time.deltaTime;
+
+        // Air attack hang failsafe
+        if (airAttackHangTimer > 0)
+        {
+            airAttackHangTimer -= Time.deltaTime;
+
+            if (airAttackHangTimer <= 0)
+            {
+                EndAirAttack(); // auto recover
+            }
+        }
     }
 
     public void EndRoll()
@@ -486,12 +646,12 @@ public class PlayerController : Entity
 
     public void SetFacingDirection()
     {
-        if(dirH > 0f && !_IsFacingRight && canFlip)
+        if (dirH > 0f && !_IsFacingRight && canFlip)
         {
             facingDirection *= -1;
             _IsFacingRight = true;
         }
-        else if(dirH < 0f && _IsFacingRight && canFlip)
+        else if (dirH < 0f && _IsFacingRight && canFlip)
         {
             facingDirection *= -1;
             _IsFacingRight = false;
@@ -502,17 +662,17 @@ public class PlayerController : Entity
     {
         canFlip = true;
     }
-    
+
     public void DisableCanFlip()
     {
         canFlip = false;
     }
 
     private void FixedUpdate()
-    { 
-        if(isDashing)
+    {
+        if (isDashing)
         {
-            if(dashTimeLeft > 0)
+            if (dashTimeLeft > 0)
             {
                 canMove = false;
                 rb.velocity = new Vector2(dashSpeed * facingDirection, 0); // 0 so that when dashing player will not fall
@@ -525,30 +685,33 @@ public class PlayerController : Entity
                 }
             }
 
-            if(dashTimeLeft <= 0 || TouchingWall)
+            if (dashTimeLeft <= 0 || TouchingWall)
             {
                 canMove = true;
                 isDashing = false;
             }
         }
-        
-        if (walk && !InAir && !isRolling && !isBlocking) movementController.MoveHorizontal(dirH * walkSpeed);
-        else if(InAir && !isWallSliding && dirH != 0)
-        {
-            Vector2 ForceToAdd = new Vector2(movementForceInAir * dirH, 0);
-            rb.AddForce(ForceToAdd);
 
-            if(Mathf.Abs(rb.velocity.x) > walkSpeed)
+        if (walk && !InAir && !isRolling && !isBlocking) movementController.MoveHorizontal(dirH * walkSpeed);
+        else if (InAir && !isWallSliding && dirH != 0)
+        {
+            if (airAttackCount == 0)
             {
-                rb.velocity = new Vector2(walkSpeed * dirH,rb.velocity.y);
+                Vector2 ForceToAdd = new Vector2(movementForceInAir * dirH, 0);
+                rb.AddForce(ForceToAdd);
+
+                if (Mathf.Abs(rb.velocity.x) > walkSpeed)
+                {
+                    rb.velocity = new Vector2(walkSpeed * dirH, rb.velocity.y);
+                }
             }
         }
-        else if(InAir && !isWallSliding && dirH == 0)
+        else if (InAir && !isWallSliding && dirH == 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier,rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
         }
 
-        if(isWallSliding && canMove)
+        if (isWallSliding && canMove)
         {
             if (rb.velocity.y < -WallSlideSpeed)
             {
@@ -573,7 +736,7 @@ public class PlayerController : Entity
             Vector2 forceToAdd = new Vector2(wallJumpForce * wallJumpDirection.x * dirH, wallJumpForce * wallJumpDirection.y);
             rb.AddForce(forceToAdd, ForceMode2D.Impulse);
         }
-         
+
         if (variablejump)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
@@ -583,7 +746,8 @@ public class PlayerController : Entity
 
     public void ResetCanMove()
     {
-        if(!canMove) canMove = true;
+        if (!canMove) canMove = true;
+        animationController.animator.SetBool("liftAttack", false);
     }
 
     public void SetCanMove(bool move)
@@ -632,6 +796,21 @@ public class PlayerController : Entity
         parryAnimator.ResetTrigger("Block");
         animator.SetBool("Block", false);
         blockSuccess = false;
+    }
+
+    public void EndAttack()
+    {
+        isAttacking = false;
+        normalAttack = false;
+    }
+
+    public void EndAirAttack()
+    {
+        airAttack = false;
+        isAttacking = false;
+        canMove = true;
+        rb.gravityScale = originalGravityScale;
+        rb.velocity = new Vector2(rb.velocity.x,0);
     }
 
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 public class Entity : MonoBehaviour
 {
@@ -43,6 +42,8 @@ public class Entity : MonoBehaviour
 
     public bool isChasing = false;
 
+    [SerializeField] private float groundRaycastDistance;
+
     public virtual void Start()
     {
         GUITextShader = Shader.Find("GUI/Text Shader");
@@ -68,7 +69,7 @@ public class Entity : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.55f, LayerMask.GetMask("Platforms", "Ledges"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundRaycastDistance, LayerMask.GetMask("Platforms", "Ledges"));
         if (hit.collider == null) return false;
         else return true;
     }

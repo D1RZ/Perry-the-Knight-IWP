@@ -3,7 +3,33 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "AttackTypeData",menuName = "SO/AttackTypeData")]
 public class AttackTypeData : ScriptableObject
 {
-    public float[] attackStepDamages;
+    public string attackStepAnimVarName;
+    public AttackStep[] attackSteps;
     public int maxAttackSteps;
     public string attackTypeBool;
+
+    public void ApplyStepEffects(int stepIndex)
+    {
+        AttackStep step = attackSteps[stepIndex];
+
+        if (step.applyLiftForce)
+        {
+            if (PlayerController.Instance.rb != null)
+            {
+                PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                PlayerController.Instance.rb.AddForce(new Vector2(0, step.liftForceAmount), ForceMode2D.Impulse);
+            }
+        }
+    }
+}
+
+[System.Serializable] 
+public class AttackStep
+{
+    public float damage;
+    public float attackAnimTime;
+    public bool applyLiftForce;
+    public float liftForceAmount;
+    public Vector2 knockbackForce;
 }

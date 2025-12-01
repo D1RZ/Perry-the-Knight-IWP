@@ -18,6 +18,11 @@ public class SpearEnemy_IdleState : IdleState
 
     public override void onUpdate(Entity entity)
     {
+        if(!entity.CheckGrounded()) return; // if enemy is in air then dont update idle state (can serve as psuedo in air state)
+
+        Animator anim = entity.spriteRenderer.GetComponent<Animator>();
+        if (anim != null && anim.speed == 0) anim.speed = 1;
+
         if (idleTime > 0)
         {
             idleTime -= Time.deltaTime;
