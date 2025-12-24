@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ArcherEnemy_PatrolState : MoveState
 {
-    private SpearEnemy_PatrolState_Data spearPatrolData;
+    private PatrolState_Data spearPatrolData;
 
-    public ArcherEnemy_PatrolState(SpearEnemy_PatrolState_Data stateData)
+    public ArcherEnemy_PatrolState(PatrolState_Data stateData)
     {
         this.spearPatrolData = stateData;
     }

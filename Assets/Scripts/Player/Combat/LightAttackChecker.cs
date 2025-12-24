@@ -28,7 +28,7 @@ public class LightAttackChecker : BaseAttackChecker
         Time.timeScale = 0f;
 
         // Wait for real-time duration (unaffected by timeScale)
-        yield return new WaitForSecondsRealtime(0.25f);
+        yield return new WaitForSecondsRealtime(0.2f);
 
         // Resume time
         Time.timeScale = 1f;
@@ -58,7 +58,7 @@ public class LightAttackChecker : BaseAttackChecker
         // Reapply constraints
         if (enemy != null && enemy.rb != null)
         {
-            enemy.rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            enemy.rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
         
         if (enemy != null) enemy.ChangeSpriteColor(false);

@@ -47,7 +47,7 @@ public class Entity : MonoBehaviour
     public virtual void Start()
     {
         GUITextShader = Shader.Find("GUI/Text Shader");
-        NormalSpriteShader = Shader.Find("Sprites/Default");
+        NormalSpriteShader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
         facingDirection = 1;
         rb = GetComponent<Rigidbody2D>();
 
@@ -94,7 +94,12 @@ public class Entity : MonoBehaviour
 
     public virtual bool CheckLedge()
     {
-        return Physics2D.Raycast(ledgeCheck.position,Vector2.down,entityData.ledgeCheckDistance, LayerMask.GetMask("Platforms", "Ledges"));
+        if (Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, LayerMask.GetMask("Ledges")))
+        {
+            Flip();
+            return true;
+        }
+
     }
 
     public virtual bool CheckChaseTarget(string layerOfTarget)

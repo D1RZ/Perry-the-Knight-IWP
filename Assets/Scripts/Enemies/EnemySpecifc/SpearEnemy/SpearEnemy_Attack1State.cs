@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class SpearEnemy_Attack1State : MoveState
 {
-    private SpearEnemy_Attack1State_Data spearAttack1Data;
+    private SpearEnemy_AttackState_Data spearAttack1Data;
 
     // Cooldown timer variables
     private float attackCooldown = 0.25f; // seconds before starting attack
     private float cooldownTimer;
     private bool hasStartedAttack;
 
-    public SpearEnemy_Attack1State(SpearEnemy_Attack1State_Data stateData)
+    public SpearEnemy_Attack1State(SpearEnemy_AttackState_Data stateData)
     {
         this.spearAttack1Data = stateData;
     }

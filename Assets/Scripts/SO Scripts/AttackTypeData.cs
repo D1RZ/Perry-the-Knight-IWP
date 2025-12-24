@@ -12,13 +12,13 @@ public class AttackTypeData : ScriptableObject
     {
         AttackStep step = attackSteps[stepIndex];
 
-        if (step.applyLiftForce)
+        if (step.applyForceToPlayer)
         {
             if (PlayerController.Instance.rb != null)
             {
                 PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-                PlayerController.Instance.rb.AddForce(new Vector2(0, step.liftForceAmount), ForceMode2D.Impulse);
+                PlayerController.Instance.rb.AddForce(new Vector2(step.ForceToPlayerAmt.x,step.ForceToPlayerAmt.y), ForceMode2D.Impulse);
             }
         }
     }
@@ -29,7 +29,7 @@ public class AttackStep
 {
     public float damage;
     public float attackAnimTime;
-    public bool applyLiftForce;
-    public float liftForceAmount;
+    public bool applyForceToPlayer;
+    public Vector2 ForceToPlayerAmt;
     public Vector2 knockbackForce;
 }

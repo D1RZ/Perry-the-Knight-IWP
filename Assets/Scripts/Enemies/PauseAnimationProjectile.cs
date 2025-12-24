@@ -9,7 +9,7 @@ public class PauseAnimationProjectile : PauseAnimation
     public void SpawnProjectile()
     {
         var projectile = ObjectPoolManager.Instance.Spawn(projectileName,spawnPos.position,Quaternion.identity);
-        projectile.transform.localScale = new Vector3(1 * transform.parent.GetComponent<Enemy>().facingDirection, 1,1);
+        projectile.transform.localScale = new Vector3(projectileScale.x * transform.parent.GetComponent<Enemy>().facingDirection, projectileScale.y,1);
         projectile.GetComponent<Arrow>().SetFacingDirection(transform.parent.GetComponent<Enemy>().facingDirection);
         projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.parent.GetComponent<Enemy>().facingDirection * projectileSpeed, 0);
     }

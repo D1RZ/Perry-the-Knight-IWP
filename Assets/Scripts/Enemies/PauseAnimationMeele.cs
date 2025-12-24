@@ -14,7 +14,10 @@ public class PauseAnimationMeele : PauseAnimation
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hasHit ||PlayerController.Instance.GetIsRolling() || collision.gameObject.layer != 8) return;
+        if (hasHit ||PlayerController.Instance.GetIsRolling() || collision.gameObject.layer != 8 || PlayerController.Instance.GetIsDashAttacking()) return;
+
+        if (isFlying && !FlyHit) FlyHit = true;
+        else if (isFlying && FlyHit) return;
 
         hasHit = true;
 
@@ -30,10 +33,7 @@ public class PauseAnimationMeele : PauseAnimation
     {
         if(PlayerController.Instance.GetIsBlocking() && transform.parent.GetComponent<Enemy>().facingDirection != PlayerController.Instance.facingDirection)
         {
-            PlayerController.Instance.blockSuccess = true;
-            PlayerController.Instance.animationController.animator.SetBool("Block", true);
-
-            if(Time.time - PlayerController.Instance.GetStartBlockTime() <= 0.4f)
+            if (Time.time - PlayerController.Instance.GetStartBlockTime() <= 0.3f)
             {
                 Enemy enemy = transform.parent.GetComponent<Enemy>();
                 var InstantiatedParticle = Instantiate(ParticleManager.Instance.GetParticleEffect("Hit"), enemy.gameObject.transform.position, Quaternion.identity);
@@ -143,7 +143,7 @@ public class PauseAnimationMeele : PauseAnimation
         // Apply hit impact force
         enemy.rb.constraints = RigidbodyConstraints2D.None;
         enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        enemy.rb.AddForce(new Vector2(PlayerController.Instance.facingDirection * 30f, 0), ForceMode2D.Impulse);
+        enemy.rb.AddForce(new Vector2(PlayerController.Instance.facingDirection * 10f, 0), ForceMode2D.Impulse);
 
         // Pause enemy animation
         if (enemy.spriteRenderer != null)
@@ -158,7 +158,7 @@ public class PauseAnimationMeele : PauseAnimation
         // Reapply constraints
         if (enemy != null && enemy.rb != null)
         {
-            enemy.rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            enemy.rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
 
         if (enemy != null) enemy.ChangeSpriteColor(false);

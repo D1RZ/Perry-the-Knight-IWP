@@ -166,7 +166,7 @@ public class PlayerController : Entity
 
     private float jumptimer;
 
-    private bool isDashing;
+    private bool isDashAttacking = false;
 
     private bool isRolling = false;
 
@@ -206,7 +206,8 @@ public class PlayerController : Entity
 
     public float maxAirHangTime = 0.45f; // tweak this
 
-    private float originalGravityScale;
+    // for dash attack input check
+    private bool isHolding = false;
     
     private static PlayerController _instance;
 
@@ -296,9 +297,9 @@ public class PlayerController : Entity
                 sfxAudioSource.Play();
             }
         }
-        else if (!walk && !run)
+        else if (!walk && !run && !isDashAttacking)
         {
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX; // freezing of x position to prevent character from sliding due to 2d physics material
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // freezing of x position to prevent character from sliding due to 2d physics material
             animationController.SetAnimation("idle");
         }
     }
@@ -323,8 +324,8 @@ public class PlayerController : Entity
             ExecuteAttack(AttackType.Air);
         }
 
-        // Future attacks
-        // if (dashAttack) ExecuteAttack(AttackType.Dash);
+        if (dashAttack) ExecuteAttack(AttackType.Dash);
+        
         // if (slamAttack) ExecuteAttack(AttackType.GroundSlam);
     }
 
@@ -332,7 +333,7 @@ public class PlayerController : Entity
     {
         isAttacking = true;
         canMove = false;
-        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        if(currentAttackType != AttackType.Dash) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
         switch (type)
         {
@@ -380,7 +381,7 @@ public class PlayerController : Entity
             EndRoll();
         }
 
-        if (rb.velocity.y < 0f && canMove)
+        if (rb.velocity.y < 0f)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
@@ -397,7 +398,7 @@ public class PlayerController : Entity
             audioSettingsManager.TurnOnOffAudioMenu();
         }
 
-        if (canMove)
+        if (canMove && !isDashAttacking)
         {
             dirH = Input.GetAxis("Horizontal");
         }
@@ -409,7 +410,7 @@ public class PlayerController : Entity
         walk = Mathf.Abs(dirH) > 0.01f && defaultwalkspeed > 0 && canMove; // 0.01f so that walk animation will end early and not have delay between transition between walk and idle animation
         animationController._yVelocity = rb.velocity.y;
 
-        if (!isWallSliding && canMove)
+        if (!isWallSliding && canMove && !isDashAttacking)
         {
             SetFacingDirection();
         }
@@ -448,7 +449,7 @@ public class PlayerController : Entity
 
     private AttackType ResolveAttack()
     {
-        if (isRolling || isHit || isBlocking)
+        if (isRolling || isHit || isBlocking || isDashAttacking)
             return AttackType.None;
 
         if (currentAttackInputTimer > 0)
@@ -461,7 +462,8 @@ public class PlayerController : Entity
             if (Input.GetMouseButtonDown(0) && airAttackCount <= 3)
             {
                 airAttackCount++;
-                currentAttackInputTimer = 0.4f;
+                currentAttackInputTimer = 0.35f;
+                currentAttackType = AttackType.Air;
                 Debug.Log("Air Attack!");
                 return AttackType.Air;
             }
@@ -475,10 +477,10 @@ public class PlayerController : Entity
             return AttackType.Lift;
         }
 
-        // Normal attack
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0))
         {
-            currentAttackInputTimer = AttackInputDelay;
+            currentAttackInputTimer = 0.5f;
+            currentAttackType = AttackType.Normal;
             return AttackType.Normal;
         }
 
@@ -620,21 +622,21 @@ public class PlayerController : Entity
         canMove = false;
         isRolling = false;
         normalAttack = false;
-        isDashing = false;
+        //isDashing = false;
 
         // Stop all motion immediately
         rb.velocity = Vector2.zero;
     }
 
-    private void AttemptToDash()
-    {
-        isDashing = true;
-        dashTimeLeft = dashTime;
-        lastDash = Time.time;
+    //private void AttemptToDash()
+    //{
+    //    isDashing = true;
+    //    dashTimeLeft = dashTime;
+    //    lastDash = Time.time;
 
-        PlayerAfterImagePool.Instance.GetFromPool();
-        lastImageXPos = transform.position.x;
-    }
+    //    PlayerAfterImagePool.Instance.GetFromPool();
+    //    lastImageXPos = transform.position.x;
+    //}
 
     public void FinishLedgeClimb()
     {
@@ -670,48 +672,46 @@ public class PlayerController : Entity
 
     private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            if (dashTimeLeft > 0)
-            {
-                canMove = false;
-                rb.velocity = new Vector2(dashSpeed * facingDirection, 0); // 0 so that when dashing player will not fall
-                dashTimeLeft -= Time.deltaTime;
+        HandleDashMovement();
+        HandleGroundMovement();
+        HandleAirMovement();
+        HandleWallSlide();
+        HandleJumpLogic();
+        HandleVariableJump();
+    }
 
-                if (Mathf.Abs(transform.position.x - lastImageXPos) > distanceBetweenImages)
-                {
-                    PlayerAfterImagePool.Instance.GetFromPool();
-                    lastImageXPos = transform.position.x;
-                }
-            }
+    private void HandleGroundMovement()
+    {
+        if (!walk || InAir || isRolling || isBlocking) return;
 
-            if (dashTimeLeft <= 0 || TouchingWall)
-            {
-                canMove = true;
-                isDashing = false;
-            }
-        }
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        if (walk && !InAir && !isRolling && !isBlocking) movementController.MoveHorizontal(dirH * walkSpeed);
-        else if (InAir && !isWallSliding && dirH != 0)
+        movementController.MoveHorizontal(dirH * walkSpeed);
+    }
+
+    private void HandleAirMovement()
+    {
+        if (!InAir || isWallSliding) return;
+
+        if (dirH != 0)
         {
             if (airAttackCount == 0)
             {
-                Vector2 ForceToAdd = new Vector2(movementForceInAir * dirH, 0);
-                rb.AddForce(ForceToAdd);
+                Vector2 force = new Vector2(movementForceInAir * dirH, 0);
+                rb.AddForce(force);
 
                 if (Mathf.Abs(rb.velocity.x) > walkSpeed)
                 {
                     rb.velocity = new Vector2(walkSpeed * dirH, rb.velocity.y);
                 }
             }
-        }
-        else if (InAir && !isWallSliding && dirH == 0)
+        else
         {
             rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
         }
 
-        if (isWallSliding && canMove)
+    private void HandleWallSlide()
         {
             if (rb.velocity.y < -WallSlideSpeed)
             {
@@ -719,27 +719,45 @@ public class PlayerController : Entity
             }
         }
 
-        if (jump && !isWallSliding)
+    private void HandleJumpLogic()
         {
             AmtOfJumpsLeft--;
             movementController.MoveVertical(jumpSpeed);
             jump = false;
         }
-        else if (isWallSliding && dirH <= Math.Abs(0.1f) && jump) // if no direction specified when on wall
+
+        // Wall slide jumps
+        if (dirH <= Mathf.Abs(0.1f))
         {
             isWallSliding = false;
-            Vector2 forceToAdd = new Vector2(wallHopForce * wallHopDirection.x * -facingDirection, wallHopForce * wallHopDirection.y);
-            rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+            Vector2 force = new Vector2(
+                wallHopForce * wallHopDirection.x * -facingDirection,
+                wallHopForce * wallHopDirection.y
+            );
+            rb.AddForce(force, ForceMode2D.Impulse);
         }
-        else if ((isWallSliding || TouchingWall) && dirH > Math.Abs(0.1f) && jump) // if there is direction specified when on wall
+        else
         {
-            Vector2 forceToAdd = new Vector2(wallJumpForce * wallJumpDirection.x * dirH, wallJumpForce * wallJumpDirection.y);
-            rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+            // Wall jump (with direction)
+            Vector2 force = new Vector2(
+                wallJumpForce * wallJumpDirection.x * dirH,
+                wallJumpForce * wallJumpDirection.y
+            );
+            rb.AddForce(force, ForceMode2D.Impulse);
         }
 
-        if (variablejump)
+        jump = false;
+        }
+
+    private void HandleVariableJump()
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+        if (!variablejump) return;
+
+        rb.velocity = new Vector2(
+            rb.velocity.x,
+            rb.velocity.y * variableJumpHeightMultiplier
+        );
+
             variablejump = false;
         }
     }
@@ -788,7 +806,7 @@ public class PlayerController : Entity
 
     public void ActivateParryVFX()
     {
-        parryAnimator.SetTrigger("Block");
+        if(parrySuccess) parryAnimator.SetTrigger("Block");
     }
 
     public void ResetParryVFX()
@@ -809,7 +827,7 @@ public class PlayerController : Entity
         airAttack = false;
         isAttacking = false;
         canMove = true;
-        rb.gravityScale = originalGravityScale;
+        rb.gravityScale = 1;
         rb.velocity = new Vector2(rb.velocity.x,0);
     }
 

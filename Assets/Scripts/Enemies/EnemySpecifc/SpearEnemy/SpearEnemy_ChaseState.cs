@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SpearEnemy_ChaseState : State
 {
-    private SpearEnemy_ChaseState_Data spearChaseData;
+    private ChaseState_Data spearChaseData;
 
-    public SpearEnemy_ChaseState(SpearEnemy_ChaseState_Data stateData)
+    public SpearEnemy_ChaseState(ChaseState_Data stateData)
     {
         this.spearChaseData = stateData;
     }

@@ -17,7 +17,7 @@ public class PauseAnimation : MonoBehaviour
     private IEnumerator ResumeAnimation()
     {
         yield return new WaitForSeconds(0.2f);
-        animator.speed = 4f;
+        animator.speed = resumeAnimationSpeed;
         ExclamationMark.SetActive(false);
     }
 

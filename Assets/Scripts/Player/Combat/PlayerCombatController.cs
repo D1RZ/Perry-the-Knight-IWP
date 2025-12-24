@@ -44,7 +44,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.OnPlayerAttack += HandleAttack;
+        PlayerController.OnPlayerReady += Register;
     }
 
     private void HandleAttack(string attackType)
@@ -77,10 +77,10 @@ public class PlayerCombatController : MonoBehaviour
             knockbackForce = currentAttackType.attackSteps[attackStep - 1].knockbackForce;
         }
 
-        if(currentAttackType.attackStepAnimVarName != "nil")
+            if (currentAttackType.attackStepAnimVarName != "nil")
         animator.SetInteger(currentAttackType.attackStepAnimVarName, attackStep);
 
-        if(attackType == "Air Attack")
+            if (attackType == "Air Attack")
         Debug.Log("Air Attack Step: " + animator.GetInteger("AirAttackStep"));
 
         animator.SetBool(currentAttackType.attackTypeBool, true);
@@ -104,7 +104,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             if(attackTypeDataPair.key.Equals(attackType))
             {
-                if (previousAttackType != null && attackType != previousAttackType) attackStep = 0; // reset attack step for every new type of attack the player attacks with
+                if (previousAttackType != null && attackType != previousAttackType && currentAttackType != null) attackStep = 0; // reset attack step for every new type of attack the player attacks with
 
                 previousAttackType = attackType;
                 currentAttackType = attackTypeDataPair.value;

@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpearEnemy : Enemy,IDamageable
+public class SpearEnemy : Enemy
 {
-    public SpearEnemy_PatrolState_Data PatrolStateData;
+    public PatrolState_Data PatrolStateData;
 
     public IdleState_Data IdleStateData;
 
-    public SpearEnemy_ChaseState_Data ChaseStateData;
+    public ChaseState_Data ChaseStateData;
 
-    public SpearEnemy_Attack1State_Data Attack1StateData;
+    public SpearEnemy_AttackState_Data AttackStateData;
 
     public Transform VFXPos;
 
@@ -29,7 +29,7 @@ public class SpearEnemy : Enemy,IDamageable
         IdleState = new SpearEnemy_IdleState(IdleStateData);
         PatrolState = new SpearEnemy_PatrolState(PatrolStateData);
         ChaseState = new SpearEnemy_ChaseState(ChaseStateData);
-        Attack1State = new SpearEnemy_Attack1State(Attack1StateData);
+        Attack1State = new SpearEnemy_Attack1State(AttackStateData);
         #endregion
 
         #region Setting of state names 
@@ -81,7 +81,7 @@ public class SpearEnemy : Enemy,IDamageable
     {
         // since spear enemy only has 1 type of attack for now so therefore can ignore AttackNo
         if (!PlayerController.Instance.GetIsBlocking())
-            PlayerController.Instance._PlayerData.HealthData -= 40;
+            PlayerController.Instance._PlayerData.HealthData -= AttackStateData.Damage;
         else
             PlayerController.Instance._PlayerData.HealthData -= 8;
     }

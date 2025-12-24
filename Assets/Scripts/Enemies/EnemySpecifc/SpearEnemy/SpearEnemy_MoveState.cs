@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SpearEnemy_PatrolState : MoveState
 {
-    private SpearEnemy_PatrolState_Data spearPatrolData;
+    private PatrolState_Data spearPatrolData;
 
-    public SpearEnemy_PatrolState(SpearEnemy_PatrolState_Data stateData)
+    public SpearEnemy_PatrolState(PatrolState_Data stateData)
     {
         this.spearPatrolData = stateData;
     }

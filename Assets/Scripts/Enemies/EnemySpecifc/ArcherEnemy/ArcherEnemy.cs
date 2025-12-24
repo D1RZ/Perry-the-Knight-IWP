@@ -3,7 +3,7 @@ public class ArcherEnemy : Enemy,IDamageable
 {
     public IdleState_Data IdleStateData;
 
-    public SpearEnemy_PatrolState_Data PatrolStateData;
+    public PatrolState_Data PatrolStateData;
 
     public ArcherEnemy_AttackState_Data AttackStateData;
 

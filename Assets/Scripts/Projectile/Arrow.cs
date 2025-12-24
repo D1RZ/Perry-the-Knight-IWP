@@ -16,7 +16,7 @@ public class Arrow : MonoBehaviour
             return;
         }
 
-        if (hasHit || PlayerController.Instance.GetIsRolling() || collision.gameObject.layer != 8) return;
+        if (hasHit || PlayerController.Instance.GetIsRolling() || collision.gameObject.layer != 8 || PlayerController.Instance.GetIsDashAttacking()) return;
 
        damageMultiplier = 1;
 
@@ -37,7 +37,7 @@ public class Arrow : MonoBehaviour
             PlayerController.Instance.blockSuccess = true;
             PlayerController.Instance.animationController.animator.SetBool("Block", true);
 
-            if (Time.time - PlayerController.Instance.GetStartBlockTime() <= 0.4f)
+            if (Time.time - PlayerController.Instance.GetStartBlockTime() <= 0.3f)
             {
                 transform.GetComponent<Animator>().SetTrigger("Block");
                 var rb = transform.GetComponent<Rigidbody2D>();
