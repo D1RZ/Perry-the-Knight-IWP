@@ -8,10 +8,12 @@ public class Room : MonoBehaviour
 
     public void OnEnterRoom()
     {
-        foreach (Enemy enemy in enemiesParent.GetComponentsInChildren<Enemy>())
-        {
-            enemy.ResetEnemy();
-        }
+        //foreach (Enemy enemy in enemiesParent.GetComponentsInChildren<Enemy>(true))
+        //{
+        //    Debug.Log("Reset Enemy!");
+        //    enemy.ResetEnemy();
+        //    enemy.gameObject.SetActive(true);
+        //}
 
         transform.gameObject.SetActive(true);
     }

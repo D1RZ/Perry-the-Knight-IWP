@@ -93,13 +93,6 @@ public class Enemy : Entity
 
         stunTimer = 0f;
         knockedUpGraceTimer = 0f;
-
-        rb.velocity = Vector2.zero;
-        rb.gravityScale = 1;
-
-        stateMachine.SetNextState("IDLE",this);
-
-        CurrentState.Enter(this);
     }
 
     public void SetHealth(float dmg)

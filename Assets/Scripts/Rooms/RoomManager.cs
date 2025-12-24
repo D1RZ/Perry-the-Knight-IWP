@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour
     [Header("Transition")]
     [SerializeField] private bool useFade = true;
 
-    private Room currentRoom;
+    [SerializeField] private Room currentRoom;
     private bool isTransitioning;
 
     private void Awake()

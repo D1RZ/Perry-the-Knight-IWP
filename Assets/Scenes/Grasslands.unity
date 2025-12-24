@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.4
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000061fc6b25d9a10da7a168bf06435cf78b730008bb3fad1cff812e30117d9532e71bbbc430ed73684f
@@ -2616,6 +2616,10 @@ PrefabInstance:
       propertyPath: confiner
       value: 
       objectReference: {fileID: 655084775}
+    - target: {fileID: 6881555371165845463, guid: 65745f867464b644f96edffd2c8e6f58, type: 3}
+      propertyPath: currentRoom
+      value: 
+      objectReference: {fileID: 1543101921}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3929,10 +3933,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3825266215651911790, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848551303899186638, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.16
+      objectReference: {fileID: 0}
     - target: {fileID: 5692696849794660191, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
       propertyPath: targetRoom
       value: 
       objectReference: {fileID: 1543101921}
+    - target: {fileID: 8960214120368923485, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
