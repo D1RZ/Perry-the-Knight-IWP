@@ -5,6 +5,9 @@ public class PauseAnimationMeele : PauseAnimation
 {
     private int latestAttack;
     private bool hasHit = false;
+    [SerializeField] private bool isFlying = false;
+    private bool FlyHit = false; // for flying enemy as flying enemy attack hitbox is more than one frame
+    private bool Parried = false; // checks for if player has parried enemy attack
 
     public void AttackingVFX(int VFXAttackNo = 1) // which vfx to instantiate
     {
@@ -20,7 +23,7 @@ public class PauseAnimationMeele : PauseAnimation
         else if (isFlying && FlyHit) return;
 
         hasHit = true;
-
+   
         if (CheckForBlockOrParry()) return;
 
         Debug.Log("HIT REGISTERED!!");
@@ -38,18 +41,24 @@ public class PauseAnimationMeele : PauseAnimation
                 Enemy enemy = transform.parent.GetComponent<Enemy>();
                 var InstantiatedParticle = Instantiate(ParticleManager.Instance.GetParticleEffect("Hit"), enemy.gameObject.transform.position, Quaternion.identity);
                 InstantiatedParticle.transform.localScale = new Vector3(-enemy.facingDirection, 1, 1);
+                Parried = true;
+                PlayerController.Instance.parrySuccess = true;
+                PlayerController.Instance.blockSuccess = true;
+                PlayerController.Instance.animationController.animator.SetBool("Block", true);
                 StartCoroutine(DoParryHitImpact(enemy));
                 return true;
             }
             else
             {
+                PlayerController.Instance.parrySuccess = false;
+                PlayerController.Instance.blockSuccess = true;
+                PlayerController.Instance.animationController.animator.SetBool("Block", true);
                 Enemy enemy = transform.parent.GetComponent<Enemy>();
                 var InstantiatedParticle = Instantiate(ParticleManager.Instance.GetParticleEffect("Hit"), enemy.gameObject.transform.position, Quaternion.identity);
                 InstantiatedParticle.transform.localScale = new Vector3(-enemy.facingDirection, 1, 1);
                 StartCoroutine(DoParryHitImpact(enemy));
                 return false;
             }
-
         }
 
         return false;
@@ -124,14 +133,17 @@ public class PauseAnimationMeele : PauseAnimation
             yield break; // exit coroutine — nothing else to do
         }
 
-        // Optional: freeze time
-        Time.timeScale = 0f;
+        if (Parried)
+        {
+            // Optional: freeze time
+            Time.timeScale = 0f;
 
-        // Wait for real-time duration (unaffected by timeScale)
-        yield return new WaitForSecondsRealtime(0.4f);
+            // Wait for real-time duration (unaffected by timeScale)
+            yield return new WaitForSecondsRealtime(0.2f);
 
-        // Resume time
-        Time.timeScale = 1f;
+            // Resume time
+            Time.timeScale = 1f;
+        }
 
         // If Rigidbody was destroyed or enemy null, exit safely
         if (enemy == null || enemy.rb == null)
@@ -168,7 +180,29 @@ public class PauseAnimationMeele : PauseAnimation
             if (anim != null) anim.speed = 1;
         }
 
+        if (Parried)
+        {
+            Parried = false;
+            enemy.Anim.Play(enemy.hitAnim);
+            enemy.stunTimer = enemy.stunTime;
+            enemy.isStunned = true;
+            enemy.rb.velocity = Vector3.zero;
+            enemy.isBlocking = false;
+        }
+
         hasHit = false;
+    }
+
+    public void SetFlyHit(bool flyhit)
+    {
+        FlyHit = flyhit;
+    }
+
+    public void SetFinishedAttack() // for skeleton enemy
+    {
+        Entity entity = transform.root.GetComponent<Entity>();
+
+        entity.hasFinishedAttack = true;
     }
 
 }

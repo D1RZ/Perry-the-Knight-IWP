@@ -289,6 +289,7 @@ Transform:
   - {fileID: 5828635417557053920}
   - {fileID: 9221596492493075296}
   - {fileID: 8894484790347643809}
+  - {fileID: 4179719762558300494}
   - {fileID: 5467097202651645414}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -321,16 +322,22 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: 31fae8d7f4814394f95a163dda400950, type: 2}
   Anim: {fileID: 1131634256382180112}
   wallCheck: {fileID: 8894484790347643809}
-  ledgeCheck: {fileID: 8894484790347643809}
+  ledgeCheck: {fileID: 4179719762558300494}
   playerCheck: {fileID: 8894484790347643809}
   spriteRenderer: {fileID: 2557747449789267821}
   isChasing: 0
   groundRaycastDistance: 1.7
+  hasFinishedAttack: 0
   HealthBar: {fileID: 6952016830909419701}
   healthBar1PercentWidth: 0.9
   knockedUp: 0
   knockedUpGraceTimer: 0
   hitAnim: Archer Goblin - Hit
+  isStunned: 0
+  stunTime: 0
+  stunTimer: 0
+  isBlocking: 0
+  BlockParticlePos: {fileID: 0}
   IdleStateData: {fileID: 11400000, guid: 9303a87c07f0bd5428b5fee68fb5f0c3, type: 2}
   PatrolStateData: {fileID: 11400000, guid: 753cb96bfdcdfe941baf1f55131f08db, type: 2}
   AttackStateData: {fileID: 11400000, guid: 9c932849b13206f47a6f1337ae090f6c, type: 2}
@@ -407,6 +414,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1456375, y: 2.2403033}
   m_EdgeRadius: 0
+--- !u!1 &4877104293199081294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4179719762558300494}
+  m_Layer: 0
+  m_Name: LedgeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4179719762558300494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4877104293199081294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.119, y: -0.275, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2589233027049497297}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5657646142359943740
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,8 +515,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1157103501
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3882bd0030113724e808ffa744d648f4, type: 3}
   m_Color: {r: 1, g: 0.99892235, b: 0, a: 1}
@@ -563,9 +601,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 1332245485
+  m_SortingLayer: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1926007218, guid: 37018d2301497d7438b529824fc763c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -611,9 +649,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExclamationMark: {fileID: 5657646142359943740}
+  resumeAnimationSpeed: 4
   projectileName: Arrow
   spawnPos: {fileID: 5467097202651645414}
-  projectileSpeed: 6
+  projectileSpeed: 12
+  projectileScale: {x: 0.6, y: 0.7}
 --- !u!1 &6606137144983397648
 GameObject:
   m_ObjectHideFlags: 0

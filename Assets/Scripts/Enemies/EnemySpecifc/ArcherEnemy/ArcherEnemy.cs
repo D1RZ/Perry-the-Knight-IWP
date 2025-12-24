@@ -1,4 +1,3 @@
-
 public class ArcherEnemy : Enemy,IDamageable
 {
     public IdleState_Data IdleStateData;

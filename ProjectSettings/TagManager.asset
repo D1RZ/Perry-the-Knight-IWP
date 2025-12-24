@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Explosive
   - Flying
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Deep Ground
+    uniqueID: 818199323
+    locked: 0
+  - name: Background
+    uniqueID: 627833953
+    locked: 0
+  - name: Trail
+    uniqueID: 2802688473
+    locked: 0
+  - name: Ground Enemy
+    uniqueID: 1332245485
+    locked: 0
   - name: Player
     uniqueID: 113207457
     locked: 0
@@ -53,4 +66,13 @@ TagManager:
     locked: 0
   - name: Particles
     uniqueID: 3137863795
+    locked: 0
+  - name: Ground
+    uniqueID: 4280069439
+    locked: 0
+  - name: Decorations
+    uniqueID: 288370305
+    locked: 0
+  - name: Flying Enemy
+    uniqueID: 3878851965
     locked: 0

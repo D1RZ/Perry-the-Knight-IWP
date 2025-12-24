@@ -44,13 +44,14 @@ public class Entity : MonoBehaviour
 
     [SerializeField] private float groundRaycastDistance;
 
+    public bool hasFinishedAttack = false;
+
     public virtual void Start()
     {
         GUITextShader = Shader.Find("GUI/Text Shader");
         NormalSpriteShader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
         facingDirection = 1;
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     public void ChangeSpriteColor(bool turnWhite)
@@ -82,11 +83,20 @@ public class Entity : MonoBehaviour
         rb.velocity = velocityWorkspace;
     }
 
+    public virtual void SetVelocity(Vector2 velocity) // changes velocity of enemy according to their facing direction
+    {
+        velocityX = velocity.x;
+        if (!isChasing) velocityWorkspace.Set(velocity.x * facingDirection, velocity.y);
+        else velocityWorkspace.Set(velocity.x, velocity.y);
+        rb.velocity = velocityWorkspace;
+    }
+
     public virtual bool CheckWall()
     {
         if (Physics2D.Raycast(wallCheck.position,transform.right * facingDirection, entityData.wallCheckDistance, LayerMask.GetMask("Platforms", "Ledges")))
         {
             Flip();
+            return true;
         }
 
         return false;
@@ -100,6 +110,7 @@ public class Entity : MonoBehaviour
             return true;
         }
 
+        return false;
     }
 
     public virtual bool CheckChaseTarget(string layerOfTarget)
@@ -115,7 +126,20 @@ public class Entity : MonoBehaviour
         target = null;
         return false;
     }
-    
+
+    public virtual bool CheckChaseOverlapTarget(string layerOfTarget)
+    {
+        Collider2D hitCollider = Physics2D.OverlapCircle(playerCheck.position, entityData.chaseRaycastDistance, LayerMask.GetMask(layerOfTarget));
+
+        if (hitCollider != null)
+        {
+            target = hitCollider.gameObject;
+            return true;
+        }
+
+        return false;
+    }
+
     public virtual bool CheckAttackTarget(string layerOfTarget)
     {
         Collider2D hitCollider = Physics2D.OverlapCircle(playerCheck.position,entityData.attackDetectionRadius, LayerMask.GetMask(layerOfTarget));
@@ -127,13 +151,24 @@ public class Entity : MonoBehaviour
         }
 
         return false;
-    }    
+    }
+
+    public virtual bool CheckGuardTarget(string layerOfTarget)
+    {
+        Collider2D hitCollider = Physics2D.OverlapCircle(playerCheck.position, entityData.guardDetectionRadius, LayerMask.GetMask(layerOfTarget));
+
+        if (hitCollider != null)
+        {
+            target = hitCollider.gameObject;
+            return true;
+        }
+
+        return false;
+    }
 
     public virtual void Flip()
     {
         facingDirection *= -1;
-
-        //velocityX *= -1;
 
         transform.localScale *= new Vector2(-1,1);
     }
@@ -202,6 +237,8 @@ public class Entity : MonoBehaviour
     public virtual void OnDrawGizmos()
     {
         if(wallCheck != null) Gizmos.DrawLine(wallCheck.position,wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance));
+
+        if (ledgeCheck != null) Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.wallCheckDistance));
     }
 
     public void SetTarget(GameObject target)
@@ -222,6 +259,11 @@ public class Entity : MonoBehaviour
     public float GetCurrentVelocity()
     {
         return velocityX;
+    }
+
+    public void SetFinishedAttack()
+    {
+        hasFinishedAttack = true;
     }
 
 }

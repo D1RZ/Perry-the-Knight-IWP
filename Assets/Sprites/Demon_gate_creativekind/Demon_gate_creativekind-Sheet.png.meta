@@ -1,0 +1,1882 @@
+fileFormatVersion: 2
+guid: f0118fb07f6ba064ab1176a019f1bcd1
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1378
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05f4a4b94deba1f4ca1c461b1f35af4c
+      internalID: -766479735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 1378
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 407c6fb235a2e2141a78131879d5f22f
+      internalID: -304586555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 1378
+        width: 19
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1dcf4b7800f4204d9b2c66915bae3fd
+      internalID: -1336552913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 1378
+        width: 25
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b91830aa05bfa13438a345cacfc519e9
+      internalID: -159702980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 1375
+        width: 42
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54cf3d5565f7b7b4bab7ce359282d6f3
+      internalID: -1441784727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 1371
+        width: 74
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3ec0e4a5b298f428dad53264ebde82
+      internalID: -1529679137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 1371
+        width: 87
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d126f39d34076c4a8d8f6c69f1c1623
+      internalID: 209709046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 1367
+        width: 122
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d34276bedb4ca34bb87ef9e2687bddf
+      internalID: 502803278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 1367
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e9141dedccde804b9add8af455aa470
+      internalID: 1987355089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 1365
+        width: 145
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24084ad2fb201c442a36145cc8391d06
+      internalID: -386409301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 1361
+        width: 162
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07a298a3f4a52834da5b49bd147d9bb9
+      internalID: -1044301305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1168
+        width: 164
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 126e49dba246b85468f50351a9d46f12
+      internalID: 1077336483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 1168
+        width: 164
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4405c84125d247044acebab398bc9c7c
+      internalID: -1325787317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 1168
+        width: 164
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d378af305a30ca040ac8ccc0ec7ba631
+      internalID: 1627473522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 1168
+        width: 162
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 575c55a64ccd835409aee412be322ece
+      internalID: 630137030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 1168
+        width: 164
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e72026600f55f42a97baab6089708a
+      internalID: -1785731929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 1168
+        width: 164
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5aa1392e92d4a5a4facd9a60a809e7ee
+      internalID: -189683759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 1168
+        width: 165
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f82a6bc2edd5b64896de4136b20a714
+      internalID: 455598694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 977
+        width: 164
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4868fc535b8b42b47ae65c98af85f455
+      internalID: -659305768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 977
+        width: 164
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672e03186639d3c46afe9160f9161a5c
+      internalID: 32966169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 977
+        width: 164
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b79dd006a35b8b14790f2027b2fd145d
+      internalID: -101250827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 977
+        width: 162
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bee034b174bce94caf5332255be47ea
+      internalID: -920331427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 977
+        width: 164
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73d3775fd368dc14e8e90ae49b2ab7b8
+      internalID: -878891255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 977
+        width: 164
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89c044721367e8544aeb0d8f3e6164da
+      internalID: 990851582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 977
+        width: 165
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eaf40b7e051a5540855497f2a056ba2
+      internalID: -1372699599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 977
+        width: 164
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84fcc2c1503a7db409d881b8d482dc62
+      internalID: -1346401080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 977
+        width: 164
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9e0e02aea15e054bb3257638934c8a4
+      internalID: 1336322707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 977
+        width: 164
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c24103c430fe314192657344641e9fd
+      internalID: 1539068608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 977
+        width: 162
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee4f8b8ae06999345b2d991ebc908cc8
+      internalID: 188229986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 2126
+        y: 977
+        width: 164
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8364343efb7de4e4db032ec4529a847c
+      internalID: -516325781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 2318
+        y: 977
+        width: 164
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c0f154cbff67db44b2ee7a6f3107b89
+      internalID: 184320829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 977
+        width: 165
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c7b333491f467469a76e5de0b86af7
+      internalID: 988375775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 785
+        width: 164
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c441774b39b94fb41986e7bb8726c395
+      internalID: 347628946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 785
+        width: 164
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf302d355436d24fb9cd2d6d7ce7ec2
+      internalID: 1655634335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 785
+        width: 164
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd92091e59d578346ad4aec3204f950c
+      internalID: 577880074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 785
+        width: 162
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb10c54ea48f710439a9a158fe44897f
+      internalID: -1395016367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 785
+        width: 164
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d78035f0e06b65a4596a73a962016f83
+      internalID: 1731856320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 785
+        width: 164
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b095f90ce86e6b488254bf405ad34ac
+      internalID: 1708775148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 785
+        width: 165
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: badf15032190f4549bc721f385aa112f
+      internalID: 657491192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 593
+        width: 164
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfaf4bf5c10e173419227de1492e912a
+      internalID: 648141593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 593
+        width: 164
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 443cdff217f5fdd4a9d0df09f8faa92e
+      internalID: 287803280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 593
+        width: 164
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 997dd22ff7c589f43ab2be21c495d4cf
+      internalID: -822693167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 593
+        width: 162
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2db0faa6fd63564aa4a118c1b0c12b7
+      internalID: -735627993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 593
+        width: 164
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56f0850b12275b74583167a15ddfef72
+      internalID: 1482591764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 593
+        width: 164
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0636b4820ebc1bf46bb326f2318f3cbb
+      internalID: -1463701203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 593
+        width: 165
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff1024d21d05704d9542ba6b4b73647
+      internalID: -448039854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 400
+        width: 164
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd5b87a5e888d274f8b84d0b7b39f8b9
+      internalID: -361640675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 400
+        width: 164
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ca401d9a9ec9ab4c814d2b19a71bd5b
+      internalID: 1966383250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 400
+        width: 164
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664c9483ada522041a7643194c6efcea
+      internalID: -777038779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 400
+        width: 162
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e20f72d81ae06314a9f7226ed2a5cebf
+      internalID: -863918608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_50
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 400
+        width: 164
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a43b95232269ee4894044a98ba04158
+      internalID: 1982764147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_51
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 400
+        width: 164
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d38243af8891892408d448a71a43880f
+      internalID: -46947816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 400
+        width: 165
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 191038242fe29d647af6dd70aa454b1a
+      internalID: -1764688418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 209
+        width: 164
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ff20a6b45e52ae4999cca2ad2c7d482
+      internalID: 378986924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 209
+        width: 164
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae1a2ce233fc73f4b9f7e782c12ca2a2
+      internalID: 614888658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 209
+        width: 164
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb1a9cb9ea6ebc648a85130a5deb20eb
+      internalID: 1826403812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 209
+        width: 162
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 618d68ff59b51c34396533ce6b2836ce
+      internalID: -992806950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_57
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 209
+        width: 164
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b5ea1237aa8bb4688d6bd82b2ec727
+      internalID: -856630988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_58
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 209
+        width: 164
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e340e6a8dd4ead04fb382075b690ca90
+      internalID: -2124280341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_59
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 209
+        width: 165
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c89b6c078322ea4fa57dbb9efd4191a
+      internalID: 503054489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_60
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 209
+        width: 164
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: accd708ceaad30a44af99983de3978fe
+      internalID: -1308383083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_61
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 209
+        width: 164
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f128c3656f5b8e145a947e294d910c4a
+      internalID: -532101536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_62
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 209
+        width: 164
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d87b341d3c863b340990a830b3e95f51
+      internalID: 1524086129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_63
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 209
+        width: 162
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3ff6e5e203891f48aeeac3cad6730ca
+      internalID: 471178844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 2126
+        y: 209
+        width: 164
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d1259f86f0ec74bad82b8785454543
+      internalID: -1293707499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 2318
+        y: 209
+        width: 164
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74dcb91a218e034ea4fef790dc7a559
+      internalID: -353794278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 209
+        width: 165
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9995262c777b6704991d288c4ab902af
+      internalID: -245290029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_67
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 17
+        width: 164
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa730a01f967fc34f92152c5faa2896e
+      internalID: 1200718817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_68
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 21
+        width: 143
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3171c417a16e39c41b44a01f4870360d
+      internalID: 1421548508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_69
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 24
+        width: 127
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d366ae461f32d104a83622ae99d486db
+      internalID: -811095485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_70
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 24
+        width: 122
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64326cb2c2bf4564094578a724c4fa71
+      internalID: -155951392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_71
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 26
+        width: 88
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9838e9ab2aafc81468880386cb805934
+      internalID: 1813680437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_72
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 28
+        width: 74
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e51cf2caa6dfd594f8f6e6f4b488a931
+      internalID: -1317339812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_73
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 32
+        width: 42
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 847a34b880db1eb4d816c56b3657eaa3
+      internalID: 859788074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_74
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 34
+        width: 25
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab7440592eedc9149be65b0b176978b1
+      internalID: 593652004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_75
+      rect:
+        serializedVersion: 2
+        x: 1624
+        y: 35
+        width: 17
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dce77fa7bace5c5498928b8231ab701d
+      internalID: 1486404900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_76
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 35
+        width: 10
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41672ad7a8e1cfe439d29a94c8e1a02b
+      internalID: -2023502995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Demon_gate_creativekind-Sheet_77
+      rect:
+        serializedVersion: 2
+        x: 2012
+        y: 35
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c1111b3a3ac80e408b262c391cc0057
+      internalID: -109215877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Demon_gate_creativekind-Sheet_0: -766479735
+      Demon_gate_creativekind-Sheet_1: -304586555
+      Demon_gate_creativekind-Sheet_10: -1044301305
+      Demon_gate_creativekind-Sheet_11: 1077336483
+      Demon_gate_creativekind-Sheet_12: -1325787317
+      Demon_gate_creativekind-Sheet_13: 1627473522
+      Demon_gate_creativekind-Sheet_14: 630137030
+      Demon_gate_creativekind-Sheet_15: -1785731929
+      Demon_gate_creativekind-Sheet_16: -189683759
+      Demon_gate_creativekind-Sheet_17: 455598694
+      Demon_gate_creativekind-Sheet_18: -659305768
+      Demon_gate_creativekind-Sheet_19: 32966169
+      Demon_gate_creativekind-Sheet_2: -1336552913
+      Demon_gate_creativekind-Sheet_20: -101250827
+      Demon_gate_creativekind-Sheet_21: -920331427
+      Demon_gate_creativekind-Sheet_22: -878891255
+      Demon_gate_creativekind-Sheet_23: 990851582
+      Demon_gate_creativekind-Sheet_24: -1372699599
+      Demon_gate_creativekind-Sheet_25: -1346401080
+      Demon_gate_creativekind-Sheet_26: 1336322707
+      Demon_gate_creativekind-Sheet_27: 1539068608
+      Demon_gate_creativekind-Sheet_28: 188229986
+      Demon_gate_creativekind-Sheet_29: -516325781
+      Demon_gate_creativekind-Sheet_3: -159702980
+      Demon_gate_creativekind-Sheet_30: 184320829
+      Demon_gate_creativekind-Sheet_31: 988375775
+      Demon_gate_creativekind-Sheet_32: 347628946
+      Demon_gate_creativekind-Sheet_33: 1655634335
+      Demon_gate_creativekind-Sheet_34: 577880074
+      Demon_gate_creativekind-Sheet_35: -1395016367
+      Demon_gate_creativekind-Sheet_36: 1731856320
+      Demon_gate_creativekind-Sheet_37: 1708775148
+      Demon_gate_creativekind-Sheet_38: 657491192
+      Demon_gate_creativekind-Sheet_39: 648141593
+      Demon_gate_creativekind-Sheet_4: -1441784727
+      Demon_gate_creativekind-Sheet_40: 287803280
+      Demon_gate_creativekind-Sheet_41: -822693167
+      Demon_gate_creativekind-Sheet_42: -735627993
+      Demon_gate_creativekind-Sheet_43: 1482591764
+      Demon_gate_creativekind-Sheet_44: -1463701203
+      Demon_gate_creativekind-Sheet_45: -448039854
+      Demon_gate_creativekind-Sheet_46: -361640675
+      Demon_gate_creativekind-Sheet_47: 1966383250
+      Demon_gate_creativekind-Sheet_48: -777038779
+      Demon_gate_creativekind-Sheet_49: -863918608
+      Demon_gate_creativekind-Sheet_5: -1529679137
+      Demon_gate_creativekind-Sheet_50: 1982764147
+      Demon_gate_creativekind-Sheet_51: -46947816
+      Demon_gate_creativekind-Sheet_52: -1764688418
+      Demon_gate_creativekind-Sheet_53: 378986924
+      Demon_gate_creativekind-Sheet_54: 614888658
+      Demon_gate_creativekind-Sheet_55: 1826403812
+      Demon_gate_creativekind-Sheet_56: -992806950
+      Demon_gate_creativekind-Sheet_57: -856630988
+      Demon_gate_creativekind-Sheet_58: -2124280341
+      Demon_gate_creativekind-Sheet_59: 503054489
+      Demon_gate_creativekind-Sheet_6: 209709046
+      Demon_gate_creativekind-Sheet_60: -1308383083
+      Demon_gate_creativekind-Sheet_61: -532101536
+      Demon_gate_creativekind-Sheet_62: 1524086129
+      Demon_gate_creativekind-Sheet_63: 471178844
+      Demon_gate_creativekind-Sheet_64: -1293707499
+      Demon_gate_creativekind-Sheet_65: -353794278
+      Demon_gate_creativekind-Sheet_66: -245290029
+      Demon_gate_creativekind-Sheet_67: 1200718817
+      Demon_gate_creativekind-Sheet_68: 1421548508
+      Demon_gate_creativekind-Sheet_69: -811095485
+      Demon_gate_creativekind-Sheet_7: 502803278
+      Demon_gate_creativekind-Sheet_70: -155951392
+      Demon_gate_creativekind-Sheet_71: 1813680437
+      Demon_gate_creativekind-Sheet_72: -1317339812
+      Demon_gate_creativekind-Sheet_73: 859788074
+      Demon_gate_creativekind-Sheet_74: 593652004
+      Demon_gate_creativekind-Sheet_75: 1486404900
+      Demon_gate_creativekind-Sheet_76: -2023502995
+      Demon_gate_creativekind-Sheet_77: -109215877
+      Demon_gate_creativekind-Sheet_8: 1987355089
+      Demon_gate_creativekind-Sheet_9: -386409301
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

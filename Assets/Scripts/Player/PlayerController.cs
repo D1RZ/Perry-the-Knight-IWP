@@ -57,10 +57,6 @@ public class PlayerController : Entity
 
     [SerializeField] private float ledgeClimbYOffset2 = 0f;
 
-    [SerializeField] private float dashTime;
-
-    [SerializeField] private float dashSpeed;
-
     [SerializeField] private float distanceBetweenImages;
 
     [SerializeField] private float dashCooldown;
@@ -172,8 +168,6 @@ public class PlayerController : Entity
 
     private bool isBlocking = false;
 
-    private float dashTimeLeft;
-
     private float lastImageXPos;
 
     private float lastDash = -100f;
@@ -185,6 +179,8 @@ public class PlayerController : Entity
     private bool liftAttack = false; // for lift attack
 
     private bool airAttack = false;
+
+    private bool dashAttack = false;
 
     private int airAttackCount = 0;
 
@@ -202,13 +198,25 @@ public class PlayerController : Entity
 
     public bool blockSuccess = false;
 
+    public bool parrySuccess = false;
+
     private float airAttackHangTimer = 0f;
 
     public float maxAirHangTime = 0.45f; // tweak this
 
     // for dash attack input check
     private bool isHolding = false;
-    
+
+    private float holdTime = 0f;
+
+    public float dashAttackThreshold = 0.4f;
+
+    private float dashAttackTimeLeft;
+
+    [SerializeField] private float dashAttackTime;
+
+    [SerializeField] private float dashAttackSpeed;
+
     private static PlayerController _instance;
 
     public static PlayerController Instance
@@ -221,9 +229,28 @@ public class PlayerController : Entity
         }
     }
 
+    public enum BufferedInputType { None, Press, Hold , Lift} // stores next input
+
+    public BufferedInputType bufferedInput = BufferedInputType.None;
+
+    private AttackType currentAttackType = AttackType.None; // keeps track of current attack type for buffer input
+
+    [SerializeField] private Transform smokeVFXCreatePos;
+
+    [SerializeField] private DashAttackChecker dashAttackChecker;
+
+    public static event Action<PlayerController> OnPlayerReady;
+
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         _instance = this;
+        OnPlayerReady?.Invoke(this);
     }
 
     // Start is called before the first frame update
@@ -261,6 +288,8 @@ public class PlayerController : Entity
         HandleGroundCheck();
         HandleGravity();
         HandleMovementState();
+
+        Debug.Log("IS HOLDING: " + isHolding);
     }
 
     private void HandleMovementState()
@@ -322,6 +351,7 @@ public class PlayerController : Entity
         {
             Debug.Log("Call execute!");
             ExecuteAttack(AttackType.Air);
+            return;
         }
 
         if (dashAttack) ExecuteAttack(AttackType.Dash);
@@ -333,7 +363,7 @@ public class PlayerController : Entity
     {
         isAttacking = true;
         canMove = false;
-        if(currentAttackType != AttackType.Dash) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        if(currentAttackType != AttackType.Dash && currentAttackType != AttackType.Lift) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
         switch (type)
         {
@@ -353,13 +383,14 @@ public class PlayerController : Entity
                 airAttack = false;
                 break;
 
+            case AttackType.Dash:
+                OnPlayerAttack?.Invoke("Dash Attack");
+                dashAttack = false;
+                break;
+
             // Add more here later
             case AttackType.GroundSlam:
                 OnPlayerAttack?.Invoke("Ground Slam");
-                break;
-
-            case AttackType.Dash:
-                OnPlayerAttack?.Invoke("Dash Attack");
                 break;
         }
     }
@@ -376,7 +407,7 @@ public class PlayerController : Entity
             return; // ignore gravity during air attack
 
         // Fallback check: if roll got cancelled by falling
-        if (isRolling && InAir && rb.velocity.y < 0)
+        if (isRolling && InAir)
         {
             EndRoll();
         }
@@ -393,6 +424,12 @@ public class PlayerController : Entity
 
     private void HandleInput()
     {
+        if(isHolding && Input.GetMouseButtonUp(0))
+        {
+            isHolding = false;
+            holdTime = 0;
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             audioSettingsManager.TurnOnOffAudioMenu();
@@ -452,8 +489,19 @@ public class PlayerController : Entity
         if (isRolling || isHit || isBlocking || isDashAttacking)
             return AttackType.None;
 
+        if (currentAttackType == AttackType.Dash && isHolding) return AttackType.None;
+
         if (currentAttackInputTimer > 0)
+        {
+            Debug.Log("RUNNING BUFFER " + currentAttackType);
+
+            if(bufferedInput == BufferedInputType.None && currentAttackType == AttackType.Normal)
+            {
+                CheckForBufferInput();
+            }
+
             return AttackType.None;
+        }
 
         if (InAir)
         {
@@ -474,9 +522,38 @@ public class PlayerController : Entity
         if (Input.GetKey(KeyCode.W) && Input.GetMouseButtonDown(0))
         {
             currentAttackInputTimer = 0.5f;
+            currentAttackType = AttackType.Lift;
             return AttackType.Lift;
         }
 
+        if (bufferedInput != BufferedInputType.None)
+        {
+            holdTime = 0;
+            if (bufferedInput == BufferedInputType.Press)
+            {
+                currentAttackInputTimer = 0.5f;
+                bufferedInput = BufferedInputType.None;
+                currentAttackType = AttackType.Normal;
+                Debug.Log("NORMAL ATTACK BUFFER!");
+                return AttackType.Normal;
+            }
+            else if(bufferedInput == BufferedInputType.Hold)
+            {
+                currentAttackInputTimer = 0.6f;
+                bufferedInput = BufferedInputType.None;
+                currentAttackType = AttackType.Dash;
+                Debug.Log("DASH ATTACK BUFFER!");
+                return AttackType.Dash;
+            }
+            else if(bufferedInput == BufferedInputType.Lift)
+            {
+                currentAttackInputTimer = 0.5f;
+                bufferedInput = BufferedInputType.None;
+                currentAttackType = AttackType.Lift;
+                return AttackType.Lift;
+            }
+        }
+       
         if(Input.GetMouseButtonDown(0))
         {
             currentAttackInputTimer = 0.5f;
@@ -485,6 +562,44 @@ public class PlayerController : Entity
         }
 
         return AttackType.None;
+    }
+
+    private void CheckForBufferInput()
+    {
+        Debug.Log("CHECKING FOR BUFFER");
+
+        if (!isHolding && Input.GetKey(KeyCode.W) && Input.GetMouseButtonDown(0))
+        {
+            bufferedInput = BufferedInputType.None;
+            return;
+        }
+
+        if(Input.GetMouseButton(0) && !isHolding)
+        {
+            Debug.Log("IS HOLDING");
+            holdTime = 0;
+            isHolding = true;
+            return;
+        }
+
+        if(isHolding && Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("PRESS BUFFER");
+            bufferedInput = BufferedInputType.Press;
+            isHolding = false;
+            return;
+        }
+
+        if(isHolding && Input.GetMouseButton(0))
+        {
+            holdTime += Time.deltaTime;
+
+            if(holdTime > dashAttackThreshold)
+            {
+                Debug.Log("HOLD BUFFER");
+                bufferedInput = BufferedInputType.Hold;
+            }
+        }
     }
 
     private void PerformAttack(AttackType attack)
@@ -510,9 +625,17 @@ public class PlayerController : Entity
                 liftAttack = false;
                 airAttack = true;
                 rb.velocity = Vector2.zero;  // stop drifting
-                originalGravityScale = rb.gravityScale;
                 rb.gravityScale = 0f;
                 airAttackHangTimer = maxAirHangTime;
+                break;
+
+            case AttackType.Dash:
+                normalAttack = false;
+                liftAttack = false;
+                airAttack = false;
+                dashAttack = true;
+                rb.velocity = Vector2.zero;
+                dashAttackChecker.ResetDashHits();
                 break;
         }
 
@@ -540,6 +663,8 @@ public class PlayerController : Entity
         run = false;
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        transform.GetComponent<BoxCollider2D>().enabled = false;
+        rb.gravityScale = 0;
 
         // Clear existing velocity so the roll feels snappy
         rb.velocity = Vector2.zero;
@@ -566,6 +691,8 @@ public class PlayerController : Entity
                 EndAirAttack(); // auto recover
             }
         }
+
+        if (dashAttackTimeLeft > 0) dashAttackTimeLeft -= Time.deltaTime;
     }
 
     public void EndRoll()
@@ -580,6 +707,9 @@ public class PlayerController : Entity
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         else
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        rb.gravityScale = 1;
+        transform.GetComponent<BoxCollider2D>().enabled = true;
 
         walk = Mathf.Abs(dirH) > 0.01f && defaultwalkspeed > 0 && canMove;
         run = false;
@@ -628,16 +758,6 @@ public class PlayerController : Entity
         rb.velocity = Vector2.zero;
     }
 
-    //private void AttemptToDash()
-    //{
-    //    isDashing = true;
-    //    dashTimeLeft = dashTime;
-    //    lastDash = Time.time;
-
-    //    PlayerAfterImagePool.Instance.GetFromPool();
-    //    lastImageXPos = transform.position.x;
-    //}
-
     public void FinishLedgeClimb()
     {
         canClimbLedge = false;
@@ -680,9 +800,22 @@ public class PlayerController : Entity
         HandleVariableJump();
     }
 
+    private void HandleDashMovement()
+    {
+        if(isDashAttacking)
+        {
+            if(dashAttackTimeLeft <= 0f)
+            {
+                dashAttackTimeLeft = 0f;
+                rb.velocity = Vector3.zero;
+                isDashAttacking = false;
+            }
+        }
+    }
+
     private void HandleGroundMovement()
     {
-        if (!walk || InAir || isRolling || isBlocking) return;
+        if (!walk || InAir || isRolling || isBlocking || isDashAttacking) return;
 
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -692,7 +825,7 @@ public class PlayerController : Entity
 
     private void HandleAirMovement()
     {
-        if (!InAir || isWallSliding) return;
+        if (!InAir || isWallSliding || isDashAttacking || (isAttacking && currentAttackType != AttackType.Lift)) return;
 
         if (dirH != 0)
         {
@@ -702,33 +835,41 @@ public class PlayerController : Entity
                 rb.AddForce(force);
 
                 if (Mathf.Abs(rb.velocity.x) > walkSpeed)
-                {
                     rb.velocity = new Vector2(walkSpeed * dirH, rb.velocity.y);
-                }
             }
+        }
         else
         {
+            // No horizontal input — apply drag
             rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
         }
+    }
 
     private void HandleWallSlide()
-        {
-            if (rb.velocity.y < -WallSlideSpeed)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, -WallSlideSpeed);
-            }
-        }
+    {
+        if (!isWallSliding || !canMove) return;
+
+        if (rb.velocity.y < -WallSlideSpeed)
+            rb.velocity = new Vector2(rb.velocity.x, -WallSlideSpeed);
+    }
 
     private void HandleJumpLogic()
+    {
+        if (!jump) return;
+
+        if (!isWallSliding)
         {
+            // Normal jump
             AmtOfJumpsLeft--;
             movementController.MoveVertical(jumpSpeed);
             jump = false;
+            return;
         }
 
         // Wall slide jumps
         if (dirH <= Mathf.Abs(0.1f))
         {
+            // Wall hop (no direction)
             isWallSliding = false;
             Vector2 force = new Vector2(
                 wallHopForce * wallHopDirection.x * -facingDirection,
@@ -747,10 +888,10 @@ public class PlayerController : Entity
         }
 
         jump = false;
-        }
+    }
 
     private void HandleVariableJump()
-        {
+    {
         if (!variablejump) return;
 
         rb.velocity = new Vector2(
@@ -758,8 +899,7 @@ public class PlayerController : Entity
             rb.velocity.y * variableJumpHeightMultiplier
         );
 
-            variablejump = false;
-        }
+        variablejump = false;
     }
 
     public void ResetCanMove()
@@ -814,6 +954,26 @@ public class PlayerController : Entity
         parryAnimator.ResetTrigger("Block");
         animator.SetBool("Block", false);
         blockSuccess = false;
+        parrySuccess = false;
+    }
+
+    public void StartDashAttack()
+    {
+        animator.speed = 0;
+
+        GameObject smokeVFX = Instantiate(ParticleManager.Instance.GetParticleEffect("Smoke"), smokeVFXCreatePos.transform.position, Quaternion.identity);
+
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        rb.velocity = new Vector2(facingDirection * dashAttackSpeed, 0);
+
+        Debug.Log("DASH RB VELOCITY: " + rb.velocity);
+
+        isDashAttacking = true;
+
+        dashAttackTimeLeft = dashAttackTime;
+
+        animator.speed = 1;
     }
 
     public void EndAttack()
@@ -829,6 +989,11 @@ public class PlayerController : Entity
         canMove = true;
         rb.gravityScale = 1;
         rb.velocity = new Vector2(rb.velocity.x,0);
+    }
+
+    public bool GetIsDashAttacking()
+    {
+        return isDashAttacking;
     }
 
 }

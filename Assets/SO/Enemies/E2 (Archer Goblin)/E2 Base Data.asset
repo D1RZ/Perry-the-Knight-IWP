@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 45
   wallCheckDistance: 2.5
-  ledgeCheckDistance: 0.4
+  ledgeCheckDistance: 1.9
   attackDetectionRadius: 6
   chaseRaycastDistance: 0.5
+  guardDetectionRadius: 3.8

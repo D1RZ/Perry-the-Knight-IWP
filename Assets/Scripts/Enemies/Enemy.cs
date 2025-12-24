@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy : Entity
 {
@@ -12,11 +10,18 @@ public class Enemy : Entity
     public bool knockedUp = false;
     public float knockedUpGraceTimer = 0f;
     public string hitAnim;
+    public bool isStunned = false;
+    public float stunTime;
+    public float stunTimer;
+    public bool isBlocking = false;
+    public Transform BlockParticlePos;
 
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
+        if (transform.localScale.x > 0) facingDirection = 1;
+        else if (transform.localScale.x < 0) facingDirection = -1;
         health = entityData.MaxHealth;
         Debug.Log("Enemy Starting Health: " + health);
     }
@@ -40,13 +45,26 @@ public class Enemy : Entity
             // Only check grounded AFTER the grace timer expires
             if (CheckGrounded())
             {
+                Debug.Log("KNOCKED UP DONE!");
                 knockedUp = false;
+                if (isStunned) isStunned = false;
                 rb.velocity = Vector3.zero; // prevent any form of sliding
                 Animator anim = spriteRenderer.GetComponent<Animator>();
                 if (anim != null) anim.speed = 1;
                 CurrentState.Enter(this);
                 rb.gravityScale = 1;
                 Debug.Log("Enemy Landed");
+            }
+            return;
+        }
+
+        if (isStunned)
+        {
+            if (stunTimer > 0) stunTimer -= Time.deltaTime;
+            else
+            {
+                isStunned = false;
+                CurrentState.Enter(this);
             }
             return;
         }
@@ -62,6 +80,26 @@ public class Enemy : Entity
     public virtual void HitConnected(int AttackNo)
     {
 
+    }
+
+    public void ResetEnemy()
+    {
+        health = entityData.MaxHealth;
+        HealthBar.SetActive(false);
+
+        knockedUp = false;
+        isStunned = false;
+        isBlocking = false;
+
+        stunTimer = 0f;
+        knockedUpGraceTimer = 0f;
+
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 1;
+
+        stateMachine.SetNextState("IDLE",this);
+
+        CurrentState.Enter(this);
     }
 
     public void SetHealth(float dmg)

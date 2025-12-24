@@ -57,11 +57,6 @@ public class SpearEnemy : Enemy
         Debug.Log("Next State: " + NextState);
         Debug.Log("Current State: " + CurrentState);
     }
-    
-    public void TakeDamage(float amount)
-    {
-       throw new System.NotImplementedException();
-    }
 
     public override void AttackVFX(int VFXAttackNo)
     {

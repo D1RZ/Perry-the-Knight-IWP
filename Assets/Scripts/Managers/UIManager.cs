@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -44,6 +45,8 @@ public class UIManager : MonoBehaviour
     
     private IEnumerator LerpEnemyGreyBar(Image greyBar, float targetWidth, float speed)
     {
+        if (greyBar == null) yield return null;
+
         yield return new WaitForSeconds(0.15f); // optional small delay for "damage lag" effect
 
         float currentWidth = greyBar.rectTransform.sizeDelta.x;
@@ -58,11 +61,14 @@ public class UIManager : MonoBehaviour
         }
 
         // ensure final width matches target
-        Vector2 finalSize = greyBar.rectTransform.sizeDelta;
-        finalSize.x = targetWidth;
-        greyBar.rectTransform.sizeDelta = finalSize;
+        if (greyBar != null)
+        {
+            Vector2 finalSize = greyBar.rectTransform.sizeDelta;
+            finalSize.x = targetWidth;
+            greyBar.rectTransform.sizeDelta = finalSize;
+        }
     }
-
+    
     private void UpdatePlayerHealthUI(float currentHealth)
     {
         HealthBar.rectTransform.sizeDelta = new Vector2(1.54f * playerData.HealthData, 17);
@@ -96,9 +102,18 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerController.Instance._PlayerData.HealthData <= 0)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
         // Smoothly lerp the yellow bar's width towards the target
         Vector2 yellowSize = YellowBar.rectTransform.sizeDelta;
         yellowSize.x = Mathf.Lerp(yellowSize.x, targetYellowWidth, Time.deltaTime * yellowBarSpeed);
         YellowBar.rectTransform.sizeDelta = yellowSize;
     }
+
 }

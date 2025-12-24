@@ -15,19 +15,19 @@ MonoBehaviour:
   attackStepAnimVarName: AirAttackStep
   attackSteps:
   - damage: 15
-    attackAnimTime: 0.34
-    applyLiftForce: 0
-    liftForceAmount: 0
+    attackAnimTime: 0.2
+    applyForceToPlayer: 0
+    ForceToPlayerAmt: {x: 0, y: 0}
     knockbackForce: {x: 0, y: 0}
   - damage: 15
     attackAnimTime: 0.4
-    applyLiftForce: 0
-    liftForceAmount: 0
+    applyForceToPlayer: 0
+    ForceToPlayerAmt: {x: 0, y: 0}
     knockbackForce: {x: 0, y: 0}
   - damage: 30
-    attackAnimTime: 0.39
-    applyLiftForce: 0
-    liftForceAmount: 0
+    attackAnimTime: 0.2
+    applyForceToPlayer: 0
+    ForceToPlayerAmt: {x: 0, y: 0}
     knockbackForce: {x: 5, y: 0}
   maxAttackSteps: 3
   attackTypeBool: airAttack

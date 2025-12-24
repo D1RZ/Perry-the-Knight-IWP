@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,12 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         _instance = this;
     }
 
@@ -45,6 +52,17 @@ public class PlayerCombatController : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.OnPlayerReady += Register;
+    }
+
+    private void Register(PlayerController controller)
+    {
+        PlayerController.OnPlayerAttack += HandleAttack;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerReady -= Register;
+        PlayerController.OnPlayerAttack -= HandleAttack;
     }
 
     private void HandleAttack(string attackType)
@@ -70,26 +88,28 @@ public class PlayerCombatController : MonoBehaviour
         {
             attackStep = (attackStep < currentAttackType.maxAttackSteps) ? attackStep + 1 : 1;
 
+            Debug.Log("ATTACK TYPE:" + attackType + "ATTACK STEP: " + attackStep);
+
             // Set the damage for this step
             float stepDamage = currentAttackType.attackSteps[attackStep - 1].damage; // -1 if your array is 0-based
             SetAttackDamage(stepDamage);
 
             knockbackForce = currentAttackType.attackSteps[attackStep - 1].knockbackForce;
-        }
 
             if (currentAttackType.attackStepAnimVarName != "nil")
-        animator.SetInteger(currentAttackType.attackStepAnimVarName, attackStep);
+                animator.SetInteger(currentAttackType.attackStepAnimVarName, attackStep);
 
             if (attackType == "Air Attack")
-        Debug.Log("Air Attack Step: " + animator.GetInteger("AirAttackStep"));
+                Debug.Log("Air Attack Step: " + animator.GetInteger("AirAttackStep"));
 
-        animator.SetBool(currentAttackType.attackTypeBool, true);
+            animator.SetBool(currentAttackType.attackTypeBool, true);
 
-        currentAttackType.ApplyStepEffects(attackStep - 1);
+            currentAttackType.ApplyStepEffects(attackStep - 1);
 
-        yield return new WaitForSeconds(currentAttackType.attackSteps[attackStep - 1].attackAnimTime);
+            yield return new WaitForSeconds(currentAttackType.attackSteps[attackStep - 1].attackAnimTime);
 
-        animator.SetBool(currentAttackType.attackTypeBool, false);
+            animator.SetBool(currentAttackType.attackTypeBool, false);
+        }
 
         PlayerController.Instance.EndAttack();
 
@@ -128,6 +148,11 @@ public class PlayerCombatController : MonoBehaviour
     public Vector2 GetKnockbackForce()
     {
         return knockbackForce;
+    }
+
+    public AttackTypeData GetCurrentAttackType()
+    {
+        return currentAttackType;
     }
 
 }

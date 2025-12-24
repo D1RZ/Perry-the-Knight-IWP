@@ -5,6 +5,7 @@ public class PauseAnimationProjectile : PauseAnimation
     [SerializeField] private string projectileName;
     [SerializeField] private Transform spawnPos;
     [SerializeField] private float projectileSpeed;
+    [SerializeField] private Vector2 projectileScale;
 
     public void SpawnProjectile()
     {

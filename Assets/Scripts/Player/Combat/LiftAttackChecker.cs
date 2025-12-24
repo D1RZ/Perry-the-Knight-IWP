@@ -16,7 +16,7 @@ public class LiftAttackChecker : BaseAttackChecker
             PlayerController.Instance.defaultwalkspeed = 7;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
-            Destroy(enemy.gameObject);
+            enemy.gameObject.SetActive(false);
             hasHit = false; // reset before exiting
             yield break; // exit coroutine — nothing else to do
         }

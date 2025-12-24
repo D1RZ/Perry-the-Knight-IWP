@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "AttackTypeData",menuName = "SO/AttackTypeData")]
 public class AttackTypeData : ScriptableObject
 {
+    public enum AttackType { None, Normal, Dash, Lift};
     public string attackStepAnimVarName;
     public AttackStep[] attackSteps;
     public int maxAttackSteps;

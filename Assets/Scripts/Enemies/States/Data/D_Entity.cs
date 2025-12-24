@@ -12,4 +12,6 @@ public class D_Entity : ScriptableObject
     public float attackDetectionRadius = 0.15f;
 
     public float chaseRaycastDistance = 0.5f;
+
+    public float guardDetectionRadius = 3.8f;
 }

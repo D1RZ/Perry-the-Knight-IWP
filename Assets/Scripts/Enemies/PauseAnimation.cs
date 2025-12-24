@@ -4,7 +4,9 @@ using UnityEngine;
 public class PauseAnimation : MonoBehaviour
 {
     [SerializeField] private GameObject ExclamationMark;
+    [SerializeField] private float resumeAnimationSpeed = 1f;
     private Animator animator;
+    private Transform ExclaimationMarkPos;
 
     public void PausingAnimation()
     {
@@ -19,6 +21,16 @@ public class PauseAnimation : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         animator.speed = resumeAnimationSpeed;
         ExclamationMark.SetActive(false);
+    }
+
+    public GameObject GetExclaimationMark()
+    {
+        return ExclamationMark;
+    }
+
+    public void SetExclaimationMarkPos(Transform newPos)
+    {
+        ExclaimationMarkPos = newPos;
     }
 
 }

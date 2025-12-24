@@ -60,15 +60,18 @@ public class SpearEnemy_Attack1State : MoveState
                     {
                         entity.CheckFacingDirectionBasedOnTargetPos();
                         entity.stateMachine.SetNextState("CHASE", entity);
+                        return;
                     }
                     else
                     {
                         entity.stateMachine.SetNextState("PATROL", entity);
+                        return;
                     }
                 }
                 else
                 {
                     entity.stateMachine.ForceSetNextState("ATTACK1", entity);
+                    return;
                 }
             }
         }
@@ -77,6 +80,7 @@ public class SpearEnemy_Attack1State : MoveState
     private void StartAttack(Entity entity)
     {
         hasStartedAttack = true;
+        entity.CheckFacingDirectionBasedOnTargetPos();
         entity.Anim.Play("Spear Goblin - Attack", 0, 0f);
         entity.SetVelocity(0);
         entity.Anim.speed = 1f;

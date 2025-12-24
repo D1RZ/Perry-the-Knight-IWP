@@ -18,6 +18,12 @@ public class ArcherEnemy_PatrolState : MoveState
 
     public override void onUpdate(Entity entity)
     {
+        entity.CheckWall();
+
+        entity.CheckLedge();
+
+        entity.SetVelocity(entity.GetCurrentVelocity());
+
         if (PlayerController.Instance._PlayerData.HealthData > 0)
         {
             float distanceToPlayer = Vector2.Distance(entity.transform.position, PlayerController.Instance.transform.position);
@@ -39,10 +45,6 @@ public class ArcherEnemy_PatrolState : MoveState
                 return;
             }
         }
-
-        entity.CheckWall();
-
-        entity.SetVelocity(entity.GetCurrentVelocity());
     }
     
     public override void Exit(Entity entity)

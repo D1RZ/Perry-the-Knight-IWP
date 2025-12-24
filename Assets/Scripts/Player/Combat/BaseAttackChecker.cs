@@ -10,6 +10,8 @@ public class BaseAttackChecker : MonoBehaviour
     {
         if (hasHit || collision.gameObject.layer != 7) return;
 
+        hasHit = true;
+
         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy == null) return;
 
@@ -24,9 +26,6 @@ public class BaseAttackChecker : MonoBehaviour
 
         Collider2D hitboxCollider = transform.GetComponent<Collider2D>();
         if (hitboxCollider != null) hitboxCollider.enabled = false;
-
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy == null) return;
 
         var hitParticle = Instantiate(
             ParticleManager.Instance.GetParticleEffect("Hit"),
