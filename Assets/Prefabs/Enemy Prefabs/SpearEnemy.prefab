@@ -276,6 +276,7 @@ MonoBehaviour:
   ExclamationMark: {fileID: 2941035770968134957}
   resumeAnimationSpeed: 4
   isFlying: 0
+  entity: {fileID: 429122379550034496}
 --- !u!61 &5989156619368124451
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -463,8 +464,8 @@ Transform:
   - {fileID: 960235928828362680}
   - {fileID: 4472228552428709929}
   - {fileID: 251606702899944592}
-  - {fileID: 1548879848923002343}
   - {fileID: 734024279521535328}
+  - {fileID: 1548879848923002343}
   - {fileID: 3549770178879066360}
   - {fileID: 899845757323353596}
   - {fileID: 7944629437140127403}

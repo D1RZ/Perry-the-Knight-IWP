@@ -37,9 +37,6 @@ public class SpearEnemy_Attack1State : MoveState
             }
             return; // Skip the rest until attack starts
         }
-        
-        if(Vector2.Distance(entity.gameObject.transform.position,PlayerController.Instance.gameObject.transform.position) < 0.8f)
-        PlayerController.Instance.defaultwalkspeed = 2.5f;
 
         // gets info about current animator controller state in this case its attack animation state
         AnimatorStateInfo stateInfo = entity.Anim.GetCurrentAnimatorStateInfo(0);

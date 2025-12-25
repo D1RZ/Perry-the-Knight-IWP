@@ -403,6 +403,7 @@ MonoBehaviour:
   ExclamationMark: {fileID: 5875291604265788465}
   resumeAnimationSpeed: 1
   isFlying: 1
+  entity: {fileID: 3267662884674731105}
 --- !u!96 &8322463174067195550
 TrailRenderer:
   serializedVersion: 3

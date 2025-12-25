@@ -55,6 +55,9 @@ TagManager:
   - name: Trail
     uniqueID: 2802688473
     locked: 0
+  - name: Statue
+    uniqueID: 4116908285
+    locked: 0
   - name: Ground Enemy
     uniqueID: 1332245485
     locked: 0

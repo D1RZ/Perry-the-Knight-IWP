@@ -996,5 +996,25 @@ public class PlayerController : Entity
         return isDashAttacking;
     }
 
+    public void RecoverFromBlockOrParry()
+    {
+        // Core combat state
+        isBlocking = false;
+        isAttacking = false;
+        isHit = false;
+        blockSuccess = false;
+
+        // Movement
+        canMove = true;
+        rb.velocity = Vector2.zero;
+
+        // Restore correct constraints for grounded movement
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
+        // Animator state
+        animationController.animator.SetBool("Block", false);
+        animationController.animator.speed = 1;
+    }
+
 }
 

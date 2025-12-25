@@ -8,6 +8,7 @@ public class PauseAnimationMeele : PauseAnimation
     [SerializeField] private bool isFlying = false;
     private bool FlyHit = false; // for flying enemy as flying enemy attack hitbox is more than one frame
     private bool Parried = false; // checks for if player has parried enemy attack
+    private bool Blocked = false;
     [SerializeField] private Entity entity;
 
     public void AttackingVFX(int VFXAttackNo = 1) // which vfx to instantiate
@@ -30,7 +31,11 @@ public class PauseAnimationMeele : PauseAnimation
         Debug.Log("HIT REGISTERED!!");
         var InstantiatedParticle = Instantiate(ParticleManager.Instance.GetParticleEffect("Hit"), PlayerController.Instance.gameObject.transform.position,Quaternion.identity);
         InstantiatedParticle.transform.localScale = new Vector3(-PlayerController.Instance.facingDirection,1,1);
-        StartCoroutine(DoHitImpact());
+        Enemy enemy = entity as Enemy;
+        if (enemy.health > 0)
+        {
+            StartCoroutine(DoHitImpact());
+        }
     }
 
     private bool CheckForBlockOrParry()
@@ -51,6 +56,7 @@ public class PauseAnimationMeele : PauseAnimation
             }
             else
             {
+                Blocked = true;
                 PlayerController.Instance.parrySuccess = false;
                 PlayerController.Instance.blockSuccess = true;
                 PlayerController.Instance.animationController.animator.SetBool("Block", true);
@@ -68,7 +74,7 @@ public class PauseAnimationMeele : PauseAnimation
     private IEnumerator DoHitImpact()
     {
         transform.GetComponent<Collider2D>().enabled = false;
-        PlayerController.Instance.ChangeSpriteColor(true);
+        if(!Blocked) PlayerController.Instance.ChangeSpriteColor(true);
         PlayerController.Instance.OnHit();
         transform.parent.GetComponent<Enemy>().HitConnected(latestAttack);
         PlayerController.InvokeOnPlayerHit();
@@ -81,28 +87,33 @@ public class PauseAnimationMeele : PauseAnimation
             yield return null;
         }
 
-        // Optional: freeze time
-        Time.timeScale = 0f;
+        if (!Blocked)
+        {
+            // Optional: freeze time
+            Time.timeScale = 0f;
 
-        // Shake camera (we’ll handle timing using real time)
-        //CameraShake.Instance.Shake(0.2f, 0.5f); // duration, intensity
+            // Shake camera (we’ll handle timing using real time)
+            //CameraShake.Instance.Shake(0.2f, 0.5f); // duration, intensity
 
-        // Wait for real-time duration (unaffected by timeScale)
-        yield return new WaitForSecondsRealtime(0.2f);
+            // Wait for real-time duration (unaffected by timeScale)
+            yield return new WaitForSecondsRealtime(0.2f);
 
-        // Resume time
-        Time.timeScale = 1f;
+            // Resume time
+            Time.timeScale = 1f;
+        }
+
         PlayerController.Instance.SetCanMove(false); // or a HitStun flag
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.None;
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerController.Instance.rb.velocity = Vector3.zero;
-        PlayerController.Instance.rb.AddForce(new Vector2(transform.parent.GetComponent<Enemy>().facingDirection * 15f, 0), ForceMode2D.Impulse);
+        PlayerController.Instance.rb.AddForce(new Vector2(transform.parent.GetComponent<Enemy>().facingDirection * 5f, 0), ForceMode2D.Impulse);
         PlayerController.Instance.animationController.animator.speed = 0;
         // Wait until the player nearly stops sliding
         Rigidbody2D rb = PlayerController.Instance.rb;
         yield return new WaitForSeconds(0.1f);
         PlayerController.Instance.SetCanMove(true);
-        PlayerController.Instance.ChangeSpriteColor(false);
+        if (!Blocked) PlayerController.Instance.ChangeSpriteColor(false);
+        Blocked = false;
         PlayerController.Instance.SetIsHit(false);
         PlayerController.Instance.animationController.animator.speed = 1;
         hasHit = false;
@@ -129,8 +140,9 @@ public class PauseAnimationMeele : PauseAnimation
             PlayerController.Instance.defaultwalkspeed = 7;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
-            Destroy(enemy.gameObject);
+            enemy.gameObject.SetActive(false);
             hasHit = false; // reset before exiting
+            PlayerController.Instance.RecoverFromBlockOrParry();
             yield break; // exit coroutine — nothing else to do
         }
 

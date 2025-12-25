@@ -3933,18 +3933,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3825266215651911790, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5692696849794660191, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
       propertyPath: targetRoom
       value: 
       objectReference: {fileID: 1543101921}
-    - target: {fileID: 8960214120368923485, guid: 442d268a7de06fa42b3b6879ffc57756, type: 3}
-      propertyPath: m_ColliderPaths.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -86,7 +86,7 @@ public class Arrow : MonoBehaviour
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.None;
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerController.Instance.rb.velocity = Vector3.zero;
-        PlayerController.Instance.rb.AddForce(new Vector2(facingDirection * 15f, 0), ForceMode2D.Impulse);
+        PlayerController.Instance.rb.AddForce(new Vector2(facingDirection * 8f, 0), ForceMode2D.Impulse);
         PlayerController.Instance.animationController.animator.speed = 0;
         // Wait until the player nearly stops sliding
         Rigidbody2D rb = PlayerController.Instance.rb;
