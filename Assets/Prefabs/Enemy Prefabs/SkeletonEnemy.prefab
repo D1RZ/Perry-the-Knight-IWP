@@ -258,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 1908072681074620127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.14, y: 0.26, z: 0}
+  m_LocalPosition: {x: 1.14, y: 0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -558,10 +558,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1332245485
+  m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: -307175445, guid: fb7e5104f2fac494598910db013685b9, type: 3}
+  m_Sprite: {fileID: 1973909347, guid: a518e097b6a76d04aac1621224d5f6f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -608,6 +608,7 @@ MonoBehaviour:
   ExclamationMark: {fileID: 3469709122220164563}
   resumeAnimationSpeed: 1.5
   isFlying: 0
+  entity: {fileID: 2766012988521998741}
 --- !u!61 &7510158647401731459
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -34,6 +34,8 @@ public class SpearEnemy_PatrolState : MoveState
 
         entity.CheckWall();
 
+        entity.CheckLedge();
+
         entity.SetVelocity(entity.GetCurrentVelocity());
     }
     

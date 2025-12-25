@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536ff066a9d1c1a4cba2001e93045070, type: 3}
   m_Name: E4 Guard Data
   m_EditorClassIdentifier: 
-  minGuardTime: 1.2
-  maxGuardTime: 1.6
+  minGuardTime: 1.6
+  maxGuardTime: 2

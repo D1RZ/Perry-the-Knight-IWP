@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc4a12acc05aa947baecc75732a817b, type: 3}
   m_Name: E4 Base Data
   m_EditorClassIdentifier: 
-  MaxHealth: 75
+  MaxHealth: 40
   wallCheckDistance: 2.5
-  ledgeCheckDistance: 0.4
+  ledgeCheckDistance: 1.9
   attackDetectionRadius: 3
   chaseRaycastDistance: 10
   guardDetectionRadius: 3.8

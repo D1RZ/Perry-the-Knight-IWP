@@ -8,6 +8,7 @@ public class PauseAnimationMeele : PauseAnimation
     [SerializeField] private bool isFlying = false;
     private bool FlyHit = false; // for flying enemy as flying enemy attack hitbox is more than one frame
     private bool Parried = false; // checks for if player has parried enemy attack
+    [SerializeField] private Entity entity;
 
     public void AttackingVFX(int VFXAttackNo = 1) // which vfx to instantiate
     {
@@ -200,8 +201,6 @@ public class PauseAnimationMeele : PauseAnimation
 
     public void SetFinishedAttack() // for skeleton enemy
     {
-        Entity entity = transform.root.GetComponent<Entity>();
-
         entity.hasFinishedAttack = true;
     }
 

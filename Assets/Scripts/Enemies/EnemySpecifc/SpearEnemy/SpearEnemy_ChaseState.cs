@@ -21,23 +21,58 @@ public class SpearEnemy_ChaseState : State
 
     public override void onUpdate(Entity entity)
     {
-        float direction = Mathf.Sign(entity.GetTarget().transform.position.x - entity.transform.position.x);
+        if (entity.GetTarget() == null)
+            return;
 
-        entity.SetVelocity(direction * spearChaseData.ChaseMovementSpeed);
+        float playerX = entity.GetTarget().transform.position.x;
+        float enemyX = entity.transform.position.x;
 
+        float directionToPlayer = Mathf.Sign(playerX - enemyX);
+
+        // LEDGE CHECK
+        if (entity.CheckLedge())
+        {
+            Debug.Log("CHECKED LEDGE:" + "DP: " + directionToPlayer + "FD: " + entity.facingDirection);
+
+            // Case 1: Player is on the OTHER side of the enemy
+            if (directionToPlayer == entity.facingDirection)
+            {
+                // Flip and keep chasing
+                entity.Flip();
+                entity.SetVelocity(entity.facingDirection * spearChaseData.ChaseMovementSpeed);
+                return;
+            }
+            else
+            {
+                // Player is beyond the ledge then stop chase
+                entity.Flip();
+                entity.SetVelocity(entity.facingDirection * spearChaseData.ChaseMovementSpeed);
+                entity.stateMachine.SetNextState("PATROL", entity);
+                return;
+            }
+        }
+
+        // NORMAL CHASE
+        entity.SetVelocity(entity.facingDirection * spearChaseData.ChaseMovementSpeed);
         entity.CheckFacingDirection();
 
-        if (entity.CheckAttackTarget("Player") && Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) < 1)
+        // ATTACK CHECK
+        if (PlayerController.Instance._PlayerData.HealthData > 0)
         {
-            entity.stateMachine.SetNextState("ATTACK1",entity);
-            return;
-        }    
+            if (entity.CheckAttackTarget("Player") &&
+                Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) < 1)
+            {
+                entity.stateMachine.SetNextState("ATTACK1", entity);
+                return;
+            }
 
-        if(Vector2.Distance(entity.GetTarget().gameObject.transform.position, entity.gameObject.transform.position) > spearChaseData.MaxChaseDistance 
-            || Mathf.Abs(entity.transform.position.y - PlayerController.Instance.transform.position.y) > 1)
-        {
-            entity.stateMachine.SetNextState("PATROL", entity);
-            return;
+            // TOO FAR then STOP CHASE
+            if (Vector2.Distance(entity.GetTarget().transform.position, entity.transform.position)
+                > spearChaseData.MaxChaseDistance)
+            {
+                entity.stateMachine.SetNextState("PATROL", entity);
+                return;
+            }
         }
     }
     
@@ -45,4 +80,5 @@ public class SpearEnemy_ChaseState : State
     {
         entity.isChasing = false;
     }
+
 }
