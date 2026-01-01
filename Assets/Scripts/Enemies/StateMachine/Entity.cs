@@ -38,6 +38,8 @@ public class Entity : MonoBehaviour
 
     private Shader GUITextShader;
 
+    private Shader NormalLitSpriteShader;
+
     private Shader NormalSpriteShader;
 
     public bool isChasing = false;
@@ -49,7 +51,8 @@ public class Entity : MonoBehaviour
     public virtual void Start()
     {
         GUITextShader = Shader.Find("GUI/Text Shader");
-        NormalSpriteShader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
+        NormalLitSpriteShader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
+
         facingDirection = 1;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -63,7 +66,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            spriteRenderer.material.shader = NormalSpriteShader;
+            spriteRenderer.material.shader = NormalLitSpriteShader;
             spriteRenderer.color = Color.white;
         }
     }

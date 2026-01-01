@@ -241,6 +241,20 @@ public class PlayerController : Entity
 
     public static event Action<PlayerController> OnPlayerReady;
 
+    public Vector3 playerStartPosition { get; private set; }
+
+    public int HealthPotionsCollected = 0;
+
+    private bool isHealing = false;
+
+    private bool FreeForAction =>
+    !isRolling &&
+    !isAttacking &&
+    !isHit &&
+    !isBlocking &&
+    !InAir &&
+    !isHealing;
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -267,6 +281,7 @@ public class PlayerController : Entity
         canFlip = true;
         animator = GetComponent<Animator>();
         Player.HealthData = Player.MaxHealth;
+        playerStartPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -361,6 +376,7 @@ public class PlayerController : Entity
 
     private void ExecuteAttack(AttackType type)
     {
+        Debug.Log("EXECUTE ATTACK " + currentAttackType.ToString());
         isAttacking = true;
         canMove = false;
         if(currentAttackType != AttackType.Dash && currentAttackType != AttackType.Lift) rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -424,6 +440,8 @@ public class PlayerController : Entity
 
     private void HandleInput()
     {
+        Debug.Log("HANDLING INPUT");
+
         if(isHolding && Input.GetMouseButtonUp(0))
         {
             isHolding = false;
@@ -468,12 +486,12 @@ public class PlayerController : Entity
             PerformAttack(attack);
         }
 
-        if (Input.GetKeyDown(KeyCode.V) && !jump && !isAttacking && !isRolling && canMove && !InAir && !isHit)
+        if (Input.GetKeyDown(KeyCode.V) && FreeForAction)
         {
             StartRoll();
         }
 
-        if (Input.GetMouseButtonDown(1) && !jump && !isAttacking && !isRolling && !InAir && !isHit && !isBlocking)
+        if (Input.GetMouseButtonDown(1) && FreeForAction && !isRolling)
         {
             StartBlock();
         }
@@ -481,6 +499,11 @@ public class PlayerController : Entity
         if (!Input.GetMouseButton(1) && isBlocking && !blockSuccess)
         {
             EndBlock();
+        }
+
+        if(Input.GetKeyDown(KeyCode.H) && HealthPotionsCollected > 0 && FreeForAction && _PlayerData.HealthData < _PlayerData.MaxHealth)
+        {
+            StartHeal();
         }
     }
 
@@ -663,7 +686,7 @@ public class PlayerController : Entity
         run = false;
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        transform.GetComponent<BoxCollider2D>().enabled = false;
+        transform.GetComponent<Collider2D>().enabled = false;
         rb.gravityScale = 0;
 
         // Clear existing velocity so the roll feels snappy
@@ -709,7 +732,7 @@ public class PlayerController : Entity
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         rb.gravityScale = 1;
-        transform.GetComponent<BoxCollider2D>().enabled = true;
+        transform.GetComponent<Collider2D>().enabled = true;
 
         walk = Mathf.Abs(dirH) > 0.01f && defaultwalkspeed > 0 && canMove;
         run = false;
@@ -788,6 +811,20 @@ public class PlayerController : Entity
     public void DisableCanFlip()
     {
         canFlip = false;
+    }
+
+    private void StartHeal()
+    {
+        isHealing = true;
+        HealthPotionsCollected -= 1;
+        animationController.animator.SetTrigger("heal");
+        Player.HealthData = Mathf.Min(Player.HealthData + 25, Player.MaxHealth);
+        UIManager.Instance.OnPlayerHeal(_PlayerData.HealthData);
+    }
+
+    public void EndHeal()
+    {
+        isHealing = false;
     }
 
     private void FixedUpdate()
@@ -1015,6 +1052,44 @@ public class PlayerController : Entity
         animationController.animator.SetBool("Block", false);
         animationController.animator.speed = 1;
     }
+    
+    public void Respawn(Vector3 spawnPos)
+    {
+        transform.position = spawnPos;
+        rb.velocity = Vector2.zero;
+
+        // Reset movement input
+        walk = false;
+        run = false;
+        dirH = 0f;
+
+        isHit = false;
+        isBlocking = false;
+        isAttacking = false;
+        isRolling = false;
+        blockSuccess = false;
+        canMove = true;
+        jump = false;
+        isHolding = false;
+        holdTime = 0;
+        isDashAttacking = false;
+        airAttack = false;
+        liftAttack = false;
+        normalAttack = false;
+        dashAttack = false;
+
+        // Force idle state
+        animationController.SetAnimation("idle");
+
+        // Reset rigidbody
+        rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        PlayerCombatController.Instance.ResetCombatState();
+        Player.HealthData = Player.MaxHealth;
+        OnPlayerHit.Invoke(Player.HealthData);
+        transform.gameObject.SetActive(true);
+        OnPlayerReady?.Invoke(this);
+    }
 
 }
-

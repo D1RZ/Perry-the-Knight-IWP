@@ -27,15 +27,15 @@ public class RoomManager : MonoBehaviour
     }
 
     // Public entry point
-    public void EnterRoom(Room newRoom)
+    public void EnterRoom(Room newRoom, bool respawn)
     {
         if (isTransitioning) return;
-        if (newRoom == currentRoom) return;
+        if (newRoom == currentRoom && !respawn) return;
 
-        StartCoroutine(TransitionToRoom(newRoom));
+        StartCoroutine(TransitionToRoom(newRoom, respawn));
     }
 
-    private IEnumerator TransitionToRoom(Room newRoom)
+    private IEnumerator TransitionToRoom(Room newRoom,bool respawn)
     {
         isTransitioning = true;
 
@@ -55,7 +55,7 @@ public class RoomManager : MonoBehaviour
         currentRoom.gameObject.SetActive(true);
 
         PlayerController.Instance.SetCanMove(false);
-        PlayerController.Instance.transform.position = currentRoom.playerSpawnPos.position;
+        if(!respawn) PlayerController.Instance.transform.position = currentRoom.playerSpawnPos.position;
 
         // 4? Update camera bounds
         if (confiner != null && newRoom.cameraBounds != null)
@@ -67,6 +67,7 @@ public class RoomManager : MonoBehaviour
         currentRoom.OnEnterRoom();
 
         PlayerController.Instance.SetCanMove(true);
+        if(respawn) PlayerController.Instance.Respawn(CheckpointManager.Instance.GetRespawnPosition());
 
         // 5? Fade back in
         if (useFade && FadeManager.Instance != null)

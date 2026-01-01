@@ -20,7 +20,7 @@ TagManager:
   - Enemy
   - Player
   - EnemyHitbox
-  - 
+  - Items
   - 
   - 
   - 
@@ -57,6 +57,9 @@ TagManager:
     locked: 0
   - name: Statue
     uniqueID: 4116908285
+    locked: 0
+  - name: Items
+    uniqueID: 3712686583
     locked: 0
   - name: Ground Enemy
     uniqueID: 1332245485

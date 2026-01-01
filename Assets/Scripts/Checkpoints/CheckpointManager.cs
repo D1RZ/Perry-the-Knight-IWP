@@ -6,6 +6,8 @@ public class CheckpointManager : MonoBehaviour
 
     private Checkpoint currentCheckpoint;
 
+    [SerializeField] private Room defaultRoom;
+
     private void Awake()
     {
         if (Instance != null)
@@ -29,14 +31,14 @@ public class CheckpointManager : MonoBehaviour
     {
         return currentCheckpoint != null
             ? currentCheckpoint.GetSpawnPosition()
-            : Vector2.zero;
+            : PlayerController.Instance.playerStartPosition;
     }
 
     public Room GetRespawnRoom()
     {
         return currentCheckpoint != null
             ? currentCheckpoint.GetRoom()
-            : null;
+            : defaultRoom;
     }
 
 }

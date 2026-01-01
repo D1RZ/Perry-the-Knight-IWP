@@ -15,6 +15,9 @@ public class Checkpoint : MonoBehaviour
 
         hasBeenActivated = true;
         CheckpointManager.Instance.SetCheckpoint(this);
+        Animator animator = transform.GetComponent<Animator>();
+        animator.SetTrigger("Save");
+        UIManager.Instance.AnimateHealthIncrease(PlayerController.Instance._PlayerData.MaxHealth + 50);
     }
 
     public Room GetRoom() => owningRoom;

@@ -9,6 +9,8 @@ public class PostProcessController : MonoBehaviour
 
     private Vignette vignette;
 
+    public bool vignetteActive { get; private set; }
+
     private void Start()
     {
         if (globalVolume != null && globalVolume.profile.TryGet(out vignette))
@@ -16,6 +18,7 @@ public class PostProcessController : MonoBehaviour
             // optional: set initial state
             vignette.active = true;
             vignette.intensity.value = 0f; // start off
+            vignetteActive = false;
         }
         else
         {
@@ -27,6 +30,7 @@ public class PostProcessController : MonoBehaviour
     {
         if (vignette != null)
         {
+            vignetteActive = true;
             vignette.intensity.value = targetIntensity;
         }
     }
@@ -35,6 +39,7 @@ public class PostProcessController : MonoBehaviour
     {
         if (vignette != null)
         {
+            vignetteActive = false;
             vignette.intensity.value = 0f;
             vignette.active = false;
         }

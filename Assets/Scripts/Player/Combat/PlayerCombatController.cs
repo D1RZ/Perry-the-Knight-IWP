@@ -51,6 +51,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerController.OnPlayerReady -= Register;
         PlayerController.OnPlayerReady += Register;
     }
 
@@ -67,6 +68,8 @@ public class PlayerCombatController : MonoBehaviour
 
     private void HandleAttack(string attackType)
     {
+        Debug.Log("HANDLE ATTACK");
+
         // Prevent attack spam
         if (lastAttackCoroutine != null)
         {
@@ -153,6 +156,21 @@ public class PlayerCombatController : MonoBehaviour
     public AttackTypeData GetCurrentAttackType()
     {
         return currentAttackType;
+    }
+
+    public void ResetCombatState()
+    {
+        // Stop any running attack coroutine
+        if (lastAttackCoroutine != null)
+        {
+            StopCoroutine(lastAttackCoroutine);
+            lastAttackCoroutine = null;
+        }
+
+        // Reset attack state
+        attackStep = 0;
+        currentAttackType = null;
+        previousAttackType = null;
     }
 
 }

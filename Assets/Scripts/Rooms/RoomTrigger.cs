@@ -8,6 +8,6 @@ public class RoomTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        RoomManager.Instance.EnterRoom(targetRoom);
+        RoomManager.Instance.EnterRoom(targetRoom, false);
     }
 }
