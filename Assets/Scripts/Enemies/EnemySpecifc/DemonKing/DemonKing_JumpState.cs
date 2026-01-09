@@ -4,11 +4,14 @@ public class DemonKing_JumpState : State
 {
     private float groundCheckTimer = 0;
     private bool hasLanded;
+    private bool spawnedSpikes = false;
 
     public override void Enter(Entity entity)
     {
         groundCheckTimer = 0;
         hasLanded = false;
+        spawnedSpikes = false;
+        entity.startAttack = false;
         entity.SetTarget(PlayerController.Instance.gameObject);
         entity.CheckFacingDirectionBasedOnTargetPos();
         entity.Anim.Play("Demon_Jump");
@@ -18,6 +21,11 @@ public class DemonKing_JumpState : State
     public override void onUpdate(Entity entity)
     {
         entity.Anim.SetFloat("yVelocity", entity.rb.velocity.y);
+
+        if(entity.startAttack && !spawnedSpikes)
+        {
+            spawnedSpikes = true;
+        }
 
         if (hasLanded)
             return;
@@ -46,7 +54,7 @@ public class DemonKing_JumpState : State
 
     public override void Exit(Entity entity)
     {
-        
+        entity.startAttack = false;
     }
     
     private void JumpTowardPlayer(Entity entity)

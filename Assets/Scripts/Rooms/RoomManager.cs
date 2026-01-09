@@ -15,6 +15,9 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Room currentRoom;
     private bool isTransitioning;
 
+    public GameObject CurrentLeftBossBarrier;
+    public GameObject CurrentRightBossBarrier;
+
     private void Awake()
     {
         if (Instance != null)

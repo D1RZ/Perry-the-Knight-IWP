@@ -47,6 +47,8 @@ public class Entity : MonoBehaviour
     [SerializeField] private float groundRaycastDistance;
 
     public bool hasFinishedAttack = false;
+    
+    public bool startAttack = false; // for earth attack 
 
     public virtual void Start()
     {
@@ -268,5 +270,7 @@ public class Entity : MonoBehaviour
     {
         hasFinishedAttack = true;
     }
+
+
 
 }

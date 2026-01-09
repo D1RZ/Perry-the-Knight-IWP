@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4904122055255127621}
   - component: {fileID: 4859289052125017018}
   - component: {fileID: 571502945763241344}
-  - component: {fileID: 635597355554028590}
   - component: {fileID: 1257660045203969574}
+  - component: {fileID: 8611418917479009335}
   m_Layer: 0
   m_Name: Earth Spikes (9)
   m_TagString: Untagged
@@ -108,22 +108,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &635597355554028590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530964247382251827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d59d74c23f164c44b6404f03a9e0077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExclamationMark: {fileID: 0}
-  resumeAnimationSpeed: 1
-  pauseAnimation: 0
-  pauseAnimationTime: 0
 --- !u!61 &1257660045203969574
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -169,3 +153,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.08, y: 0.8053906}
   m_EdgeRadius: 0
+--- !u!114 &8611418917479009335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530964247382251827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a064fe5cbd5ba514b949964654c54245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExclamationMark: {fileID: 0}
+  resumeAnimationSpeed: 1
+  pauseAnimation: 0
+  pauseAnimationTime: 0
+  isFlying: 1
+  Blockable: 0
+  entity: {fileID: 0}
+  damage: 40
+  knockbackForce: {x: 0, y: 8}

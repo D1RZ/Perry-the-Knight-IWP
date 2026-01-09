@@ -236,4 +236,9 @@ public class PauseAnimationMeele : PauseAnimation
         entity.hasFinishedAttack = true;
     }
 
+    public void SetStartAttack()
+    {
+        entity.startAttack = true;
+    }
+
 }

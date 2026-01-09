@@ -35,7 +35,7 @@ public class SkeletonEnemy_AttackState : State
 
     public override void Exit(Entity entity)
     {
-        
+        entity.hasFinishedAttack = false;
     }
 
 }

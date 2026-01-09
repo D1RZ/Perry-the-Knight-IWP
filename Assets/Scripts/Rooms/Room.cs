@@ -6,15 +6,14 @@ public class Room : MonoBehaviour
     public Transform enemiesParent;
     public Transform playerSpawnPos;
 
+    // for boss rooms
+    public GameObject LeftBossBarrier;
+    public GameObject RightBossBarrier; 
+
     public void OnEnterRoom()
     {
-        //foreach (Enemy enemy in enemiesParent.GetComponentsInChildren<Enemy>(true))
-        //{
-        //    Debug.Log("Reset Enemy!");
-        //    enemy.ResetEnemy();
-        //    enemy.gameObject.SetActive(true);
-        //}
-
+        if(LeftBossBarrier) RoomManager.Instance.CurrentLeftBossBarrier = LeftBossBarrier;
+        if(RightBossBarrier) RoomManager.Instance.CurrentRightBossBarrier = RightBossBarrier;
         transform.gameObject.SetActive(true);
     }
 

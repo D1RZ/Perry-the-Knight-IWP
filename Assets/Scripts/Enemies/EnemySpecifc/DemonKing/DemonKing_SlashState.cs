@@ -24,7 +24,7 @@ public class DemonKing_SlashState : State
 
     public override void Exit(Entity entity)
     {
-
+        entity.hasFinishedAttack = false;
     }
 
 }

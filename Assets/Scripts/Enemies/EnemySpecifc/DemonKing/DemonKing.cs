@@ -17,6 +17,8 @@ public class DemonKing : Enemy
 
     [SerializeField] private GameObject spikeRightSpawn;
 
+    [SerializeField] private GameObject earthSpike;
+
     public override void Start()
     {
         base.Start();
