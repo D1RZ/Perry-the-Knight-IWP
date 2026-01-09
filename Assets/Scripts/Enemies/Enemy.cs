@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public float health { get; private set; }
+    public float health;
     public GameObject HealthBar;
     public static Action<Enemy> OnEnemyHit; // static event shared by all enemies
+    public static Action<Enemy> OnBossHit; // only for boss enemies
     public float healthBar1PercentWidth; // for ui manager
     public bool knockedUp = false;
     public float knockedUpGraceTimer = 0f;
@@ -15,6 +16,7 @@ public class Enemy : Entity
     public float stunTimer;
     public bool isBlocking = false;
     public Transform BlockParticlePos;
+    public bool canKnockUp = true;
 
     // Start is called before the first frame update
     public override void Start()
@@ -31,7 +33,11 @@ public class Enemy : Entity
     {
         Debug.Log("Enemy Health: " + health);
 
-        if (health < 0) return;
+        if (health <= 0)
+        {
+            DeadEvent();
+            return;
+        }
 
         if (knockedUp)
         {
@@ -49,9 +55,11 @@ public class Enemy : Entity
                 knockedUp = false;
                 if (isStunned) isStunned = false;
                 rb.velocity = Vector3.zero; // prevent any form of sliding
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Animator anim = spriteRenderer.GetComponent<Animator>();
                 if (anim != null) anim.speed = 1;
-                CurrentState.Enter(this);
+                OnStunEnd();
                 rb.gravityScale = 1;
                 Debug.Log("Enemy Landed");
             }
@@ -64,7 +72,7 @@ public class Enemy : Entity
             else
             {
                 isStunned = false;
-                CurrentState.Enter(this);
+                OnStunEnd();
             }
             return;
         }
@@ -82,6 +90,11 @@ public class Enemy : Entity
 
     }
 
+    public virtual void DeadEvent()
+    {
+
+    }
+
     public void ResetEnemy()
     {
         health = entityData.MaxHealth;
@@ -95,12 +108,17 @@ public class Enemy : Entity
         knockedUpGraceTimer = 0f;
     }
 
-    public void SetHealth(float dmg)
+    public virtual void SetHealth(float dmg)
     {
         health -= dmg;
-        if (health <= 0) return;
+        if (health <= 0f) health = 0f;
         HealthBar.SetActive(true);
         OnEnemyHit.Invoke(this);
+    }
+
+    public virtual void OnStunEnd()
+    {
+        CurrentState.Enter(this);
     }
 
 }

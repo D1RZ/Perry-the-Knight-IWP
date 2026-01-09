@@ -6,10 +6,13 @@ public class PauseAnimationMeele : PauseAnimation
     private int latestAttack;
     private bool hasHit = false;
     [SerializeField] private bool isFlying = false;
+    [SerializeField] private bool Blockable = true;
     private bool FlyHit = false; // for flying enemy as flying enemy attack hitbox is more than one frame
     private bool Parried = false; // checks for if player has parried enemy attack
     private bool Blocked = false;
     [SerializeField] private Entity entity;
+    [SerializeField] private float damage;
+    [SerializeField] private Vector2 knockbackForce;
 
     public void AttackingVFX(int VFXAttackNo = 1) // which vfx to instantiate
     {
@@ -25,14 +28,24 @@ public class PauseAnimationMeele : PauseAnimation
         else if (isFlying && FlyHit) return;
 
         hasHit = true;
-   
-        if (CheckForBlockOrParry()) return;
+
+        if (Blockable)
+        {
+            if (CheckForBlockOrParry()) return;
+        }
 
         Debug.Log("HIT REGISTERED!!");
         var InstantiatedParticle = Instantiate(ParticleManager.Instance.GetParticleEffect("Hit"), PlayerController.Instance.gameObject.transform.position,Quaternion.identity);
         InstantiatedParticle.transform.localScale = new Vector3(-PlayerController.Instance.facingDirection,1,1);
-        Enemy enemy = entity as Enemy;
-        if (enemy.health > 0)
+        if (entity != null)
+        {
+            Enemy enemy = entity as Enemy;
+            if (enemy.health > 0)
+            {
+                StartCoroutine(DoHitImpact());
+            }
+        }
+        else
         {
             StartCoroutine(DoHitImpact());
         }
@@ -76,14 +89,20 @@ public class PauseAnimationMeele : PauseAnimation
         transform.GetComponent<Collider2D>().enabled = false;
         if(!Blocked) PlayerController.Instance.ChangeSpriteColor(true);
         PlayerController.Instance.OnHit();
-        transform.parent.GetComponent<Enemy>().HitConnected(latestAttack);
+        if (entity != null) transform.parent.GetComponent<Enemy>().HitConnected(latestAttack);
+        else
+        {
+            PlayerController.Instance._PlayerData.HealthData -= damage;
+            Debug.Log("PLAYER REMAINING HEALTH: " + PlayerController.Instance._PlayerData.HealthData);
+        }
+
         PlayerController.InvokeOnPlayerHit();
 
         if (PlayerController.Instance._PlayerData.HealthData <= 0)
         {
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), PlayerController.Instance.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), PlayerController.Instance.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
-            transform.parent.GetComponent<Enemy>().stateMachine.SetNextState("IDLE", transform.parent.GetComponent<Enemy>());
+            if(entity != null) transform.parent.GetComponent<Enemy>().stateMachine.SetNextState("IDLE", transform.parent.GetComponent<Enemy>());
             yield return null;
         }
 
@@ -106,11 +125,12 @@ public class PauseAnimationMeele : PauseAnimation
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.None;
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerController.Instance.rb.velocity = Vector3.zero;
-        PlayerController.Instance.rb.AddForce(new Vector2(transform.parent.GetComponent<Enemy>().facingDirection * 5f, 0), ForceMode2D.Impulse);
+        if (entity != null) PlayerController.Instance.rb.AddForce(new Vector2(transform.parent.GetComponent<Enemy>().facingDirection * 5f, 0), ForceMode2D.Impulse);
+        else PlayerController.Instance.rb.AddForce(new Vector2(knockbackForce.x, knockbackForce.y), ForceMode2D.Impulse);
         PlayerController.Instance.animationController.animator.speed = 0;
         // Wait until the player nearly stops sliding
         Rigidbody2D rb = PlayerController.Instance.rb;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         PlayerController.Instance.SetCanMove(true);
         if (!Blocked) PlayerController.Instance.ChangeSpriteColor(false);
         Blocked = false;

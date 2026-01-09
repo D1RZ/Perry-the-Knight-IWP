@@ -5,6 +5,8 @@ public class PauseAnimation : MonoBehaviour
 {
     [SerializeField] private GameObject ExclamationMark;
     [SerializeField] private float resumeAnimationSpeed = 1f;
+    [SerializeField] private bool pauseAnimation = true;
+    [SerializeField] private float pauseAnimationTime = 0.2f;
     private Animator animator;
     private Transform ExclaimationMarkPos;
 
@@ -12,15 +14,20 @@ public class PauseAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.speed = 0;
-        ExclamationMark.SetActive(true);
-        StartCoroutine(ResumeAnimation());
+        if(ExclamationMark) ExclamationMark.SetActive(true);
+        if(pauseAnimation) StartCoroutine(ResumeAnimation());
     }
 
     private IEnumerator ResumeAnimation()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(pauseAnimationTime);
         animator.speed = resumeAnimationSpeed;
-        ExclamationMark.SetActive(false);
+        if (ExclamationMark) ExclamationMark.SetActive(false);
+    }
+
+    public void ResumingAnimation()
+    {
+        StartCoroutine(ResumeAnimation());
     }
 
     public GameObject GetExclaimationMark()

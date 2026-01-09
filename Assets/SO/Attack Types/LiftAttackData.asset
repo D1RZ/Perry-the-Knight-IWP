@@ -18,6 +18,6 @@ MonoBehaviour:
     attackAnimTime: 0.5
     applyForceToPlayer: 1
     ForceToPlayerAmt: {x: 0, y: 16}
-    knockbackForce: {x: 0, y: 13}
+    knockbackForce: {x: 0, y: 14}
   maxAttackSteps: 1
   attackTypeBool: liftAttack

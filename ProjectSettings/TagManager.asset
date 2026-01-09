@@ -76,6 +76,9 @@ TagManager:
   - name: Ground
     uniqueID: 4280069439
     locked: 0
+  - name: Shield
+    uniqueID: 19063177
+    locked: 0
   - name: Decorations
     uniqueID: 288370305
     locked: 0

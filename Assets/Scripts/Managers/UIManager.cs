@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
     {
         PlayerController.OnPlayerHit += UpdatePlayerHealthUI;
         Enemy.OnEnemyHit += UpdateEnemyHealthUI;
+        Enemy.OnBossHit += UpdateBossEnemyHealthUI;
     }
 
     private void UpdateEnemyHealthUI(Enemy enemy)
@@ -66,7 +67,18 @@ public class UIManager : MonoBehaviour
         // start coroutine to lerp grey bar down
         StartCoroutine(LerpEnemyGreyBar(enemyGreyBar, targetRedWidth, 0.5f));
     }
-    
+
+    private void UpdateBossEnemyHealthUI(Enemy enemy)
+    {
+        // get references
+        var enemyRedBar = enemy.HealthBar.transform.GetChild(2).GetComponent<Image>();
+
+        float targetRedWidth = enemy.healthBar1PercentWidth * (enemy.health / enemy.entityData.MaxHealth) * 100;
+
+        // start coroutine to lerp grey bar down
+        StartCoroutine(LerpEnemyGreyBar(enemyRedBar, targetRedWidth, 0.5f));
+    }
+
     private IEnumerator LerpEnemyGreyBar(Image greyBar, float targetWidth, float speed)
     {
         if (greyBar == null) yield return null;
@@ -118,14 +130,16 @@ public class UIManager : MonoBehaviour
     {
         PlayerController.OnPlayerHit -= UpdatePlayerHealthUI;
         Enemy.OnEnemyHit -= UpdateEnemyHealthUI;
+        Enemy.OnBossHit -= UpdateBossEnemyHealthUI;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerData.MaxHealth = 100;
-        playerData.HealthData = 100;
-        UpdatePlayerHealthUI(playerData.HealthData);
+        playerData.MaxHealth = 200;
+        playerData.HealthData = 200;
+        //UpdatePlayerHealthUI(playerData.HealthData);
+        AnimateHealthIncrease(200);
         targetYellowWidth = YellowBar.rectTransform.sizeDelta.x;
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpearEnemy_ChaseState : State
 {
     private ChaseState_Data spearChaseData;
-
+        
     public SpearEnemy_ChaseState(ChaseState_Data stateData)
     {
         this.spearChaseData = stateData;

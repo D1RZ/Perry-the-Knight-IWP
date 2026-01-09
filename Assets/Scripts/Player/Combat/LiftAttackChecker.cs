@@ -38,19 +38,23 @@ public class LiftAttackChecker : BaseAttackChecker
         }
 
         if (enemy != null) enemy.ChangeSpriteColor(false);
-        enemy.rb.constraints = RigidbodyConstraints2D.None;
-        enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        enemy.rb.AddForce(new Vector2(PlayerCombatController.Instance.GetKnockbackForce().x, PlayerCombatController.Instance.GetKnockbackForce().y),ForceMode2D.Impulse);
-        enemy.Anim.Play(enemy.hitAnim);
-        enemy.knockedUp = true;
-        enemy.knockedUpGraceTimer = 0.2f;    // delay before checking grounded
-        enemy.rb.gravityScale = 1.25f;
-        Debug.Log("Enemy RB Velocity: " + enemy.rb.velocity);
 
-        if (enemy != null && enemy.spriteRenderer != null)
+        if (enemy.canKnockUp)
         {
-            Animator anim = enemy.spriteRenderer.GetComponent<Animator>();
-            if (anim != null) anim.speed = 0;
+            enemy.rb.constraints = RigidbodyConstraints2D.None;
+            enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            enemy.rb.AddForce(new Vector2(PlayerCombatController.Instance.GetKnockbackForce().x, PlayerCombatController.Instance.GetKnockbackForce().y), ForceMode2D.Impulse);
+            enemy.Anim.Play(enemy.hitAnim);
+            enemy.knockedUp = true;
+            enemy.knockedUpGraceTimer = 0.2f;    // delay before checking grounded
+            enemy.rb.gravityScale = 1.25f;
+            Debug.Log("Enemy RB Velocity: " + enemy.rb.velocity);
+
+            if (enemy != null && enemy.spriteRenderer != null)
+            {
+                Animator anim = enemy.spriteRenderer.GetComponent<Animator>();
+                if (anim != null) anim.speed = 0;
+            }
         }
 
         Debug.Log("LIFTED ENEMY! " + enemy.transform.rotation.z);
