@@ -11,6 +11,7 @@ public class BossRoomCutscenes : MonoBehaviour
     [SerializeField] private Transform BossFightCamPos;
     [SerializeField] private float demonMoveSpeed = 3f;
     [SerializeField] private GameObject DialogueUI;
+    [SerializeField] private GameObject DemonKing;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -71,9 +72,73 @@ public class BossRoomCutscenes : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        DialogueManager.Instance.ShowDialogue("Where is the demon king!");
+        DialogueManager.Instance.ShowDialogue("Where is the Demon King?!");
 
         yield return new WaitUntil(() => !DialogueManager.Instance.TypeInProgress);
+
+        DialogueManager.Instance.dialogueName.text = "SLIME";
+
+        yield return new WaitForSeconds(0.1f);
+
+        DialogueManager.Instance.ShowDialogue("If you want answers, fight me first, child.");
+
+        yield return new WaitUntil(() => !DialogueManager.Instance.TypeInProgress);
+
+        DialogueManager.Instance.dialogueName.text = "PLAYER";
+
+        yield return new WaitForSeconds(0.1f);
+
+        DialogueManager.Instance.ShowDialogue("Fine, Let's end this.");
+
+        yield return new WaitUntil(() => !DialogueManager.Instance.TypeInProgress);
+
+        yield return StartCoroutine(MoveDialogueUI(new Vector3(0, -5, 0), 1));
+
+        RoomManager.Instance.CurrentLeftBossBarrier.SetActive(true);
+        RoomManager.Instance.CurrentRightBossBarrier.SetActive(true);
+
+        DemonSlime.GetComponent<DemonSlime>().HealthBar.SetActive(true);
+        PlayerController.Instance.disableRollCollider = false;
+        PlayerController.Instance.PlayerInCutscene = false;
+        DemonSlime.GetComponent<DemonSlime>().InCutscene = false;
+    }
+
+    public IEnumerator BossTransitionSegment()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        yield return FadeManager.Instance.FadeOut();
+
+        DemonSlime.GetComponent<DemonSlime>().HealthBar.SetActive(false);
+
+        PlayerController.Instance.PlayerInCutscene = true;
+
+        DemonKing.GetComponent<Enemy>().InCutscene = true;
+        DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 0;
+        DemonKing.transform.position = new Vector3(demonSlimeTargetPos.position.x, DemonKing.transform.position.y, DemonKing.transform.position.z);
+        DemonKing.SetActive(true);
+
+        PlayerController.Instance.transform.position = playerEntryStandPos.position;
+        PlayerController.Instance.transform.localScale = new Vector3(1, 1, 1); // ensures that the player is facing the right direction
+        PlayerController.Instance.facingDirection = 1;
+        PlayerController.Instance.rb.velocity = Vector3.zero;
+        PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        ResetPlayer();
+        PlayerController.Instance.animationController.animator.Play("Idle", 0, 0.0f);
+
+        yield return FadeManager.Instance.FadeIn();
+
+        DialogueManager.Instance.dialogueText.text = "";
+
+        yield return StartCoroutine(MoveDialogueUI(Vector3.zero, 1));
+
+        DialogueManager.Instance.ShowDialogue("I have won, now where is the Demon King.");
+
+        yield return new WaitUntil(() => !DialogueManager.Instance.TypeInProgress);
+
+        DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 1;
+
+
     }
 
     private void ResetPlayer()

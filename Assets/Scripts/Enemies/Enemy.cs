@@ -38,6 +38,7 @@ public class Enemy : Entity
 
         if (health <= 0)
         {
+            Debug.Log("CALLED DEAD EVENT");
             DeadEvent();
             return;
         }

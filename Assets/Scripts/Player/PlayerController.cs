@@ -257,7 +257,7 @@ public class PlayerController : Entity
     !InAir &&
     !isHealing;
 
-    [SerializeField] private bool disableRollCollider = true;
+    public bool disableRollCollider = true;
 
     private float attackedTrailTimer = 0f;
 

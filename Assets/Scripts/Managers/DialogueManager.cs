@@ -14,16 +14,27 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     public bool IsTyping => isTyping;
     public bool TypeInProgress = false;
+    [SerializeField] private float amplitude = 0.15f; // world units
+    [SerializeField] private float speed = 3f;
+    private Vector3 startPos;
 
     private void Awake()
     {
         Instance = this;
     }
-     
+
+    private void Start()
+    {
+        startPos = blackArrow.transform.localPosition;
+    }
+
     private void Update()
     {
         if(!isTyping && TypeInProgress)
         {
+            float offset = -Mathf.Abs(Mathf.Sin(Time.time * speed)) * amplitude;
+            blackArrow.transform.localPosition = startPos + Vector3.right * offset;
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 TypeInProgress = false;

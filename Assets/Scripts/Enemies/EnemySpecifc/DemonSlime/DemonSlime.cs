@@ -9,6 +9,7 @@ public class DemonSlime : Enemy
     public State DashAttackState { get; private set; }
     public State MagicAttackState { get; private set; }
     private bool TriggerTransform = false;
+    [SerializeField] private BossRoomCutscenes cutsceneManager;
 
     public override void Start()
     {
@@ -45,6 +46,10 @@ public class DemonSlime : Enemy
     public override void DeadEvent()
     {
         if (TriggerTransform) return;
+
+        Debug.Log("DEAD EVENT TRIGGERED");
+        TriggerTransform = true;
+        cutsceneManager.StartCoroutine(cutsceneManager.BossTransitionSegment());
     }
 
     public override void HitConnected(int AttackNo)
