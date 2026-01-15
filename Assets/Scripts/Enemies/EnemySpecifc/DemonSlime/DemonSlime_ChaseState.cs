@@ -6,6 +6,8 @@ public class DemonSlime_ChaseState : State
     private bool resetChase = false; // after getting stunned
     private float chaseTimer;
     private float dashTransitionTime = 1.5f;
+    private float magicTimer = 0f;
+    private float magicCooldown = 5.5f;
 
     public DemonSlime_ChaseState(ChaseState_Data stateData)
     {
@@ -53,8 +55,18 @@ public class DemonSlime_ChaseState : State
         entity.SetVelocity(entity.facingDirection * slimeChaseData.ChaseMovementSpeed);
 
         chaseTimer += Time.deltaTime;
+        magicTimer += Time.deltaTime;
 
-        if(chaseTimer >= dashTransitionTime)
+        if (magicTimer >= magicCooldown)
+        {
+            magicTimer = 0f;
+            chaseTimer = 0f;
+
+            entity.stateMachine.SetNextState("MAGICATTACK", entity);
+            return;
+        }
+
+        if (chaseTimer >= dashTransitionTime)
         {
             chaseTimer = 0;
             entity.stateMachine.SetNextState("DASHATTACK", entity);

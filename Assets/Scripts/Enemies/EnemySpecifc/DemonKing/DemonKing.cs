@@ -4,20 +4,17 @@ public class DemonKing : Enemy
 {
     public ChaseState_Data ChaseStateData;
     public FlyingEnemyAttackState_Data DashAttackStateData;
-    public DemonSlimeMagicAttackData MagicAttackStateData;
     public State ChaseState { get; private set; }
     public State SlashAttackState { get; private set; }
     public State JumpAttackState { get; private set; }
-    public State LaserMagicAttackState { get; private set; }
+    public State MagicAttackState { get; private set; }
     public State SummonMagicAttackState { get; private set; }
 
     private bool TriggerTransform = false;
 
-    [SerializeField] private GameObject spikeLeftSpawn;
+    public GameObject spikeLeftSpawn;
 
-    [SerializeField] private GameObject spikeRightSpawn;
-
-    [SerializeField] private GameObject earthSpike;
+    public GameObject spikeRightSpawn;
 
     public override void Start()
     {
@@ -27,14 +24,14 @@ public class DemonKing : Enemy
         ChaseState = new DemonKing_ChaseState(ChaseStateData);
         SlashAttackState = new DemonKing_SlashState();
         JumpAttackState = new DemonKing_JumpState();
-        //LaserMagicAttackState = new DemonSlime_MagicAttackState(ParticleManager.Instance.GetParticleEffect("Spike"));
+        MagicAttackState = new DemonKing_MagicState();
         #endregion
 
         #region Setting of state names
         ChaseState.SetStateName("CHASE");
         SlashAttackState.SetStateName("SLASH");
         JumpAttackState.SetStateName("JUMP");
-        //LaserMagicAttackState.SetStateName("LASER");
+        MagicAttackState.SetStateName("MAGIC");
         //SummonMagicAttackState.SetStateName("SUMMON");
         #endregion
 
@@ -42,11 +39,11 @@ public class DemonKing : Enemy
         stateMachine.AddState(ChaseState);
         stateMachine.AddState(SlashAttackState);
         stateMachine.AddState(JumpAttackState);
-        //stateMachine.AddState(LaserMagicAttackState);
+        stateMachine.AddState(MagicAttackState);
         //stateMachine.AddState(SummonMagicAttackState);
         #endregion
 
-        this.NextState = JumpAttackState;
+        this.NextState = ChaseState;
     }
 
     private new void Update()

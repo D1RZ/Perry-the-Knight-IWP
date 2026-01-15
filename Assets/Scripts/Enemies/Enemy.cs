@@ -17,6 +17,7 @@ public class Enemy : Entity
     public bool isBlocking = false;
     public Transform BlockParticlePos;
     public bool canKnockUp = true;
+    public bool InCutscene = false;
 
     // Start is called before the first frame update
     public override void Start()
@@ -32,6 +33,8 @@ public class Enemy : Entity
     public virtual void Update()
     {
         Debug.Log("Enemy Health: " + health);
+
+        if (InCutscene) return;
 
         if (health <= 0)
         {

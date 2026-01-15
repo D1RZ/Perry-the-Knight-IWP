@@ -4,10 +4,10 @@ public class DemonKing_ChaseState : State
 {
     private ChaseState_Data DemonKingChaseData;
     private bool resetChase = false; // after getting stunned
-
+    
     // --- Decision thresholds ---
     private float slashRange = 4.5f;
-    private float laserMinRange = 8f;
+    private float magicMinRange = 10f;
 
     // --- Cooldowns ---
     private float summonCooldown = 8f;
@@ -20,13 +20,8 @@ public class DemonKing_ChaseState : State
 
     public override void Enter(Entity entity)
     {
-        //if (!entity.CheckGrounded())
-        //{
-        //    resetChase = true;
-        //    return;
-        //}
         resetChase = false;
-        entity.Anim.Play("Demon_Walk");
+        entity.Anim.Play("Demon_Walk", 0, 0f);
         entity.SetTarget(PlayerController.Instance.gameObject);
         entity.isChasing = true;
         float direction = Mathf.Sign(entity.GetTarget().transform.position.x - entity.transform.position.x);
@@ -38,19 +33,6 @@ public class DemonKing_ChaseState : State
 
     public override void onUpdate(Entity entity)
     {
-        //if (entity.CheckGrounded() && resetChase)
-        //{
-        //    resetChase = false;
-        //    entity.Anim.Play("Demon_Walk");
-        //    entity.SetTarget(PlayerController.Instance.gameObject);
-        //    entity.isChasing = true;
-        //    float direction = Mathf.Sign(entity.GetTarget().transform.position.x - entity.transform.position.x);
-        //    entity.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //    entity.SetVelocity(direction * DemonKingChaseData.ChaseMovementSpeed);
-        //    entity.CheckFacingDirection();
-        //    return;
-        //}
-
         entity.rb.constraints = RigidbodyConstraints2D.None;
         entity.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -60,20 +42,20 @@ public class DemonKing_ChaseState : State
             entity.GetTarget().transform.position
         );
 
-        //summonTimer += Time.deltaTime;
+        summonTimer += Time.deltaTime;
 
-        //if(summonTimer >= summonCooldown)
+        //if (summonTimer >= summonCooldown)
         //{
         //    summonTimer = 0;
         //    entity.stateMachine.SetNextState("SUMMON", entity);
         //    return;
         //}
 
-        //if (distanceToPlayer >= laserMinRange)
-        //{
-        //    entity.stateMachine.SetNextState("LASER", entity);
-        //    return;
-        //}
+        if (distanceToPlayer >= slashRange && distanceToPlayer <= magicMinRange)
+        {
+            entity.stateMachine.SetNextState("MAGIC", entity);
+            return;
+        }
 
         if (distanceToPlayer <= slashRange)
         {

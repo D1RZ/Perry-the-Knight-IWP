@@ -85,3 +85,6 @@ TagManager:
   - name: Flying Enemy
     uniqueID: 3878851965
     locked: 0
+  - name: UI
+    uniqueID: 3409957869
+    locked: 0

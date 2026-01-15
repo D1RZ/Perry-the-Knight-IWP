@@ -69,6 +69,8 @@ public class DemonSlime_DashAttackState : State
                 entity.Anim.speed = 1;
                 entity.transform.GetChild(0).GetComponent<Knockback>().isDashing = true;
                 Vector2 dir = (entity.GetTarget().transform.position - entity.transform.position).normalized;
+                entity.rb.constraints = RigidbodyConstraints2D.None;
+                entity.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 entity.SetVelocity(dir * attackStateData.dashSpeed);
                 dashTimer = attackStateData.dashTime;
                 entity.spriteRenderer.GetComponent<Collider2D>().enabled = true;

@@ -34,11 +34,11 @@ public class ObjectPool
         return obj;
     }
 
-    public GameObject GetObject(Vector3 position, Quaternion rotation)
+    public GameObject GetObject(Vector3 position, Quaternion rotation,bool active)
     {
         GameObject obj = poolQueue.Count > 0 ? poolQueue.Dequeue() : CreateNewObject();
         obj.transform.SetPositionAndRotation(position, rotation);
-        obj.SetActive(true);
+        obj.SetActive(active);
         return obj;
     }
 

@@ -34,7 +34,7 @@ public class ObjectPoolManager : MonoBehaviour
         return prefab.name;
     }
 
-    public GameObject Spawn(string prefabName, Vector3 position, Quaternion rotation)
+    public GameObject Spawn(string prefabName, Vector3 position, Quaternion rotation,bool active)
     {
         if (!poolDictionary.TryGetValue(prefabName, out var pool))
         {
@@ -42,7 +42,7 @@ public class ObjectPoolManager : MonoBehaviour
             return null;
         }
 
-        return pool.GetObject(position, rotation);
+        return pool.GetObject(position, rotation,active);
     }
 
     public void ReturnToPool(GameObject obj)

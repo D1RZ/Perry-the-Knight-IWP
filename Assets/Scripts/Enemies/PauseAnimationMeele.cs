@@ -6,10 +6,13 @@ public class PauseAnimationMeele : PauseAnimation
     private int latestAttack;
     private bool hasHit = false;
     [SerializeField] private bool isFlying = false;
+    [SerializeField] private bool trailDamageVFX = false;
     [SerializeField] private bool Blockable = true;
     private bool FlyHit = false; // for flying enemy as flying enemy attack hitbox is more than one frame
     private bool Parried = false; // checks for if player has parried enemy attack
     private bool Blocked = false;
+    public bool startedAttack = false; // for vfx attacks with no entity
+    public bool finishedAttack = false;
     [SerializeField] private Entity entity;
     [SerializeField] private float damage;
     [SerializeField] private Vector2 knockbackForce;
@@ -26,6 +29,9 @@ public class PauseAnimationMeele : PauseAnimation
 
         if (isFlying && !FlyHit) FlyHit = true;
         else if (isFlying && FlyHit) return;
+
+        if (trailDamageVFX && !PlayerController.Instance.attackedByTrail) PlayerController.Instance.attackedByTrail = true;
+        else if (trailDamageVFX && PlayerController.Instance.attackedByTrail) return;
 
         hasHit = true;
 
@@ -111,9 +117,6 @@ public class PauseAnimationMeele : PauseAnimation
             // Optional: freeze time
             Time.timeScale = 0f;
 
-            // Shake camera (we’ll handle timing using real time)
-            //CameraShake.Instance.Shake(0.2f, 0.5f); // duration, intensity
-
             // Wait for real-time duration (unaffected by timeScale)
             yield return new WaitForSecondsRealtime(0.2f);
 
@@ -126,7 +129,7 @@ public class PauseAnimationMeele : PauseAnimation
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerController.Instance.rb.velocity = Vector3.zero;
         if (entity != null) PlayerController.Instance.rb.AddForce(new Vector2(transform.parent.GetComponent<Enemy>().facingDirection * 5f, 0), ForceMode2D.Impulse);
-        else PlayerController.Instance.rb.AddForce(new Vector2(knockbackForce.x, knockbackForce.y), ForceMode2D.Impulse);
+        else PlayerController.Instance.rb.AddForce(new Vector2(-PlayerController.Instance.facingDirection * knockbackForce.x, knockbackForce.y), ForceMode2D.Impulse);
         PlayerController.Instance.animationController.animator.speed = 0;
         // Wait until the player nearly stops sliding
         Rigidbody2D rb = PlayerController.Instance.rb;
@@ -238,7 +241,19 @@ public class PauseAnimationMeele : PauseAnimation
 
     public void SetStartAttack()
     {
-        entity.startAttack = true;
+        startedAttack = true;
+        if (entity) entity.startAttack = true;
+        
+    }
+
+    public void SetVFXFinishedAttack()
+    {
+        finishedAttack = true;
+    }
+
+    public void ApplyCameraShake()
+    {
+        CameraManager.Instance.Shake(0.3f, 10);
     }
 
 }

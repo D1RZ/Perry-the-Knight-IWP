@@ -247,6 +247,8 @@ public class PlayerController : Entity
 
     private bool isHealing = false;
 
+    public bool attackedByTrail = false; // for earth spikes
+
     private bool FreeForAction =>
     !isRolling &&
     !isAttacking &&
@@ -254,6 +256,12 @@ public class PlayerController : Entity
     !isBlocking &&
     !InAir &&
     !isHealing;
+
+    [SerializeField] private bool disableRollCollider = true;
+
+    private float attackedTrailTimer = 0f;
+
+    public bool PlayerInCutscene = false;
     
     private void Awake()
     {
@@ -293,7 +301,7 @@ public class PlayerController : Entity
             return;
         }
 
-        if (isHit)
+        if (isHit || PlayerInCutscene)
         {
             return; // skip all input logic when hit
         }
@@ -686,7 +694,7 @@ public class PlayerController : Entity
         run = false;
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        transform.GetComponent<Collider2D>().enabled = false;
+        if(disableRollCollider) transform.GetComponent<Collider2D>().enabled = false;
         rb.gravityScale = 0;
 
         // Clear existing velocity so the roll feels snappy
@@ -716,6 +724,17 @@ public class PlayerController : Entity
         }
 
         if (dashAttackTimeLeft > 0) dashAttackTimeLeft -= Time.deltaTime;
+
+        if(attackedByTrail)
+        {
+            attackedTrailTimer += Time.deltaTime;
+
+            if(attackedTrailTimer >= 0.15f)
+            {
+                attackedByTrail = false;
+                attackedTrailTimer = 0;
+            }
+        }
     }
 
     public void EndRoll()
@@ -732,7 +751,7 @@ public class PlayerController : Entity
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         rb.gravityScale = 1;
-        transform.GetComponent<Collider2D>().enabled = true;
+        if (disableRollCollider) transform.GetComponent<Collider2D>().enabled = true;
 
         walk = Mathf.Abs(dirH) > 0.01f && defaultwalkspeed > 0 && canMove;
         run = false;
@@ -829,6 +848,11 @@ public class PlayerController : Entity
 
     private void FixedUpdate()
     {
+        if (isHit || PlayerInCutscene)
+        {
+            return; // skip all input logic when hit
+        }
+
         HandleDashMovement();
         HandleGroundMovement();
         HandleAirMovement();

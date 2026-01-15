@@ -45,4 +45,22 @@ public class FadeManager : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, targetAlpha);
     }
 
+    public IEnumerator FadeSprite(SpriteRenderer sprite, float targetAlpha, float duration)
+    {
+        float startAlpha = sprite.color.a;
+        float time = 0f;
+
+        Color baseColor = sprite.color;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+            sprite.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
+            yield return null;
+        }
+
+        sprite.color = new Color(baseColor.r, baseColor.g, baseColor.b, targetAlpha);
+    }
+
 }
