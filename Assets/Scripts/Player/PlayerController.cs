@@ -1079,6 +1079,8 @@ public class PlayerController : Entity
     
     public void Respawn(Vector3 spawnPos)
     {
+        walkSpeed = 7;
+        defaultwalkspeed = 7;
         transform.position = spawnPos;
         rb.velocity = Vector2.zero;
 

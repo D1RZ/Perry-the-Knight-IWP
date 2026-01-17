@@ -14,7 +14,7 @@ public class DemonKing_SlashState : State
     {
         entity.SetVelocity(0);
         entity.Anim.speed = 1f;
-
+        entity.hasFinishedAttack = false;
         remainingSlashes = Random.Range(3, 5);
 
         waitingForDelay = false;

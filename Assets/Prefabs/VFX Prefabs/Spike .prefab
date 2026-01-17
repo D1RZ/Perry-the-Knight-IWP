@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7116380529534334827}
   - component: {fileID: 5325227175493930779}
   - component: {fileID: 4548949714196284784}
+  - component: {fileID: -5640089178384899443}
   m_Layer: 0
   m_Name: 'Spike '
   m_TagString: Untagged
@@ -252,8 +253,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExclamationMark: {fileID: 1608066949398441944}
   resumeAnimationSpeed: 1
+  pauseAnimation: 1
+  pauseAnimationTime: 0.2
   isFlying: 0
+  trailDamageVFX: 0
   Blockable: 0
+  startedAttack: 0
+  finishedAttack: 0
   entity: {fileID: 0}
   damage: 30
   knockbackForce: {x: 0, y: 5}
+--- !u!114 &-5640089178384899443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569566990427639224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f626c23ef607c546972883a5221fdf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 1.5

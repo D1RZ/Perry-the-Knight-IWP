@@ -297,7 +297,7 @@ SpriteRenderer:
   m_SortingLayerID: 1332245485
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 88ca46ca881b1ff478e59a58f25ca931, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96e24a1b2ebf2a34899be933d86b8ace, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -558,10 +558,12 @@ MonoBehaviour:
   isBlocking: 0
   BlockParticlePos: {fileID: 0}
   canKnockUp: 0
+  InCutscene: 0
   ChaseStateData: {fileID: 11400000, guid: 29c7df1b2c7341e40904b907f15ca325, type: 2}
   DashAttackStateData: {fileID: 0}
   spikeLeftSpawn: {fileID: 8337862710476122737}
   spikeRightSpawn: {fileID: 2936263286899159203}
+  cutsceneManager: {fileID: 0}
 --- !u!1 &8337862710476122737
 GameObject:
   m_ObjectHideFlags: 0

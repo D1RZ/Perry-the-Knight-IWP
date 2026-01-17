@@ -10,7 +10,7 @@ public class BossRoomCutscenes : MonoBehaviour
     [SerializeField] private Transform demonSlimeTargetPos;
     [SerializeField] private Transform BossFightCamPos;
     [SerializeField] private float demonMoveSpeed = 3f;
-    [SerializeField] private GameObject DialogueUI;
+    public GameObject DialogueUI;
     [SerializeField] private GameObject DemonKing;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,7 +25,8 @@ public class BossRoomCutscenes : MonoBehaviour
         yield return FadeManager.Instance.FadeOut();
 
         PlayerController.Instance.transform.position = playerEntryStandPos.position;
-        PlayerController.Instance.transform.localScale = new Vector3(1,1,1); // ensures that the player is facing the right direction
+        PlayerController.Instance._IsFacingRight = true;
+        PlayerController.Instance.transform.localScale = new Vector3(1, 1, 1); // ensures that the player is facing the right direction
         PlayerController.Instance.facingDirection = 1;
         PlayerController.Instance.rb.velocity = Vector3.zero;
         PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -42,11 +43,13 @@ public class BossRoomCutscenes : MonoBehaviour
 
         yield return new WaitForSeconds(1.6f);
 
+        DemonSlime.transform.localPosition = new Vector3(37.3f, -15f, 0f);
         DemonSlime.GetComponent<DemonSlime>().InCutscene = true;
+        DemonSlime.SetActive(true);
         DemonSlime.GetComponent<Rigidbody2D>().gravityScale = 0;
-        DemonSlime.gameObject.SetActive(true);
         yield return StartCoroutine(FadeManager.Instance.FadeSprite(DemonSlime.transform.GetChild(0).GetComponent<SpriteRenderer>(),1,1));
         DemonSlime.GetComponent<Rigidbody2D>().gravityScale = 1;
+        DemonSlime.transform.localScale = new Vector3(-1, 1, 1);
         BossGate.GetComponent<Animator>().SetFloat("direction", -1);
         BossGate.GetComponent<Animator>().Play("Appear", 0, 1.0f);
         BossGate.GetComponent<Animator>().ResetTrigger("Appear");
@@ -68,6 +71,9 @@ public class BossRoomCutscenes : MonoBehaviour
         yield return slimeRoutine;
 
         DialogueUI.SetActive(true);
+
+        DialogueManager.Instance.dialogueText.text = "";
+
         yield return StartCoroutine(MoveDialogueUI(Vector3.zero,1));
 
         yield return new WaitForSeconds(0.3f);
@@ -100,6 +106,7 @@ public class BossRoomCutscenes : MonoBehaviour
         DemonSlime.GetComponent<DemonSlime>().HealthBar.SetActive(true);
         PlayerController.Instance.disableRollCollider = false;
         PlayerController.Instance.PlayerInCutscene = false;
+        DemonSlime.GetComponent<DemonSlime>().ResetSlime();
         DemonSlime.GetComponent<DemonSlime>().InCutscene = false;
     }
 
@@ -115,10 +122,11 @@ public class BossRoomCutscenes : MonoBehaviour
 
         DemonKing.GetComponent<Enemy>().InCutscene = true;
         DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 0;
-        DemonKing.transform.position = new Vector3(demonSlimeTargetPos.position.x, DemonKing.transform.position.y, DemonKing.transform.position.z);
+        DemonKing.transform.position = new Vector3(demonSlimeTargetPos.position.x  - 1.5f, DemonKing.transform.position.y, DemonKing.transform.position.z);
         DemonKing.SetActive(true);
 
         PlayerController.Instance.transform.position = playerEntryStandPos.position;
+        PlayerController.Instance._IsFacingRight = true;
         PlayerController.Instance.transform.localScale = new Vector3(1, 1, 1); // ensures that the player is facing the right direction
         PlayerController.Instance.facingDirection = 1;
         PlayerController.Instance.rb.velocity = Vector3.zero;
@@ -127,6 +135,8 @@ public class BossRoomCutscenes : MonoBehaviour
         PlayerController.Instance.animationController.animator.Play("Idle", 0, 0.0f);
 
         yield return FadeManager.Instance.FadeIn();
+
+        yield return new WaitForSeconds(0.5f);
 
         DialogueManager.Instance.dialogueText.text = "";
 
@@ -138,7 +148,92 @@ public class BossRoomCutscenes : MonoBehaviour
 
         DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 1;
 
+        yield return new WaitForSeconds(3.1f);
 
+        DialogueManager.Instance.dialogueName.text = "SLIME";
+
+        DialogueManager.Instance.dialogueText.color = new Color(0.3f, 0, 0);
+
+        DialogueManager.Instance.ShowDialogue("RIGHT HERE!");
+
+        yield return new WaitUntil(() => !DialogueManager.Instance.TypeInProgress);
+
+        yield return StartCoroutine(MoveDialogueUI(new Vector3(0, -5, 0), 1));
+
+        DemonKing.GetComponent<DemonKing>().HealthBar.SetActive(true);
+
+        UIManager.Instance.UpdateBossEnemyHealthUI(DemonKing.GetComponent<DemonKing>());
+
+        DemonKing.GetComponent<Enemy>().InCutscene = false;
+
+        PlayerController.Instance.PlayerInCutscene = false;
+    }
+
+    public IEnumerator BossDeathCutscene()
+    {
+        Debug.Log("BOSS DEATH!");
+
+        yield return FadeManager.Instance.FadeOut();
+
+        DemonKing.GetComponent<DemonKing>().HealthBar.SetActive(false);
+        DemonKing.GetComponent<Enemy>().ChangeSpriteColor(false);
+        DemonKing.transform.position = new Vector3(demonSlimeTargetPos.position.x - 2f, -80, 0);
+        DemonKing.GetComponent<Enemy>().InCutscene = true;
+        DemonKing.gameObject.SetActive(true);
+        DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 0;
+        DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().Play("Demon_Death", 0, 0.0f);
+        DemonKing.GetComponent<Enemy>().facingDirection = -1;
+        DemonKing.transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+
+        PlayerController.Instance.PlayerInCutscene = true;
+        PlayerController.Instance.transform.position = playerEntryStandPos.position;
+        PlayerController.Instance._IsFacingRight = true;
+        PlayerController.Instance.transform.localScale = new Vector3(1, 1, 1); // ensures that the player is facing the right direction
+        PlayerController.Instance.facingDirection = 1;
+        PlayerController.Instance.rb.velocity = Vector3.zero;
+        PlayerController.Instance.rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        ResetPlayer();
+        PlayerController.Instance.animationController.animator.Play("Idle", 0, 0.0f);
+        
+        yield return FadeManager.Instance.FadeIn();
+
+        yield return new WaitForSeconds(0.5f);
+
+        DialogueManager.Instance.dialogueName.text = "KING";
+
+        DialogueManager.Instance.dialogueText.text = "";
+
+        yield return StartCoroutine(MoveDialogueUI(Vector3.zero, 1));
+
+        DialogueManager.Instance.dialogueText.color = Color.black;
+
+        DialogueManager.Instance.ShowDialogue("NOOOOOOOOOOOOOOOOO!");
+
+        DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 0.9f;
+
+        yield return new WaitUntil(() => !DialogueManager.Instance.TypeInProgress);
+
+        yield return StartCoroutine(MoveDialogueUI(new Vector3(0, -10, 0), 1));
+
+        yield return StartCoroutine(CameraManager.Instance.MoveCameraTo(BossGatePos.position, 1.5f));
+
+        BossGate.GetComponent<Animator>().SetFloat("direction", 1);
+        BossGate.GetComponent<Animator>().SetTrigger("Appear");
+        BossGate.GetComponent<Animator>().Play("Appear", 0, 0.0f);
+
+        yield return new WaitForSeconds(2f);
+        
+        yield return StartCoroutine(CameraManager.Instance.MoveCameraTo(BossFightCamPos.position, 1.5f));
+
+        RoomManager.Instance.CurrentLeftBossBarrier.SetActive(false);
+        RoomManager.Instance.CurrentRightBossBarrier.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        yield return StartCoroutine(CameraManager.Instance.MoveCameraTo(PlayerController.Instance.transform.position, 1.5f));
+
+        CameraManager.Instance.Follow(PlayerController.Instance.transform);
+        PlayerController.Instance.PlayerInCutscene = false;
     }
 
     private void ResetPlayer()

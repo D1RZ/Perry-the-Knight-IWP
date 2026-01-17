@@ -76,4 +76,11 @@ public class DemonSlime : Enemy
         OnBossHit.Invoke(this);
     }
 
+    public void ResetSlime()
+    {
+        NextState = MagicAttackState;
+        CurrentState = MagicAttackState;
+        CurrentState.Enter(this);
+    }
+
 }

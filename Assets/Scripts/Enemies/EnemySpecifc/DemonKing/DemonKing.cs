@@ -16,6 +16,8 @@ public class DemonKing : Enemy
 
     public GameObject spikeRightSpawn;
 
+    [SerializeField] BossRoomCutscenes cutsceneManager;
+
     public override void Start()
     {
         base.Start();
@@ -65,8 +67,8 @@ public class DemonKing : Enemy
 
     public override void OnStunEnd()
     {
-        NextState = ChaseState;
-        CurrentState = ChaseState;
+        NextState = JumpAttackState;
+        CurrentState = JumpAttackState;
         CurrentState.Enter(this);
     }
 
@@ -76,10 +78,14 @@ public class DemonKing : Enemy
         if (health <= 0f) health = 0f;
         OnBossHit.Invoke(this);
     }
-     
-    public void SetTriggerTransform()
+
+    public override void DeadEvent()
     {
+        if (TriggerTransform) return;
+
+        Debug.Log("KING DEAD EVENT TRIGGERED");
         TriggerTransform = true;
+        cutsceneManager.StartCoroutine(cutsceneManager.BossDeathCutscene());
     }
 
 }

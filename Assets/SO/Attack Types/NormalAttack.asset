@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStepAnimVarName: LightAttackStep
   attackSteps:
-  - damage: 10
-    attackAnimTime: 0.1
-    applyLiftForce: 0
-    liftForceAmount: 0
-    knockbackForce: {x: 15, y: 0}
   - damage: 15
     attackAnimTime: 0.1
-    applyLiftForce: 0
-    liftForceAmount: 0
+    applyForceToPlayer: 0
+    ForceToPlayerAmt: {x: 0, y: 0}
+    knockbackForce: {x: 15, y: 0}
+  - damage: 20
+    attackAnimTime: 0.1
+    applyForceToPlayer: 0
+    ForceToPlayerAmt: {x: 0, y: 0}
     knockbackForce: {x: 20, y: 0}
   maxAttackSteps: 2
   attackTypeBool: normalAttack

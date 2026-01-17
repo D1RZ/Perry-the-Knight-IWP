@@ -4,7 +4,7 @@ public class Checkpoint : MonoBehaviour
 {
     [SerializeField] private Room owningRoom;
     [SerializeField] private Transform spawnPoint;
-
+    [SerializeField] private bool BossCheckpoint = false;
     private bool hasBeenActivated;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -15,9 +15,12 @@ public class Checkpoint : MonoBehaviour
 
         hasBeenActivated = true;
         CheckpointManager.Instance.SetCheckpoint(this);
-        Animator animator = transform.GetComponent<Animator>();
-        animator.SetTrigger("Save");
-        UIManager.Instance.AnimateHealthIncrease(PlayerController.Instance._PlayerData.MaxHealth + 50);
+        if (!BossCheckpoint)
+        {
+            Animator animator = transform.GetComponent<Animator>();
+            animator.SetTrigger("Save");
+            UIManager.Instance.AnimateHealthIncrease(PlayerController.Instance._PlayerData.MaxHealth + 50);
+        }
     }
 
     public Room GetRoom() => owningRoom;

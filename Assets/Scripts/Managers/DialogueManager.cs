@@ -30,7 +30,13 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if(!isTyping && TypeInProgress)
+        if (isTyping && Input.GetKeyDown(KeyCode.Space))
+        {
+            FinishTypingInstantly();
+            return;
+        }
+
+        if (!isTyping && TypeInProgress)
         {
             float offset = -Mathf.Abs(Mathf.Sin(Time.time * speed)) * amplitude;
             blackArrow.transform.localPosition = startPos + Vector3.right * offset;
@@ -70,4 +76,17 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
+    private void FinishTypingInstantly()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        dialogueText.text = currentFullText;
+        isTyping = false;
+
+        blackArrow.SetActive(true);
+    }
 }

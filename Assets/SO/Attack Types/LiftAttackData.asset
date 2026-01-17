@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStepAnimVarName: nil
   attackSteps:
-  - damage: 20
+  - damage: 30
     attackAnimTime: 0.5
     applyForceToPlayer: 1
     ForceToPlayerAmt: {x: 0, y: 16}

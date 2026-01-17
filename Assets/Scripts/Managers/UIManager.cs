@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(LerpEnemyGreyBar(enemyGreyBar, targetRedWidth, 0.5f));
     }
 
-    private void UpdateBossEnemyHealthUI(Enemy enemy)
+    public void UpdateBossEnemyHealthUI(Enemy enemy)
     {
         // get references
         var enemyRedBar = enemy.HealthBar.transform.GetChild(2).GetComponent<Image>();
