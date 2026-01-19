@@ -13,12 +13,22 @@ public class LiftAttackChecker : BaseAttackChecker
         // Handle death
         if (enemy.health <= 0)
         {
+            if (enemy.isBuilding)
+            {
+                PlayerController.Instance.defaultwalkspeed = 7;
+                Instantiate(ParticleManager.Instance.GetParticleEffect("BuildingChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("BuildingChunk").transform.rotation);
+                enemy.DeadEvent();
+                enemy.gameObject.SetActive(false);
+                enemiesHitThisAttack.Clear();
+                yield break;
+            }
+
             PlayerController.Instance.defaultwalkspeed = 7;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.DeadEvent();
             enemy.gameObject.SetActive(false);
-            hasHit = false; // reset before exiting
+            enemiesHitThisAttack.Clear();
             yield break; // exit coroutine — nothing else to do
         }
 
@@ -32,10 +42,13 @@ public class LiftAttackChecker : BaseAttackChecker
         Time.timeScale = 1f;
 
         // If Rigidbody was destroyed or enemy null, exit safely
-        if (enemy == null || enemy.rb == null)
+        if (!enemy.isBuilding)
         {
-            hasHit = false;
-            yield break;
+            if (enemy == null || enemy.rb == null)
+            {
+                enemiesHitThisAttack.Clear();
+                yield break;
+            }
         }
 
         if (enemy != null) enemy.ChangeSpriteColor(false);
@@ -62,7 +75,7 @@ public class LiftAttackChecker : BaseAttackChecker
 
         yield return new WaitForSeconds(1);
 
-        hasHit = false;
+        enemiesHitThisAttack.Clear();
     }
 
 }

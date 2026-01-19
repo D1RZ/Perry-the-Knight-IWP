@@ -9,19 +9,31 @@ public class LightAttackChecker : BaseAttackChecker
     {
         yield return base.DoHitImpact(enemy);
 
+        Debug.Log("LIGHT ATTACK!!");
+        
         enemy.ChangeSpriteColor(true);
         enemy.SetHealth(PlayerCombatController.Instance.GetAttackDamage());
-        if (freezeGravity) enemy.rb.gravityScale = 0;
+        if (freezeGravity && enemy.rb) enemy.rb.gravityScale = 0;
 
         // Handle death
         if (enemy.health <= 0)
         {
+            if(enemy.isBuilding)
+            {
+                PlayerController.Instance.defaultwalkspeed = 7;
+                Instantiate(ParticleManager.Instance.GetParticleEffect("BuildingChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("BuildingChunk").transform.rotation);
+                enemy.DeadEvent();
+                enemy.gameObject.SetActive(false);
+                enemiesHitThisAttack.Clear();
+                yield break;
+            }
+
             PlayerController.Instance.defaultwalkspeed = 7;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.DeadEvent();
             enemy.gameObject.SetActive(false);
-            hasHit = false; // reset before exiting
+            enemiesHitThisAttack.Clear();
             yield break; // exit coroutine — nothing else to do
         }
 
@@ -35,16 +47,19 @@ public class LightAttackChecker : BaseAttackChecker
         Time.timeScale = 1f;
 
         // If Rigidbody was destroyed or enemy null, exit safely
-        if (enemy == null || enemy.rb == null)
+        if (!enemy.isBuilding)
         {
-            hasHit = false;
-            yield break;
-        }
+            if (enemy == null || enemy.rb == null)
+            {
+                enemiesHitThisAttack.Clear();
+                yield break;
+            }
 
-        // Apply hit impact force
-        enemy.rb.constraints = RigidbodyConstraints2D.None;
-        enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        enemy.rb.AddForce(new Vector2(PlayerController.Instance.facingDirection * PlayerCombatController.Instance.GetKnockbackForce().x, PlayerCombatController.Instance.GetKnockbackForce().y), ForceMode2D.Impulse);
+            // Apply hit impact force
+            enemy.rb.constraints = RigidbodyConstraints2D.None;
+            enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            enemy.rb.AddForce(new Vector2(PlayerController.Instance.facingDirection * PlayerCombatController.Instance.GetKnockbackForce().x, PlayerCombatController.Instance.GetKnockbackForce().y), ForceMode2D.Impulse);
+        }
         
         // Pause enemy animation
         if (enemy.spriteRenderer != null)
@@ -68,8 +83,10 @@ public class LightAttackChecker : BaseAttackChecker
             Animator anim = enemy.spriteRenderer.GetComponent<Animator>();
             if (anim != null) anim.speed = 1;
         }
-        
-        hasHit = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        enemiesHitThisAttack.Clear();
 
         if (freezeGravity)
         {

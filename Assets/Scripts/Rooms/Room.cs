@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
 
     // for boss rooms
     [SerializeField] private bool isBossRoom = false;
+    [SerializeField] private bool DisablePlayerRoll = false;
     public GameObject LeftBossBarrier;
     public GameObject RightBossBarrier;
     public GameObject DemonSlime;
@@ -37,6 +38,8 @@ public class Room : MonoBehaviour
             LeftBossBarrier.SetActive(false);
             RightBossBarrier.SetActive(false);
         }
+        if (!DisablePlayerRoll) PlayerController.Instance.disableRollCollider = false;
+        else PlayerController.Instance.disableRollCollider = true;
         transform.gameObject.SetActive(true);
     }
 

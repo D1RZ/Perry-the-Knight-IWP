@@ -17,6 +17,8 @@ public class FightZone : MonoBehaviour
             return;
         }
 
+        if (collision.gameObject.layer != 7) return;
+
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 
         if (enemies.Contains(enemy)) return;

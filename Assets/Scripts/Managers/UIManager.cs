@@ -136,10 +136,10 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerData.MaxHealth = 200;
-        playerData.HealthData = 200;
+        playerData.MaxHealth = 100;
+        playerData.HealthData = 100;
         //UpdatePlayerHealthUI(playerData.HealthData);
-        AnimateHealthIncrease(200);
+        AnimateHealthIncrease(100);
         targetYellowWidth = YellowBar.rectTransform.sizeDelta.x;
     }
 

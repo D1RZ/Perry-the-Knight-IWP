@@ -68,6 +68,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
+            Debug.Log("REVERTED SPRITE COLOR");
             spriteRenderer.material.shader = NormalLitSpriteShader;
             spriteRenderer.color = Color.white;
         }

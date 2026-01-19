@@ -290,6 +290,7 @@ public class PlayerController : Entity
         animator = GetComponent<Animator>();
         Player.HealthData = Player.MaxHealth;
         playerStartPosition = transform.position;
+        InitializePlayer();
     }
 
     // Update is called once per frame
@@ -351,7 +352,7 @@ public class PlayerController : Entity
         }
         else if (!walk && !run && !isDashAttacking)
         {
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; // freezing of x position to prevent character from sliding due to 2d physics material
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation; // freezing of x position to prevent character from sliding due to 2d physics material
             animationController.SetAnimation("idle");
         }
     }
@@ -918,6 +919,8 @@ public class PlayerController : Entity
     {
         if (!jump) return;
 
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
         if (!isWallSliding)
         {
             // Normal jump
@@ -1084,6 +1087,42 @@ public class PlayerController : Entity
         transform.position = spawnPos;
         rb.velocity = Vector2.zero;
 
+        // Reset movement input
+        walk = false;
+        run = false;
+        dirH = 0f;
+
+        isHit = false;
+        isBlocking = false;
+        isAttacking = false;
+        isRolling = false;
+        blockSuccess = false;
+        canMove = true;
+        jump = false;
+        isHolding = false;
+        holdTime = 0;
+        isDashAttacking = false;
+        airAttack = false;
+        liftAttack = false;
+        normalAttack = false;
+        dashAttack = false;
+
+        // Force idle state
+        animationController.SetAnimation("idle");
+
+        // Reset rigidbody
+        rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        PlayerCombatController.Instance.ResetCombatState();
+        Player.HealthData = Player.MaxHealth;
+        OnPlayerHit.Invoke(Player.HealthData);
+        transform.gameObject.SetActive(true);
+        OnPlayerReady?.Invoke(this);
+    }
+
+    private void InitializePlayer()
+    {
         // Reset movement input
         walk = false;
         run = false;

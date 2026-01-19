@@ -5,13 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Grasslands.unity
-    guid: a233e83e190263f438cfd73d2e3f0820
   - enabled: 1
-    path: Assets/Scenes/Grasslands.unity
+    path: Assets/Scenes/Main.unity
     guid: a233e83e190263f438cfd73d2e3f0820
-  - enabled: 0
-    path: Assets/Scenes/Caves.unity
-    guid: 3bb1b92232b9b5245911e04ac850776a
   m_configObjects: {}

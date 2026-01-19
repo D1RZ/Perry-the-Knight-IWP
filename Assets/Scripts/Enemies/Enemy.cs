@@ -18,6 +18,10 @@ public class Enemy : Entity
     public Transform BlockParticlePos;
     public bool canKnockUp = true;
     public bool InCutscene = false;
+    public bool canDamage = true;
+    public GameObject BuffShield;
+    public bool isBuilding = false;
+    public bool IsAtFullHealth => health >= entityData.MaxHealth;
 
     // Start is called before the first frame update
     public override void Start()
@@ -81,7 +85,7 @@ public class Enemy : Entity
             return;
         }
 
-        stateMachine.OnUpdate(Time.deltaTime, this); // updates enemy state machine
+        if(stateMachine) stateMachine.OnUpdate(Time.deltaTime, this); // updates enemy state machine
     }
     
     public virtual void AttackVFX(int VFXAttackNo)
@@ -123,6 +127,17 @@ public class Enemy : Entity
     public virtual void OnStunEnd()
     {
         CurrentState.Enter(this);
+    }
+
+    public virtual void Heal(float amount)
+    {
+        if (health <= 0) return;          // dead enemies can't heal
+        if (health >= entityData.MaxHealth) return;  // already full
+
+        health = Mathf.Min(health + amount, entityData.MaxHealth);
+
+        HealthBar.SetActive(true);
+        OnEnemyHit?.Invoke(this); // reuse UI update
     }
 
 }

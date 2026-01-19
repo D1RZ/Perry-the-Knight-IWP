@@ -10,10 +10,10 @@ public class DashAttackChecker : BaseAttackChecker
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != 7) return;
+        if (collision.gameObject.layer != 7 && collision.gameObject.layer != 11) return;
 
         Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy == null) return;
+        if (enemy == null || !enemy.canDamage) return;
 
         // Already hit this enemy during this dash
         if (enemiesHitThisDash.Contains(enemy)) return;
@@ -50,12 +50,20 @@ public class DashAttackChecker : BaseAttackChecker
         // Handle death
         if (enemy.health <= 0)
         {
+            if (enemy.isBuilding)
+            {
+                PlayerController.Instance.defaultwalkspeed = 7;
+                Instantiate(ParticleManager.Instance.GetParticleEffect("BuildingChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("BuildingChunk").transform.rotation);
+                enemy.DeadEvent();
+                enemy.gameObject.SetActive(false);
+                yield break;
+            }
+
             PlayerController.Instance.defaultwalkspeed = 7;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.DeadEvent();
             enemy.gameObject.SetActive(false);
-            hasHit = false; // reset before exiting
             yield break; // exit coroutine — nothing else to do
         }
 
@@ -69,16 +77,18 @@ public class DashAttackChecker : BaseAttackChecker
         Time.timeScale = 1f;
 
         // If Rigidbody was destroyed or enemy null, exit safely
-        if (enemy == null || enemy.rb == null)
+        if (!enemy.isBuilding)
         {
-            hasHit = false;
-            yield break;
-        }
+            if (enemy == null || enemy.rb == null)
+            {
+                yield break;
+            }
 
-        // Apply hit impact force
-        enemy.rb.constraints = RigidbodyConstraints2D.None;
-        enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        enemy.rb.AddForce(new Vector2(PlayerController.Instance.facingDirection * PlayerCombatController.Instance.GetKnockbackForce().x, PlayerCombatController.Instance.GetKnockbackForce().y), ForceMode2D.Impulse);
+            // Apply hit impact force
+            enemy.rb.constraints = RigidbodyConstraints2D.None;
+            enemy.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            enemy.rb.AddForce(new Vector2(PlayerController.Instance.facingDirection * PlayerCombatController.Instance.GetKnockbackForce().x, PlayerCombatController.Instance.GetKnockbackForce().y), ForceMode2D.Impulse);
+        }
 
         // Pause enemy animation
         if (enemy.spriteRenderer != null)
@@ -102,8 +112,6 @@ public class DashAttackChecker : BaseAttackChecker
             Animator anim = enemy.spriteRenderer.GetComponent<Animator>();
             if (anim != null) anim.speed = 1;
         }
-
-        hasHit = false;
     }
 
     public void ResetDashHits()

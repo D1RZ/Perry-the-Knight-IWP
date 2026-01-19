@@ -1,52 +1,74 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseAttackChecker : MonoBehaviour
 {
-    protected bool hasHit = false;
+    protected HashSet<Enemy> enemiesHitThisAttack = new HashSet<Enemy>();
+    private Coroutine HitImpactRoutine = null;
+
+    protected virtual void OnEnable()
+    {
+        // Reset every time the hitbox is enabled (new attack)
+        enemiesHitThisAttack.Clear();
+    }
 
     // Make this virtual so child classes can override it
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hasHit || collision.gameObject.layer != 7) return;
-
-        hasHit = true;
+        if ((collision.gameObject.layer != 7 && collision.gameObject.layer != 11)) return;
 
         Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy == null) return;
+        if (enemy == null || !enemy.canDamage) return;
 
-        if(enemy.isBlocking)
+        if (enemiesHitThisAttack.Contains(enemy))
+            return;
+
+        enemiesHitThisAttack.Add(enemy);
+
+        if (enemy.isBlocking)
         {
-            var InstantiatedParticle = Instantiate(ParticleManager.Instance.GetParticleEffect("Block"),enemy.BlockParticlePos);
-            InstantiatedParticle.transform.localRotation = Quaternion.Euler(0f,0f,143f);
-            InstantiatedParticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            hasHit = false;
+            SpawnBlockVFX(enemy);
             return;
         }
 
-        Collider2D hitboxCollider = transform.GetComponent<Collider2D>();
-        if (hitboxCollider != null) hitboxCollider.enabled = false;
+        SpawnHitVFX(enemy);
 
+        Debug.Log("LIFT HIT!");
+
+        //if (enemy.isBuilding) if (HitImpactRoutine == null) HitImpactRoutine = StartCoroutine(DoHitImpact(enemy));
+        StartCoroutine(DoHitImpact(enemy));
+    }
+    
+    protected virtual IEnumerator DoHitImpact(Enemy enemy)
+    {
+        if (enemy == null || !enemy.canDamage)
+            yield break;
+
+        yield return null;
+    }
+
+    protected void SpawnHitVFX(Enemy enemy)
+    {
         var hitParticle = Instantiate(
             ParticleManager.Instance.GetParticleEffect("Hit"),
             enemy.transform.position,
             Quaternion.identity
         );
-        hitParticle.transform.localScale = new Vector3(-enemy.facingDirection, 1, 1);
-
-        Debug.Log("LIFT HIT!");
-
-        StartCoroutine(DoHitImpact(enemy));
+        hitParticle.transform.localScale =
+            new Vector3(-enemy.facingDirection, 1, 1);
     }
 
-    protected virtual IEnumerator DoHitImpact(Enemy enemy)
+    protected void SpawnBlockVFX(Enemy enemy)
     {
-        // Early exit if enemy already null
-        if (enemy == null)
-        {
-            hasHit = false;
-            yield break;
-        }
+        var blockParticle = Instantiate(
+            ParticleManager.Instance.GetParticleEffect("Block"),
+            enemy.BlockParticlePos
+        );
+        blockParticle.transform.localRotation =
+            Quaternion.Euler(0f, 0f, 143f);
+        blockParticle.transform.localScale =
+            new Vector3(0.5f, 0.5f, 0.5f);
     }
 
 }
