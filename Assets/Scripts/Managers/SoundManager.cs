@@ -40,6 +40,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        MusicPlayer.volume = Mathf.Clamp01(MusicSlider.value);
+
+        MusicPlayer.Play();
+    }
+
     public void SetVolume()
     {
         SoundVolume.SfxVolume = (SfxSlider.value * 100);
