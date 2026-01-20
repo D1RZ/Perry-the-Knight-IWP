@@ -352,6 +352,7 @@ public class PlayerController : Entity
         }
         else if (!walk && !run && !isDashAttacking)
         {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
             rb.constraints = RigidbodyConstraints2D.FreezeRotation; // freezing of x position to prevent character from sliding due to 2d physics material
             animationController.SetAnimation("idle");
         }
