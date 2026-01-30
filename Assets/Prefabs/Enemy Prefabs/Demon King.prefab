@@ -124,7 +124,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 19063177
-  m_SortingLayer: 11
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: 1745644178, guid: c948c69a57ca2c64b9618d5cb286381a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -546,6 +546,7 @@ MonoBehaviour:
   groundRaycastDistance: 3.5
   hasFinishedAttack: 0
   startAttack: 0
+  isWhite: 0
   health: 0
   HealthBar: {fileID: 0}
   healthBar1PercentWidth: 4.84
@@ -559,6 +560,9 @@ MonoBehaviour:
   BlockParticlePos: {fileID: 0}
   canKnockUp: 0
   InCutscene: 0
+  canDamage: 1
+  BuffShield: {fileID: 0}
+  isBuilding: 0
   ChaseStateData: {fileID: 11400000, guid: 29c7df1b2c7341e40904b907f15ca325, type: 2}
   DashAttackStateData: {fileID: 0}
   spikeLeftSpawn: {fileID: 8337862710476122737}

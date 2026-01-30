@@ -137,7 +137,7 @@ public class Knockback : MonoBehaviour
         // Handle death
         if (enemy.health <= 0)
         {
-            PlayerController.Instance.defaultwalkspeed = 7;
+            PlayerController.Instance.defaultwalkspeed = 9;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.gameObject.SetActive(false);

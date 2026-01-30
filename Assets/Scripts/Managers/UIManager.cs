@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private PostProcessController postProcessController;
 
-    private bool respawnTrigger = false;
+    public bool respawnTrigger = false;
 
     private Coroutine lastDamageCoroutine = null;
 
@@ -147,15 +147,11 @@ public class UIManager : MonoBehaviour
     {
         if (PlayerController.Instance._PlayerData.HealthData <= 0)
         {
-            if(Input.GetKeyDown(KeyCode.R) && !respawnTrigger)
+            if(!respawnTrigger)
             {
-                respawnTrigger = true;
                 RoomManager.Instance.EnterRoom(CheckpointManager.Instance.GetRespawnRoom(), true);
+                respawnTrigger = true;
             }
-        }
-        else
-        {
-            respawnTrigger = false;
         }
     }
 

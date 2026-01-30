@@ -93,6 +93,7 @@ public class Arrow : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         PlayerController.Instance.SetCanMove(true);
         PlayerController.Instance.ChangeSpriteColor(false);
+        PlayerController.Instance.rb.velocity = Vector3.zero;
         PlayerController.Instance.SetIsHit(false);
         PlayerController.Instance.animationController.animator.speed = 1;
         ObjectPoolManager.Instance.ReturnToPool(this.gameObject);

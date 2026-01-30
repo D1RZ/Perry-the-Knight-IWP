@@ -86,7 +86,7 @@ public class SpearEnemy_Attack1State : MoveState
     public override void Exit(Entity entity)
     {
         entity.Anim.speed = 1f; // reset after animation ends
-        PlayerController.Instance.defaultwalkspeed = 5.5f;
+        PlayerController.Instance.defaultwalkspeed = 9f;
     }
 
 }

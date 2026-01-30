@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DemonSlime_DashAttackState : State
 {
@@ -28,7 +29,9 @@ public class DemonSlime_DashAttackState : State
         maxDashCount = Random.Range(1,2); // upper bound exclusive
         hasStartedAttack = false;
         hasStartedDash = false;
+
         entity.CheckFacingDirectionBasedOnTargetPos();
+        entity.spriteRenderer.GetComponent<PauseAnimation>().enabled = true;
         entity.spriteRenderer.GetComponent<PauseAnimationMeele>().SetFlyHit(false); // resets attack hitbox
     }
 
@@ -102,24 +105,10 @@ public class DemonSlime_DashAttackState : State
         // Stop movement instantly
         entity.rb.velocity = Vector2.zero;
         entity.transform.GetChild(0).GetComponent<Knockback>().isDashing = false;
-        currentDashCount++;
-
-        if (currentDashCount < maxDashCount)
-        {
-            // Reset for next dash
-            hasStartedAttack = false;
-            hasStartedDash = false;
-
-            dashWindup = 0.15f;
-            attackTimer = 0;
-
-            entity.CheckFacingDirectionBasedOnTargetPos();
-            entity.Anim.Play("Slime_Dash");
-            entity.spriteRenderer.GetComponent<PauseAnimationMeele>().SetFlyHit(false); // resets attack hitbox
-
-            return;
-        }
-
+        entity.spriteRenderer.GetComponent<PauseAnimationMeele>().SetFlyHit(true); // disable dash attack hitbox
+        entity.spriteRenderer.GetComponent<PauseAnimation>().enabled = false;
+        entity.spriteRenderer.GetComponent<PauseAnimation>().GetExclaimationMark().SetActive(false);
+        entity.transform.GetChild(0).GetComponent<Collider2D>().enabled = false;
         entity.stateMachine.SetNextState("CHASE", entity);
     }
 

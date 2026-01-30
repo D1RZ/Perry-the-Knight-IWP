@@ -48,7 +48,9 @@ public class Entity : MonoBehaviour
 
     public bool hasFinishedAttack = false;
     
-    public bool startAttack = false; // for earth attack 
+    public bool startAttack = false; // for earth attack
+
+    public bool isWhite = false;
 
     public virtual void Start()
     {
@@ -63,12 +65,14 @@ public class Entity : MonoBehaviour
     {
         if(turnWhite)
         {
+            isWhite = true;
             spriteRenderer.material.shader = GUITextShader;
             spriteRenderer.color = Color.white;
         }
         else
         {
             Debug.Log("REVERTED SPRITE COLOR");
+            isWhite = false;
             spriteRenderer.material.shader = NormalLitSpriteShader;
             spriteRenderer.color = Color.white;
         }

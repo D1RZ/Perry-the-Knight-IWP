@@ -137,8 +137,10 @@ public class PauseAnimationMeele : PauseAnimation
         PlayerController.Instance.SetCanMove(true);
         if (!Blocked) PlayerController.Instance.ChangeSpriteColor(false);
         Blocked = false;
+        PlayerController.Instance.rb.velocity = Vector3.zero;
         PlayerController.Instance.SetIsHit(false);
         PlayerController.Instance.animationController.animator.speed = 1;
+        if(entity == null) transform.GetComponent<Collider2D>().enabled = true;
         hasHit = false;
     }
 
@@ -160,7 +162,7 @@ public class PauseAnimationMeele : PauseAnimation
         // Handle death
         if (enemy.health <= 0)
         {
-            PlayerController.Instance.defaultwalkspeed = 7;
+            PlayerController.Instance.defaultwalkspeed = 9;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.DeadEvent();

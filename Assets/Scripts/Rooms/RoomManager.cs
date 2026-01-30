@@ -13,6 +13,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private bool useFade = true;
 
     [SerializeField] private Room currentRoom;
+    private Room OldRoom;
     private bool isTransitioning;
 
     public GameObject CurrentLeftBossBarrier;
@@ -47,18 +48,21 @@ public class RoomManager : MonoBehaviour
             yield return FadeManager.Instance.FadeOut();
 
         // 2? Exit old room
-        if (currentRoom != null)
+        if (currentRoom != null && OldRoom != newRoom)
         {
-            currentRoom.OnExitRoom();
-            currentRoom.gameObject.SetActive(false);
+            OldRoom = currentRoom;
         }
 
         // 3? Switch room
         currentRoom = newRoom;
         currentRoom.gameObject.SetActive(true);
 
+        currentRoom.OnEnterRoom();
+
         PlayerController.Instance.SetCanMove(false);
         if(!respawn) PlayerController.Instance.transform.position = currentRoom.playerSpawnPos.position;
+
+        if (OldRoom != newRoom) OldRoom.OnExitRoom();
 
         // 4? Update camera bounds
         if (confiner != null && newRoom.cameraBounds != null)
@@ -67,8 +71,6 @@ public class RoomManager : MonoBehaviour
             confiner.InvalidateCache();
         }
 
-        currentRoom.OnEnterRoom();
-
         PlayerController.Instance.SetCanMove(true);
         if(respawn) PlayerController.Instance.Respawn(CheckpointManager.Instance.GetRespawnPosition());
 
@@ -76,9 +78,14 @@ public class RoomManager : MonoBehaviour
         if (useFade && FadeManager.Instance != null)
             yield return FadeManager.Instance.FadeIn();
 
+        if (respawn)
+        {
+            UIManager.Instance.respawnTrigger = false;
+        }
+
         isTransitioning = false;
     }
-
+    
     // Useful for respawn
     public Room GetCurrentRoom()
     {

@@ -99,7 +99,7 @@ public class ArcherEnemy_AttackState : MoveState
     public override void Exit(Entity entity)
     {
         entity.Anim.speed = 1f;
-        PlayerController.Instance.defaultwalkspeed = 5.5f;
+        PlayerController.Instance.defaultwalkspeed = 9f;
     }
 
     protected void SetRandomAttackCooldownTime()

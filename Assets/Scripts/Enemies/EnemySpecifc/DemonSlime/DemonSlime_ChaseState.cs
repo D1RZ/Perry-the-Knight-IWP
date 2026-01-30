@@ -24,7 +24,6 @@ public class DemonSlime_ChaseState : State
         chaseTimer = 0;
         dashTransitionTime = 2;
         resetChase = false;
-        entity.transform.GetChild(0).GetComponent<Collider2D>().enabled = true;
         entity.Anim.Play("Slime_Move");
         entity.SetTarget(PlayerController.Instance.gameObject);
         entity.isChasing = true;
@@ -41,7 +40,6 @@ public class DemonSlime_ChaseState : State
             resetChase = false;
             chaseTimer = 0;
             dashTransitionTime = 1;
-            entity.transform.GetChild(0).GetComponent<Collider2D>().enabled = true;
             entity.Anim.Play("Slime_Move");
             entity.SetTarget(PlayerController.Instance.gameObject);
             entity.isChasing = true;

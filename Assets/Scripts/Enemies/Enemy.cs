@@ -67,6 +67,7 @@ public class Enemy : Entity
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Animator anim = spriteRenderer.GetComponent<Animator>();
                 if (anim != null) anim.speed = 1;
+                spriteRenderer.GetComponent<Collider2D>().enabled = false;
                 OnStunEnd();
                 rb.gravityScale = 1;
                 Debug.Log("Enemy Landed");
@@ -79,7 +80,9 @@ public class Enemy : Entity
             if (stunTimer > 0) stunTimer -= Time.deltaTime;
             else
             {
+                Debug.Log("IS STUNNED!");
                 isStunned = false;
+                spriteRenderer.GetComponent<Collider2D>().enabled = false;
                 OnStunEnd();
             }
             return;

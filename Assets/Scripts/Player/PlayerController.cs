@@ -124,7 +124,7 @@ public class PlayerController : Entity
 
     [SerializeField] private Animator parryAnimator;
 
-    private bool isAttacking;   // true when any attack is active
+    public bool isAttacking;   // true when any attack is active
 
     public bool _IsFacingRight
     {
@@ -192,7 +192,7 @@ public class PlayerController : Entity
 
     private Animator animator;
 
-    private bool isHit = false;
+    public bool isHit = false;
 
     private float startBlockTime = 0;
 
@@ -262,6 +262,10 @@ public class PlayerController : Entity
     private float attackedTrailTimer = 0f;
 
     public bool PlayerInCutscene = false;
+
+    [SerializeField] private float hitRecoverTime = 1;
+
+    private float hitRecoverTimer = 0f;
     
     private void Awake()
     {
@@ -304,6 +308,16 @@ public class PlayerController : Entity
 
         if (isHit || PlayerInCutscene)
         {
+            if(isHit)
+            {
+                hitRecoverTimer += Time.deltaTime;
+
+                if(hitRecoverTimer > hitRecoverTime)
+                {
+                    hitRecoverTimer = 0;
+                    ForceRecoverFromHit();
+                }
+            }
             return; // skip all input logic when hit
         }
 
@@ -970,6 +984,8 @@ public class PlayerController : Entity
     public void ResetCanMove()
     {
         if (!canMove) canMove = true;
+        isHealing = false;
+
         animationController.animator.SetBool("liftAttack", false);
     }
 
@@ -1083,8 +1099,8 @@ public class PlayerController : Entity
     
     public void Respawn(Vector3 spawnPos)
     {
-        walkSpeed = 7;
-        defaultwalkspeed = 7;
+        walkSpeed = 9;
+        defaultwalkspeed = 9;
         transform.position = spawnPos;
         rb.velocity = Vector2.zero;
 
@@ -1156,6 +1172,32 @@ public class PlayerController : Entity
         OnPlayerHit.Invoke(Player.HealthData);
         transform.gameObject.SetActive(true);
         OnPlayerReady?.Invoke(this);
+    }
+
+    private void ForceRecoverFromHit()
+    {
+        // Core combat state
+        isHit = false;
+        isAttacking = false;
+        isBlocking = false;
+        isRolling = false;
+        isHealing = false;
+
+        // Movement
+        canMove = true;
+        rb.velocity = Vector2.zero;
+
+        // Physics
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.gravityScale = 1f;
+
+        // Visuals
+        ChangeSpriteColor(false);
+        animationController.animator.speed = 1;
+
+        // Animator safety
+        animationController.animator.SetBool("Block", false);
+        animationController.animator.ResetTrigger("roll");
     }
 
 }

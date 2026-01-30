@@ -6,6 +6,7 @@ public class BaseAttackChecker : MonoBehaviour
 {
     protected HashSet<Enemy> enemiesHitThisAttack = new HashSet<Enemy>();
     private Coroutine HitImpactRoutine = null;
+    [SerializeField] protected bool isSpike = false;
 
     protected virtual void OnEnable()
     {
@@ -26,17 +27,12 @@ public class BaseAttackChecker : MonoBehaviour
 
         enemiesHitThisAttack.Add(enemy);
 
-        if (enemy.isBlocking)
+        if (enemy.isBlocking && !isSpike)
         {
             SpawnBlockVFX(enemy);
             return;
         }
 
-        SpawnHitVFX(enemy);
-
-        Debug.Log("LIFT HIT!");
-
-        //if (enemy.isBuilding) if (HitImpactRoutine == null) HitImpactRoutine = StartCoroutine(DoHitImpact(enemy));
         StartCoroutine(DoHitImpact(enemy));
     }
     
@@ -44,6 +40,18 @@ public class BaseAttackChecker : MonoBehaviour
     {
         if (enemy == null || !enemy.canDamage)
             yield break;
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (PlayerController.Instance.isHit && !isSpike)
+        {
+            enemiesHitThisAttack.Clear();
+            yield break;
+        }
+
+        SpawnHitVFX(enemy);
+
+        Debug.Log("LIFT HIT!");
 
         yield return null;
     }
@@ -69,6 +77,7 @@ public class BaseAttackChecker : MonoBehaviour
             Quaternion.Euler(0f, 0f, 143f);
         blockParticle.transform.localScale =
             new Vector3(0.5f, 0.5f, 0.5f);
+        enemiesHitThisAttack.Clear();
     }
 
 }

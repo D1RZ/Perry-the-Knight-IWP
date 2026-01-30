@@ -52,14 +52,14 @@ public class DashAttackChecker : BaseAttackChecker
         {
             if (enemy.isBuilding)
             {
-                PlayerController.Instance.defaultwalkspeed = 7;
+                PlayerController.Instance.defaultwalkspeed = 9;
                 Instantiate(ParticleManager.Instance.GetParticleEffect("BuildingChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("BuildingChunk").transform.rotation);
                 enemy.DeadEvent();
                 enemy.gameObject.SetActive(false);
                 yield break;
             }
 
-            PlayerController.Instance.defaultwalkspeed = 7;
+            PlayerController.Instance.defaultwalkspeed = 9;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.DeadEvent();

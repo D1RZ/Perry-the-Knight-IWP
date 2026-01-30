@@ -12,7 +12,8 @@ public class LightAttackChecker : BaseAttackChecker
         Debug.Log("LIGHT ATTACK!!");
         
         enemy.ChangeSpriteColor(true);
-        enemy.SetHealth(PlayerCombatController.Instance.GetAttackDamage());
+        if (!isSpike) enemy.SetHealth(PlayerCombatController.Instance.GetAttackDamage());
+        else enemy.SetHealth(200);
         if (freezeGravity && enemy.rb) enemy.rb.gravityScale = 0;
 
         // Handle death
@@ -20,7 +21,7 @@ public class LightAttackChecker : BaseAttackChecker
         {
             if(enemy.isBuilding)
             {
-                PlayerController.Instance.defaultwalkspeed = 7;
+                PlayerController.Instance.defaultwalkspeed = 9;
                 Instantiate(ParticleManager.Instance.GetParticleEffect("BuildingChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("BuildingChunk").transform.rotation);
                 enemy.DeadEvent();
                 enemy.gameObject.SetActive(false);
@@ -28,7 +29,7 @@ public class LightAttackChecker : BaseAttackChecker
                 yield break;
             }
 
-            PlayerController.Instance.defaultwalkspeed = 7;
+            PlayerController.Instance.defaultwalkspeed = 9;
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathChunk"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathChunk").transform.rotation);
             Instantiate(ParticleManager.Instance.GetParticleEffect("DeathBlood"), enemy.transform.position, ParticleManager.Instance.GetParticleEffect("DeathBlood").transform.rotation);
             enemy.DeadEvent();

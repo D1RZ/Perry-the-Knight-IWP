@@ -9,7 +9,7 @@ public class BossRoomCutscenes : MonoBehaviour
     [SerializeField] private GameObject DemonSlime;
     [SerializeField] private Transform demonSlimeTargetPos;
     [SerializeField] private Transform BossFightCamPos;
-    [SerializeField] private float demonMoveSpeed = 3f;
+    [SerializeField] private float demonMoveSpeed = 8f;
     public GameObject DialogueUI;
     [SerializeField] private GameObject DemonKing;
 
@@ -39,20 +39,25 @@ public class BossRoomCutscenes : MonoBehaviour
         yield return StartCoroutine(CameraManager.Instance.MoveCameraTo(BossGatePos.position,1.5f));
 
         BossGate.GetComponent<Animator>().SetFloat("direction", 1);
-        BossGate.GetComponent<Animator>().SetTrigger("Appear");
+        BossGate.GetComponent<Animator>().Play("Appear", 0, 0.0f);
 
         yield return new WaitForSeconds(1.6f);
 
+        DemonSlime.GetComponent<DemonSlime>().TriggerTransform = false; // resets demon dead event
+        if(DemonSlime.GetComponent<DemonSlime>().isWhite) DemonSlime.GetComponent<DemonSlime>().ChangeSpriteColor(false);
         DemonSlime.transform.localPosition = new Vector3(37.3f, -15f, 0f);
+        DemonSlime.GetComponent<DemonSlime>().Anim.speed = 1;
+        DemonSlime.transform.GetComponent<Collider2D>().enabled = true;
+        DemonSlime.transform.GetChild(0).GetComponent<Collider2D>().enabled = false;
         DemonSlime.GetComponent<DemonSlime>().InCutscene = true;
         DemonSlime.SetActive(true);
         DemonSlime.GetComponent<Rigidbody2D>().gravityScale = 0;
+        DemonSlime.transform.localScale = new Vector3(-1, 1, 1);
+        DemonSlime.GetComponent<DemonSlime>().facingDirection = -1;
         yield return StartCoroutine(FadeManager.Instance.FadeSprite(DemonSlime.transform.GetChild(0).GetComponent<SpriteRenderer>(),1,1));
         DemonSlime.GetComponent<Rigidbody2D>().gravityScale = 1;
-        DemonSlime.transform.localScale = new Vector3(-1, 1, 1);
         BossGate.GetComponent<Animator>().SetFloat("direction", -1);
         BossGate.GetComponent<Animator>().Play("Appear", 0, 1.0f);
-        BossGate.GetComponent<Animator>().ResetTrigger("Appear");
 
         yield return new WaitForSeconds(1.8f);
 
@@ -104,6 +109,7 @@ public class BossRoomCutscenes : MonoBehaviour
         RoomManager.Instance.CurrentRightBossBarrier.SetActive(true);
 
         DemonSlime.GetComponent<DemonSlime>().HealthBar.SetActive(true);
+        UIManager.Instance.UpdateBossEnemyHealthUI(DemonSlime.GetComponent<DemonSlime>());
         PlayerController.Instance.disableRollCollider = false;
         PlayerController.Instance.PlayerInCutscene = false;
         DemonSlime.GetComponent<DemonSlime>().ResetSlime();
@@ -119,6 +125,9 @@ public class BossRoomCutscenes : MonoBehaviour
         DemonSlime.GetComponent<DemonSlime>().HealthBar.SetActive(false);
 
         PlayerController.Instance.PlayerInCutscene = true;
+        if(PlayerController.Instance.isWhite) PlayerController.Instance.ChangeSpriteColor(false);
+        PlayerController.Instance.SetCanMove(true);
+        PlayerController.Instance.isHit = false;
 
         DemonKing.GetComponent<Enemy>().InCutscene = true;
         DemonKing.GetComponent<Enemy>().spriteRenderer.GetComponent<Animator>().speed = 0;
@@ -258,7 +267,7 @@ public class BossRoomCutscenes : MonoBehaviour
 
         DemonSlime.transform.GetChild(0).GetComponent<Animator>().Play("Slime_Move", 0, 0.0f);
 
-        rb.velocity = new Vector2(-demonMoveSpeed, 0f);
+        rb.velocity = new Vector2(-8, 0f);
 
         // Wait until close enough on X axis
         yield return new WaitUntil(() =>

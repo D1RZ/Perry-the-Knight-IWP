@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class DemonSlime : Enemy
 {
@@ -8,7 +9,7 @@ public class DemonSlime : Enemy
     public State ChaseState { get; private set; }
     public State DashAttackState { get; private set; }
     public State MagicAttackState { get; private set; }
-    private bool TriggerTransform = false;
+    public bool TriggerTransform = false;
     [SerializeField] private BossRoomCutscenes cutsceneManager;
 
     public override void Start()
@@ -62,7 +63,11 @@ public class DemonSlime : Enemy
 
     public override void OnStunEnd()
     {
-        transform.GetChild(0).GetComponent<Collider2D>().enabled = true;
+        spriteRenderer.GetComponent<PauseAnimationMeele>().SetFlyHit(true); // disable dash attack hitbox
+        spriteRenderer.GetComponent<PauseAnimation>().enabled = false;
+        spriteRenderer.GetComponent<PauseAnimation>().GetExclaimationMark().SetActive(false);
+        transform.GetChild(0).GetComponent<Knockback>().isDashing = false;
+        transform.GetChild(0).GetComponent<Collider2D>().enabled = false;
         NextState = ChaseState;
         CurrentState = ChaseState;
         CurrentState.Enter(this);
@@ -78,6 +83,8 @@ public class DemonSlime : Enemy
 
     public void ResetSlime()
     {
+        knockedUp = false;
+        isStunned = false;
         NextState = MagicAttackState;
         CurrentState = MagicAttackState;
         CurrentState.Enter(this);
